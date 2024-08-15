@@ -20,9 +20,3 @@ assignees: alpaka99
 |Task Name| Est Time | Con Time |
 |:--:|:--:|:--:|
 | | |
-
-<!-- Iteration 주요했던 TroubleShooting이 있었다면 적어주세요. 없으면 생략 가능!
-## Trouble Shooting
--->
-
-## Iteration 회고
