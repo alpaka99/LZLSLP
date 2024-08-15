@@ -12,6 +12,7 @@
 		CE5E647A2C6DE213009830AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64792C6DE213009830AD /* ViewController.swift */; };
 		CE5E647F2C6DE215009830AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5E647E2C6DE215009830AD /* Assets.xcassets */; };
 		CE5E64822C6DE215009830AD /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CE5E64812C6DE215009830AD /* Base */; };
+		CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64942C6DEF54009830AD /* BaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		CE5E64812C6DE215009830AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE5E64832C6DE215009830AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE5E64902C6DE557009830AD /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		CE5E64942C6DEF54009830AD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		CE5E648D2C6DE4EC009830AD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CE5E64912C6DEF19009830AD /* Bases */,
 				CE5E648F2C6DE548009830AD /* Keys */,
 			);
 			path = Utils;
@@ -120,6 +123,14 @@
 				CE5E64902C6DE557009830AD /* Config.xcconfig */,
 			);
 			path = Keys;
+			sourceTree = "<group>";
+		};
+		CE5E64912C6DEF19009830AD /* Bases */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64942C6DEF54009830AD /* BaseView.swift */,
+			);
+			path = Bases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +206,7 @@
 				CE5E647A2C6DE213009830AD /* ViewController.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
+				CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
