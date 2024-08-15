@@ -8,10 +8,11 @@
 import RxCocoa
 import RxSwift
 
-// MARK: ViewStore Implmentation
+// MARK: Protocol For Generic Associated Type Injection
 protocol Inputable { }
 protocol Outputable { }
 
+// MARK: Reducer Implementation
 private protocol Reducable {
     associatedtype Input: Inputable
     associatedtype Output: Outputable
@@ -54,7 +55,7 @@ class Reducer<Input: Inputable, Output: Outputable>: Reducable {
     var output: Output
 }
 
-
+// MARK: ViewStore Implmentation
 @dynamicMemberLookup
 class ViewStore<Input: Inputable, Output: Outputable> {
     private let input: Input
@@ -102,7 +103,7 @@ extension ViewStore {
     }
 }
 
-protocol ReactiveViewModel {
+protocol ViewModel {
     associatedtype Input: Inputable
     associatedtype Output: Outputable
     
@@ -133,7 +134,7 @@ class BaseViewModelRequirements: ReactiveViewModelRequirements {
     func configureBind() { }
 }
 
-typealias RxViewModel = BaseViewModelRequirements & ReactiveViewModel
+typealias RxViewModel = BaseViewModelRequirements & ViewModel
 
 /*
  MARK: Example Usage of RxViewModel
