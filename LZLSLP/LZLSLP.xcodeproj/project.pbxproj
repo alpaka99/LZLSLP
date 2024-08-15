@@ -54,14 +54,62 @@
 		CE5E64742C6DE213009830AD /* LZLSLP */ = {
 			isa = PBXGroup;
 			children = (
+				CE5E64892C6DE422009830AD /* Resources */,
+				CE5E648A2C6DE432009830AD /* Sources */,
+			);
+			path = LZLSLP;
+			sourceTree = "<group>";
+		};
+		CE5E64892C6DE422009830AD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E647E2C6DE215009830AD /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CE5E648A2C6DE432009830AD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E648B2C6DE465009830AD /* App */,
+				CE5E648E2C6DE4F1009830AD /* Domains */,
+				CE5E648C2C6DE4E4009830AD /* Presenters */,
+				CE5E648D2C6DE4EC009830AD /* Utils */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		CE5E648B2C6DE465009830AD /* App */ = {
+			isa = PBXGroup;
+			children = (
 				CE5E64752C6DE213009830AD /* AppDelegate.swift */,
 				CE5E64772C6DE213009830AD /* SceneDelegate.swift */,
-				CE5E64792C6DE213009830AD /* ViewController.swift */,
-				CE5E647E2C6DE215009830AD /* Assets.xcassets */,
 				CE5E64802C6DE215009830AD /* LaunchScreen.storyboard */,
 				CE5E64832C6DE215009830AD /* Info.plist */,
 			);
-			path = LZLSLP;
+			path = App;
+			sourceTree = "<group>";
+		};
+		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64792C6DE213009830AD /* ViewController.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		CE5E648D2C6DE4EC009830AD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CE5E648E2C6DE4F1009830AD /* Domains */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domains;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,7 +330,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CZH2CMCGCZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LZLSLP/Info.plist;
+				INFOPLIST_FILE = LZLSLP/Sources/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -314,7 +362,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CZH2CMCGCZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LZLSLP/Info.plist;
+				INFOPLIST_FILE = LZLSLP/Sources/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
