@@ -103,7 +103,7 @@ extension ViewStore {
     }
 }
 
-protocol ViewModel {
+protocol ViewModelable {
     associatedtype Input: Inputable
     associatedtype Output: Outputable
     
@@ -124,7 +124,7 @@ protocol ReactiveViewModelRequirements {
     func configureBind()
 }
 
-class BaseViewModelRequirements: ReactiveViewModelRequirements {
+class BaseViewModel: ReactiveViewModelRequirements {
     required init() {
         configureBind()
     }
@@ -134,7 +134,7 @@ class BaseViewModelRequirements: ReactiveViewModelRequirements {
     func configureBind() { }
 }
 
-typealias RxViewModel = BaseViewModelRequirements & ViewModel
+typealias RxViewModel = BaseViewModel & ViewModelable
 
 /*
  MARK: Example Usage of RxViewModel
