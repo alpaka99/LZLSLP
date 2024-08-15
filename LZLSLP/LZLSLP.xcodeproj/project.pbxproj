@@ -22,6 +22,7 @@
 		CE5E647E2C6DE215009830AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE5E64812C6DE215009830AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE5E64832C6DE215009830AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE5E64902C6DE557009830AD /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +102,7 @@
 		CE5E648D2C6DE4EC009830AD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CE5E648F2C6DE548009830AD /* Keys */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -110,6 +112,14 @@
 			children = (
 			);
 			path = Domains;
+			sourceTree = "<group>";
+		};
+		CE5E648F2C6DE548009830AD /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64902C6DE557009830AD /* Config.xcconfig */,
+			);
+			path = Keys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
