@@ -23,6 +23,6 @@ assignees: alpaka99
 
 ## Iteration Plan
 <!-- 이번 이터레이션 공수산정을 해주세요 -->
-|Task Name| Est Time | Con Time |
-|:--:|:--:|:--:|
-| | |
+|Task Name| Work Branch |Est Time | Con Time |
+|:--:|:--:|:--:|:--:|
+| | | |
