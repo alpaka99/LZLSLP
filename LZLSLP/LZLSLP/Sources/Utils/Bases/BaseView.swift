@@ -8,6 +8,8 @@
 import UIKit
 
 class BaseView: UIView {
+    private(set) var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -24,5 +26,9 @@ class BaseView: UIView {
     func configureHierarchy() { }
     func configureLayout() { }
     func configureUI() { self.backgroundColor = .white }
+    func configureTapGestureRecognizer() {
+        self.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.cancelsTouchesInView = false
+    }
 }
 
