@@ -15,6 +15,7 @@
 		CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64942C6DEF54009830AD /* BaseView.swift */; };
 		CE5E64982C6DEFFC009830AD /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = CE5E64972C6DEFFC009830AD /* RxCocoa */; };
 		CE5E649A2C6DEFFC009830AD /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE5E64992C6DEFFC009830AD /* RxSwift */; };
+		CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E649B2C6DF017009830AD /* RxViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		CE5E64832C6DE215009830AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE5E64902C6DE557009830AD /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		CE5E64942C6DEF54009830AD /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		CE5E649B2C6DF017009830AD /* RxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				CE5E64942C6DEF54009830AD /* BaseView.swift */,
+				CE5E649B2C6DF017009830AD /* RxViewModel.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5E647A2C6DE213009830AD /* ViewController.swift in Sources */,
+				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
 				CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */,
