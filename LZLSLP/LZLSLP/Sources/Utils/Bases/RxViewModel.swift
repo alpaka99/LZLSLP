@@ -118,13 +118,13 @@ protocol ViewModelable {
 
 
 // MARK: BaseViewModel Implementation
-protocol ReactiveViewModelRequirements {
+protocol ViewModelRequirements {
     init()
     
     func configureBind()
 }
 
-class BaseViewModel: ReactiveViewModelRequirements {
+class BaseViewModel: ViewModelRequirements {
     required init() {
         configureBind()
     }
