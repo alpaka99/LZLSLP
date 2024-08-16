@@ -19,6 +19,7 @@
 		CE5E649E2C6DF131009830AD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E649D2C6DF131009830AD /* BaseViewController.swift */; };
 		CE5E64A12C6DF1B3009830AD /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64A02C6DF1B3009830AD /* UIButton+.swift */; };
 		CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64A22C6DF1DD009830AD /* UIButton.Configuration+.swift */; };
+		CE5E64A62C6EFE21009830AD /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64A52C6EFE21009830AD /* URLRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		CE5E649D2C6DF131009830AD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		CE5E64A02C6DF1B3009830AD /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		CE5E64A22C6DF1DD009830AD /* UIButton.Configuration+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton.Configuration+.swift"; sourceTree = "<group>"; };
+		CE5E64A52C6EFE21009830AD /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				CE5E64912C6DEF19009830AD /* Bases */,
 				CE5E649F2C6DF1A6009830AD /* Extensions */,
+				CE5E64A42C6EFE10009830AD /* Routers */,
 				CE5E648F2C6DE548009830AD /* Keys */,
 			);
 			path = Utils;
@@ -155,6 +158,14 @@
 				CE5E64A22C6DF1DD009830AD /* UIButton.Configuration+.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CE5E64A42C6EFE10009830AD /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64A52C6EFE21009830AD /* URLRouter.swift */,
+			);
+			path = Routers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +251,7 @@
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
+				CE5E64A62C6EFE21009830AD /* URLRouter.swift in Sources */,
 				CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */,
 				CE5E649E2C6DF131009830AD /* BaseViewController.swift in Sources */,
 			);
