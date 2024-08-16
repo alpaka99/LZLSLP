@@ -15,12 +15,6 @@ protocol Schemable {
     var scheme: String { get }
 }
 
-protocol URLable {
-    var baseURL: String { get }
-    var port: String { get }
-    var path: String { get }
-}
-
 protocol Pathable {
     var path: String { get }
 }
@@ -34,15 +28,20 @@ enum URLRouter: Router {
     case https(HTTPSRequest)
     
     func build() -> URLRequest? {
-        
         switch self {
         case .https(let request):
-            if let url = URL(string: request.scheme) {
+            let scheme = request.scheme
+            let baseURL = request.baseURL
+            let port = request.port
+            let urlString = scheme + baseURL + port + request.path
+            if let url = URL(string: urlString) {
+                print(url.absoluteString)
                 return URLRequest(url: url)
+            } else {
+                print("Cannot create urlRequest")
+                return nil
             }
         }
-        
-        return nil
     }
     
     enum HTTPSRequest: Schemable {
@@ -58,6 +57,7 @@ enum URLRouter: Router {
         var port: String {
             return "/v1"
         }
+        
         var path: String {
             switch self {
             case .lslp(let request):
@@ -69,7 +69,7 @@ enum URLRouter: Router {
 
 
 
-enum LSLPRequest: URLable {
+enum LSLPRequest: Pathable {
     case auth(AuthType)
     case post(PostType)
     case comment(CommentType)
@@ -88,7 +88,7 @@ enum LSLPRequest: URLable {
     }
     
     var path: String {
-        switch self {
+        switch self { //MARK: 다 똑같은 코드인데 한줄로 쓰는 방법이 없을까?
         case .auth(let endpoint):
             return endpoint.endpoint
         case .post(let endpoint):
@@ -110,14 +110,33 @@ enum LSLPRequest: URLable {
     
     
     enum AuthType: Endpoitable {
-        case join
+        case join(RegisterForm)
         case validation
         case login
-        case refreshToken
+        case accessToken
         case withdraw
         
+        struct RegisterForm {
+            let email: String
+            let password: String
+            let nick: String
+            let phoneNum: String?
+            let birthDay: String?
+        }
+        
         var endpoint: String {
-            return ""
+            switch self {
+            case .join:
+                return "/users/join"
+            case .validation:
+                return "/validation/email"
+            case .login:
+                return "/users/login"
+            case .accessToken:
+                return "/auth/refresh"
+            case .withdraw:
+                return "/users/withdraw"
+            }
         }
     }
     
@@ -127,10 +146,26 @@ enum LSLPRequest: URLable {
         case getPosts
         case getPost
         case updatePost
+        case deletePost
         case getUserPost
         
         var endpoint: String {
-            return ""
+            switch self {
+            case .postFiles:
+                return "/posts/files"
+            case .postPost:
+                return "/posts"
+            case .getPosts:
+                return "/posts"
+            case .getPost:
+                return "/posts/"
+            case .updatePost:
+                return "/posts/"
+            case .deletePost:
+                return "/posts/"
+            case .getUserPost:
+                return "/posts/users/"
+            }
         }
     }
     
@@ -140,7 +175,14 @@ enum LSLPRequest: URLable {
         case deleteComment
         
         var endpoint: String {
-            return ""
+            switch self {
+            case .postComment:
+                return "/posts/:id/comments"
+            case .updateComment:
+                return "/posts/:id/comments/:commentID"
+            case .deleteComment:
+                return "/posts/:id/comments/:commentID"
+            }
         }
     }
     
@@ -149,7 +191,12 @@ enum LSLPRequest: URLable {
         case getLike
         
         var endpoint: String {
-            return ""
+            switch self {
+            case .likePost:
+                return "/posts/:id/like"
+            case .getLike:
+                return "/posts/likes/me"
+            }
         }
     }
     
@@ -158,7 +205,12 @@ enum LSLPRequest: URLable {
         case getLike
         
         var endpoint: String {
-            return ""
+            switch self {
+            case .likePost:
+                return "/posts/:id/like-2"
+            case .getLike:
+                return "/posts/likes-2/me"
+            }
         }
     }
     
@@ -167,7 +219,12 @@ enum LSLPRequest: URLable {
         case cancelFollow
         
         var endpoint: String {
-            return ""
+            switch self {
+            case .follow:
+                return "/follow/:id"
+            case .cancelFollow:
+                return "/follow/:id"
+            }
         }
     }
     
@@ -177,7 +234,14 @@ enum LSLPRequest: URLable {
         case getOtherProfile
         
         var endpoint: String {
-            return ""
+            switch self {
+            case .getMyProfile:
+                return "/users/me/profile"
+            case .updateMyProfile:
+                return "/users/me/profile"
+            case .getOtherProfile:
+                return "/users/:id/profile"
+            }
         }
     }
     
@@ -185,7 +249,10 @@ enum LSLPRequest: URLable {
         case searchHashTag
         
         var endpoint: String {
-            return ""
+            switch self {
+            case .searchHashTag:
+                return "/posts/hashtags"
+            }
         }
     }
 }
@@ -293,6 +360,7 @@ enum LSLPRequest: URLable {
 
 class Temp {
     func temp1() {
+        URLRouter.https(.lslp(.auth(.accessToken))).build()
         
     }
 }
