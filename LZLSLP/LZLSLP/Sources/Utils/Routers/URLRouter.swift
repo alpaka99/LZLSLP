@@ -13,14 +13,20 @@ protocol Router {
 
 protocol Schemable {
     var scheme: String { get }
+    var httpMethod: String { get }
+    var httpHeaders: [String : String] { get }
 }
 
 protocol Pathable {
     var path: String { get }
+    var httpMethod: String { get }
+    var httpHeaders: [String : String] { get }
 }
 
 protocol Endpoitable {
     var endpoint: String { get }
+    var httpMethod: HTTPMethod { get }
+    var httpHeaders: [String : String] { get }
 }
 
 
@@ -30,12 +36,27 @@ enum URLRouter: Router {
     func build() -> URLRequest? {
         switch self {
         case .https(let request):
+            
             let scheme = request.scheme
             let baseURL = request.baseURL
             let port = request.port
             let urlString = scheme + baseURL + port + request.path
+            
             if let url = URL(string: urlString) {
-                print(url.absoluteString)
+                var urlRequest = URLRequest(url: url)
+                // methods
+                urlRequest.httpMethod = request.httpMethod
+                
+                // headers
+                for (_, element) in request.httpHeaders.enumerated() {
+                    let key = element.key
+                    let value = element.value
+                    
+                    urlRequest.addValue(key, forHTTPHeaderField: value)
+                }
+                print(urlRequest.url?.absoluteString)
+                print(urlRequest.httpMethod)
+                print(urlRequest.allHTTPHeaderFields)
                 return URLRequest(url: url)
             } else {
                 print("Cannot create urlRequest")
@@ -45,7 +66,6 @@ enum URLRouter: Router {
     }
     
     enum HTTPSRequest: Schemable {
-        
         case lslp(LSLPRequest)
         
         var scheme: String {
@@ -62,6 +82,20 @@ enum URLRouter: Router {
             switch self {
             case .lslp(let request):
                 return request.path
+            }
+        }
+        
+        var httpMethod: String {
+            switch self {
+            case .lslp(let request):
+                return request.httpMethod
+            }
+        }
+        
+        var httpHeaders: [String : String] {
+            switch self {
+            case .lslp(let request):
+                return request.httpHeaders
             }
         }
     }
@@ -108,13 +142,55 @@ enum LSLPRequest: Pathable {
         }
     }
     
+    var httpMethod: String {
+        switch self {
+        case .auth(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .like(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .like2(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .follow(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .profile(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .hashtag(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .post(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .comment(let endpoint):
+            return endpoint.httpMethod.rawValue
+        }
+    }
+    
+    var httpHeaders: [String : String] {
+        switch self {
+        case .auth(let endpoint):
+            return endpoint.httpHeaders
+        case .like(let endpoint):
+            return endpoint.httpHeaders
+        case .like2(let endpoint):
+            return endpoint.httpHeaders
+        case .follow(let endpoint):
+            return endpoint.httpHeaders
+        case .profile(let endpoint):
+            return endpoint.httpHeaders
+        case .hashtag(let endpoint):
+            return endpoint.httpHeaders
+        case .post(let endpoint):
+            return endpoint.httpHeaders
+        case .comment(let endpoint):
+            return endpoint.httpHeaders
+        }
+    }
+    
     
     enum AuthType: Endpoitable {
         case join(RegisterForm)
-        case validation
-        case login
+        case validation(email: String)
+        case login(email: String, password: String)
         case accessToken
-        case withdraw
+        case withdraw // 한번 더 로그인 과정을 거치는게 일반적
         
         struct RegisterForm {
             let email: String
@@ -122,6 +198,21 @@ enum LSLPRequest: Pathable {
             let nick: String
             let phoneNum: String?
             let birthDay: String?
+        }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .join(_):
+                return .post
+            case .validation:
+                return .post
+            case .login:
+                return .post
+            case .accessToken:
+                return .get
+            case .withdraw:
+                return .get
+            }
         }
         
         var endpoint: String {
@@ -138,11 +229,35 @@ enum LSLPRequest: Pathable {
                 return "/users/withdraw"
             }
         }
+        
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            switch self {
+            case .join(_):
+                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
+                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+            case .validation(_):
+                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
+                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+            case .login:
+                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
+                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+            case .accessToken:
+                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
+                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+                headerPayload[HTTPHeaderKey.refreshToken.rawValue] = HTTPHeaderKey.refreshToken.value
+            case .withdraw:
+                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
+                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+            }
+            
+            return headerPayload
+        }
     }
     
     enum PostType: Endpoitable {
-        case postFiles
-        case postPost
+        case postFiles(files: Data)
+        case postPost // 어떤 content를 포스트에 넣을지 생각해보기
         case getPosts
         case getPost
         case updatePost
@@ -167,6 +282,30 @@ enum LSLPRequest: Pathable {
                 return "/posts/users/"
             }
         }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .postFiles:
+                return .post
+            case .postPost:
+                return .post
+            case .getPosts:
+                return .get
+            case .getPost:
+                return .get
+            case .updatePost:
+                return .put
+            case .deletePost:
+                return .delete
+            case .getUserPost:
+                return .get
+            }
+        }
+        
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            return headerPayload
+        }
     }
     
     enum CommentType: Endpoitable {
@@ -184,6 +323,22 @@ enum LSLPRequest: Pathable {
                 return "/posts/:id/comments/:commentID"
             }
         }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .postComment:
+                return .post
+            case .updateComment:
+                return .put
+            case .deleteComment:
+                return .delete
+            }
+        }
+        
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            return headerPayload
+        }
     }
     
     enum LikeType: Endpoitable {
@@ -197,6 +352,20 @@ enum LSLPRequest: Pathable {
             case .getLike:
                 return "/posts/likes/me"
             }
+        }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .getLike:
+                return .get
+            case .likePost:
+                return .post
+            }
+        }
+        
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            return headerPayload
         }
     }
     
@@ -212,6 +381,20 @@ enum LSLPRequest: Pathable {
                 return "/posts/likes-2/me"
             }
         }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .likePost:
+                return .post
+            case .getLike:
+                return .get
+            }
+        }
+        
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            return headerPayload
+        }
     }
     
     enum FollowType: Endpoitable {
@@ -225,6 +408,20 @@ enum LSLPRequest: Pathable {
             case .cancelFollow:
                 return "/follow/:id"
             }
+        }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .follow:
+                return .post
+            case .cancelFollow:
+                return .post
+            }
+        }
+        
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            return headerPayload
         }
     }
     
@@ -243,6 +440,22 @@ enum LSLPRequest: Pathable {
                 return "/users/:id/profile"
             }
         }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .getMyProfile:
+                return .get
+            case .updateMyProfile:
+                return .put
+            case .getOtherProfile:
+                return .get
+            }
+        }
+        
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            return headerPayload
+        }
     }
     
     enum HashtagType: Endpoitable {
@@ -254,7 +467,20 @@ enum LSLPRequest: Pathable {
                 return "/posts/hashtags"
             }
         }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .searchHashTag:
+                return .get
+            }
+        }
+        
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            return headerPayload
+        }
     }
+    
 }
 
 
@@ -354,8 +580,30 @@ enum LSLPRequest: Pathable {
 //    }
 //}
 
+enum HTTPMethod: String {
+    case get = "get"
+    case post = "post"
+    case put = "put"
+    case delete = "delete"
+}
    
 
+enum HTTPHeaderKey: String {
+    case contentType = "Content-Type"
+    case sesacKey = "SesacKey"
+    case refreshToken = "Refresh"
+    
+    var value: String {
+        switch self {
+        case .contentType:
+            return "application/json"
+        case .sesacKey:
+            return "SesacKeyValue"
+        case .refreshToken:
+            return "RefreshTokenValue"
+        }
+    }
+}
 
 
 class Temp {
@@ -364,3 +612,4 @@ class Temp {
         
     }
 }
+
