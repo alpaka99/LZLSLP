@@ -15,6 +15,9 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .systemBlue
         navigationItem.title = "LSLP :D"
+        
+        let temp = Temp()
+        temp.temp1()
     }
 }
 
