@@ -24,6 +24,8 @@
 		CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64AD2C70C391009830AD /* SignupView.swift */; };
 		CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64AF2C70C3A4009830AD /* SignupViewModel.swift */; };
 		CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B12C70C3EF009830AD /* SignupViewController.swift */; };
+		CE5E64B52C70CC86009830AD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE5E64B42C70CC86009830AD /* SnapKit */; };
+		CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B62C70CD81009830AD /* UIStackView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,7 @@
 		CE5E64AD2C70C391009830AD /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		CE5E64AF2C70C3A4009830AD /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		CE5E64B12C70C3EF009830AD /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		CE5E64B62C70CD81009830AD /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5E64B52C70CC86009830AD /* SnapKit in Frameworks */,
 				CE5E649A2C6DEFFC009830AD /* RxSwift in Frameworks */,
 				CE5E64982C6DEFFC009830AD /* RxCocoa in Frameworks */,
 			);
@@ -166,6 +170,7 @@
 			children = (
 				CE5E64A02C6DF1B3009830AD /* UIButton+.swift */,
 				CE5E64A22C6DF1DD009830AD /* UIButton.Configuration+.swift */,
+				CE5E64B62C70CD81009830AD /* UIStackView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 			packageProductDependencies = (
 				CE5E64972C6DEFFC009830AD /* RxCocoa */,
 				CE5E64992C6DEFFC009830AD /* RxSwift */,
+				CE5E64B42C70CC86009830AD /* SnapKit */,
 			);
 			productName = LZLSLP;
 			productReference = CE5E64722C6DE213009830AD /* LZLSLP.app */;
@@ -246,6 +252,7 @@
 			mainGroup = CE5E64692C6DE213009830AD;
 			packageReferences = (
 				CE5E64962C6DEFFC009830AD /* XCRemoteSwiftPackageReference "RxSwift" */,
+				CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = CE5E64732C6DE213009830AD /* Products */;
 			projectDirPath = "";
@@ -280,6 +287,7 @@
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
+				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
@@ -519,6 +527,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -531,6 +547,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE5E64962C6DEFFC009830AD /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		CE5E64B42C70CC86009830AD /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
