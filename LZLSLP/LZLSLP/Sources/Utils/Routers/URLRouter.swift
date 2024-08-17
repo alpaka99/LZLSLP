@@ -45,11 +45,8 @@ enum URLRouter: Router {
             let port = request.port
             let urlString = scheme + baseURL + port + request.path
             
-            var components = URLComponents(string: urlString)
-//            components?.queryItems = request.parameters
+            let components = URLComponents(string: urlString)
             
-            
-            print("This")
             if let composedURL = components?.url {
                 var urlRequest = URLRequest(url: composedURL)
                 // methods
@@ -60,7 +57,7 @@ enum URLRouter: Router {
                     let key = element.key
                     let value = element.value
                     
-                    urlRequest.addValue(key, forHTTPHeaderField: value)
+                    urlRequest.addValue(value, forHTTPHeaderField: key)
                 }
                 
                 
@@ -68,10 +65,10 @@ enum URLRouter: Router {
                 guard let requestBody = try? JSONEncoder().encode(request.parameters) else { return nil }
                 urlRequest.httpBody = requestBody
                 
-                print(urlRequest.url?.absoluteString)
-                print(urlRequest.httpMethod)
-                print(urlRequest.allHTTPHeaderFields)
-                print(urlRequest.httpBody)
+//                print("url", urlRequest.url?.absoluteString)
+//                print("Methods", urlRequest.httpMethod)
+//                print("Headers", urlRequest.allHTTPHeaderFields)
+//                print("Body", urlRequest.httpBody)
                 return urlRequest
             } else {
                 print("Cannot create urlRequest")
@@ -84,10 +81,10 @@ enum URLRouter: Router {
         case lslp(LSLPRequest)
         
         var scheme: String {
-            return "https://"
+            return "http://"
         }
         var baseURL: String {
-            return "naver.com"
+            return Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String ?? ""
         }
         var port: String {
             return "/v1"
@@ -581,102 +578,6 @@ enum LSLPRequest: Pathable {
 }
 
 
-
-//enum Path: Pathable {
-//    var path: String {
-//        switch self {
-//        case .auth(let temp), .post(let temp):
-//            return temp.endPoint
-//        default:
-//            return ""
-//        }
-//    }
-//    
-//    case auth(Endpointable)
-//    case post(Endpointable)
-//    case comment
-//    case like
-//    case like2
-//    case follow
-//    case profile
-//    case hashtag
-//    
-//    
-//    enum AuthType: Endpointable {
-//        var endPoint: String {
-//            return ""
-//        }
-//    }
-//    
-//    enum PostType: Endpointable {
-//        var endPoint: String {
-//            return ""
-//        }
-//    }
-//}
-
-//enum HTTPRequestType {
-//    case auth(AuthType)
-//    case post(PostType)
-//    case comment(CommentType)
-//    case like(LikeType)
-//    case like2(Like2Type)
-//    case follow(FollowType)
-//    case profile(ProfileType)
-//    case hashtag(HashTagType)
-//    
-//    
-//    enum AuthType {
-//        case join
-//        case validation
-//        case login
-//        case refresh
-//        case withdraw
-//        
-//        
-//    }
-//    
-//    enum PostType {
-//        case files
-//        case postPost
-//        case getPosts
-//        case getPost
-//        case deletePost
-//        case getUserPost
-//    }
-//    
-//    enum CommentType {
-//        case postComment
-//        case updateComment
-//        case deleteComment
-//    }
-//    
-//    enum LikeType {
-//        case like
-//        case cancelLike
-//    }
-//    
-//    enum Like2Type {
-//        case like
-//        case cancelLike
-//    }
-//    
-//    enum FollowType {
-//        case follow
-//        case cancelFollow
-//    }
-//    
-//    enum ProfileType {
-//        case getProfile
-//        case updateProfile
-//        case getOthersProfile(String)
-//    }
-//    
-//    enum HashTagType {
-//        case search
-//    }
-//}
-
 enum HTTPMethod: String {
     case get = "get"
     case post = "post"
@@ -695,7 +596,7 @@ enum HTTPHeaderKey: String {
         case .contentType:
             return "application/json"
         case .sesacKey:
-            return "SesacKeyValue"
+            return Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
         case .refreshToken:
             return "RefreshTokenValue"
         }
@@ -705,7 +606,7 @@ enum HTTPHeaderKey: String {
 
 class Temp {
     func temp1() {
-        URLRouter.https(.lslp(.auth(.login(email: "alpaka", password: "1234")))).build()
+        URLRouter.https(.lslp(.auth(.login(email: "alpaka@pakaland.com", password: "1234")))).build()
     }
 }
 
