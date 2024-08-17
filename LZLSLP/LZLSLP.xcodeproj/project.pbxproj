@@ -26,6 +26,7 @@
 		CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B12C70C3EF009830AD /* SignupViewController.swift */; };
 		CE5E64B52C70CC86009830AD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE5E64B42C70CC86009830AD /* SnapKit */; };
 		CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B62C70CD81009830AD /* UIStackView+.swift */; };
+		CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B92C70D4A0009830AD /* SignupForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		CE5E64AF2C70C3A4009830AD /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		CE5E64B12C70C3EF009830AD /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		CE5E64B62C70CD81009830AD /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		CE5E64B92C70D4A0009830AD /* SignupForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				CE5E64912C6DEF19009830AD /* Bases */,
 				CE5E649F2C6DF1A6009830AD /* Extensions */,
 				CE5E64A72C70BA08009830AD /* Managers */,
+				CE5E64B82C70D495009830AD /* Models */,
 				CE5E64A42C6EFE10009830AD /* Routers */,
 				CE5E648F2C6DE548009830AD /* Keys */,
 			);
@@ -199,6 +202,14 @@
 				CE5E64B12C70C3EF009830AD /* SignupViewController.swift */,
 			);
 			path = Signup;
+			sourceTree = "<group>";
+		};
+		CE5E64B82C70D495009830AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64B92C70D4A0009830AD /* SignupForm.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +299,7 @@
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
+				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,

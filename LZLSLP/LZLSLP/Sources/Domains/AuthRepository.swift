@@ -21,14 +21,27 @@ final class AuthRepository {
     
     func configureBind() {
         router
-            .bind(with: self) { owner, router in
-                let result = NetworkManager.shared.requestCall(router: router)
-                    .catch { error in
-                        Single.just(Data())
-                    }
-                
-                
+            .flatMap { router in
+                NetworkManager.shared.requestCall(router: router)
+            }
+            .debug()
+            .asDriver(onErrorJustReturn: Data())
+            .drive(with: self) { owner, data in
+                let convertedData = try! JSONDecoder().decode(SignUpResponse.self, from: data)
+                print(convertedData)
             }
             .disposed(by: disposeBag)
+    }
+}
+
+struct SignUpResponse: Decodable {
+    let userId: String
+    let email: String
+    let nick: String
+    
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case email
+        case nick
     }
 }
