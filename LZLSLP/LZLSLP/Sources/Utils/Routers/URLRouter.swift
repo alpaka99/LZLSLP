@@ -15,18 +15,21 @@ protocol Schemable {
     var scheme: String { get }
     var httpMethod: String { get }
     var httpHeaders: [String : String] { get }
+    var parameters: [String : String] { get }
 }
 
 protocol Pathable {
     var path: String { get }
     var httpMethod: String { get }
     var httpHeaders: [String : String] { get }
+    var parameters: [String : String] { get }
 }
 
 protocol Endpoitable {
     var endpoint: String { get }
     var httpMethod: HTTPMethod { get }
     var httpHeaders: [String : String] { get }
+    var parameters: [String : String] { get }
 }
 
 
@@ -42,8 +45,13 @@ enum URLRouter: Router {
             let port = request.port
             let urlString = scheme + baseURL + port + request.path
             
-            if let url = URL(string: urlString) {
-                var urlRequest = URLRequest(url: url)
+            var components = URLComponents(string: urlString)
+//            components?.queryItems = request.parameters
+            
+            
+            print("This")
+            if let composedURL = components?.url {
+                var urlRequest = URLRequest(url: composedURL)
                 // methods
                 urlRequest.httpMethod = request.httpMethod
                 
@@ -54,10 +62,17 @@ enum URLRouter: Router {
                     
                     urlRequest.addValue(key, forHTTPHeaderField: value)
                 }
+                
+                
+                // parameter as body
+                guard let requestBody = try? JSONEncoder().encode(request.parameters) else { return nil }
+                urlRequest.httpBody = requestBody
+                
                 print(urlRequest.url?.absoluteString)
                 print(urlRequest.httpMethod)
                 print(urlRequest.allHTTPHeaderFields)
-                return URLRequest(url: url)
+                print(urlRequest.httpBody)
+                return urlRequest
             } else {
                 print("Cannot create urlRequest")
                 return nil
@@ -96,6 +111,13 @@ enum URLRouter: Router {
             switch self {
             case .lslp(let request):
                 return request.httpHeaders
+            }
+        }
+        
+        var parameters: [String : String] {
+            switch self {
+            case .lslp(let request):
+                return request.parameters
             }
         }
     }
@@ -185,6 +207,28 @@ enum LSLPRequest: Pathable {
     }
     
     
+    var parameters: [String : String] {
+        switch self {
+        case .auth(let endpoint):
+            return endpoint.parameters
+        case .like(let endpoint):
+            return endpoint.parameters
+        case .like2(let endpoint):
+            return endpoint.parameters
+        case .follow(let endpoint):
+            return endpoint.parameters
+        case .profile(let endpoint):
+            return endpoint.parameters
+        case .hashtag(let endpoint):
+            return endpoint.parameters
+        case .post(let endpoint):
+            return endpoint.parameters
+        case .comment(let endpoint):
+            return endpoint.parameters
+        }
+    }
+    
+    
     enum AuthType: Endpoitable {
         case join(RegisterForm)
         case validation(email: String)
@@ -253,6 +297,32 @@ enum LSLPRequest: Pathable {
             
             return headerPayload
         }
+        
+        var parameters: [String : String] {
+            switch self {
+            case .join(let registerForm):
+                return [
+                    "email" : registerForm.email,
+                    "password" : registerForm.password,
+                    "nick" : registerForm.nick,
+                    "phoneNum" : registerForm.phoneNum ?? "",
+                    "birthDay" : registerForm.birthDay ?? "",
+                ]
+            case .validation(email: let email):
+                return [
+                    "email" : email
+                ]
+            case .login(email: let email, password: let password):
+                return  [
+                    "email" : email,
+                     "password" : password,
+                ]
+            case .accessToken:
+                return [:]
+            case .withdraw:
+                return [:]
+            }
+        }
     }
     
     enum PostType: Endpoitable {
@@ -306,6 +376,10 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             return headerPayload
         }
+        
+        var parameters: [String : String] {
+            return [:]
+        }
     }
     
     enum CommentType: Endpoitable {
@@ -339,6 +413,10 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             return headerPayload
         }
+        
+        var parameters: [String : String] {
+            return [:]
+        }
     }
     
     enum LikeType: Endpoitable {
@@ -366,6 +444,10 @@ enum LSLPRequest: Pathable {
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
             return headerPayload
+        }
+        
+        var parameters: [String : String] {
+            return [:]
         }
     }
     
@@ -395,6 +477,10 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             return headerPayload
         }
+        
+        var parameters: [String : String] {
+            return [:]
+        }
     }
     
     enum FollowType: Endpoitable {
@@ -422,6 +508,10 @@ enum LSLPRequest: Pathable {
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
             return headerPayload
+        }
+        
+        var parameters: [String : String] {
+            return [:]
         }
     }
     
@@ -456,6 +546,10 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             return headerPayload
         }
+        
+        var parameters: [String : String] {
+            return [:]
+        }
     }
     
     enum HashtagType: Endpoitable {
@@ -479,8 +573,11 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             return headerPayload
         }
+        
+        var parameters: [String : String] {
+            return [:]
+        }
     }
-    
 }
 
 
@@ -608,8 +705,7 @@ enum HTTPHeaderKey: String {
 
 class Temp {
     func temp1() {
-        URLRouter.https(.lslp(.auth(.accessToken))).build()
-        
+        URLRouter.https(.lslp(.auth(.login(email: "alpaka", password: "1234")))).build()
     }
 }
 
