@@ -65,10 +65,10 @@ enum URLRouter: Router {
                 guard let requestBody = try? JSONEncoder().encode(request.parameters) else { return nil }
                 urlRequest.httpBody = requestBody
                 
-//                print("url", urlRequest.url?.absoluteString)
-//                print("Methods", urlRequest.httpMethod)
-//                print("Headers", urlRequest.allHTTPHeaderFields)
-//                print("Body", urlRequest.httpBody)
+                print("url", urlRequest.url?.absoluteString)
+                print("Methods", urlRequest.httpMethod)
+                print("Headers", urlRequest.allHTTPHeaderFields)
+                print("Body", urlRequest.httpBody)
                 return urlRequest
             } else {
                 print("Cannot create urlRequest")
@@ -227,23 +227,15 @@ enum LSLPRequest: Pathable {
     
     
     enum AuthType: Endpoitable {
-        case join(RegisterForm)
+        case join(SignUpForm)
         case validation(email: String)
         case login(email: String, password: String)
         case accessToken
         case withdraw // 한번 더 로그인 과정을 거치는게 일반적
         
-        struct RegisterForm {
-            let email: String
-            let password: String
-            let nick: String
-            let phoneNum: String?
-            let birthDay: String?
-        }
-        
         var httpMethod: HTTPMethod {
             switch self {
-            case .join(_):
+            case .join:
                 return .post
             case .validation:
                 return .post

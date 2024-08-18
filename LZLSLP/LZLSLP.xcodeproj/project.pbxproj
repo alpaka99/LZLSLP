@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64752C6DE213009830AD /* AppDelegate.swift */; };
 		CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64772C6DE213009830AD /* SceneDelegate.swift */; };
-		CE5E647A2C6DE213009830AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64792C6DE213009830AD /* ViewController.swift */; };
 		CE5E647F2C6DE215009830AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5E647E2C6DE215009830AD /* Assets.xcassets */; };
 		CE5E64822C6DE215009830AD /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CE5E64812C6DE215009830AD /* Base */; };
 		CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64942C6DEF54009830AD /* BaseView.swift */; };
@@ -20,13 +19,20 @@
 		CE5E64A12C6DF1B3009830AD /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64A02C6DF1B3009830AD /* UIButton+.swift */; };
 		CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64A22C6DF1DD009830AD /* UIButton.Configuration+.swift */; };
 		CE5E64A62C6EFE21009830AD /* URLRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64A52C6EFE21009830AD /* URLRouter.swift */; };
+		CE5E64A92C70BA26009830AD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64A82C70BA26009830AD /* NetworkManager.swift */; };
+		CE5E64AB2C70C2FD009830AD /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64AA2C70C2FD009830AD /* AuthRepository.swift */; };
+		CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64AD2C70C391009830AD /* SignupView.swift */; };
+		CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64AF2C70C3A4009830AD /* SignupViewModel.swift */; };
+		CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B12C70C3EF009830AD /* SignupViewController.swift */; };
+		CE5E64B52C70CC86009830AD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE5E64B42C70CC86009830AD /* SnapKit */; };
+		CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B62C70CD81009830AD /* UIStackView+.swift */; };
+		CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B92C70D4A0009830AD /* SignupForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE5E64722C6DE213009830AD /* LZLSLP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LZLSLP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5E64752C6DE213009830AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE5E64772C6DE213009830AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE5E64792C6DE213009830AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE5E647E2C6DE215009830AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE5E64812C6DE215009830AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE5E64832C6DE215009830AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +43,13 @@
 		CE5E64A02C6DF1B3009830AD /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		CE5E64A22C6DF1DD009830AD /* UIButton.Configuration+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton.Configuration+.swift"; sourceTree = "<group>"; };
 		CE5E64A52C6EFE21009830AD /* URLRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRouter.swift; sourceTree = "<group>"; };
+		CE5E64A82C70BA26009830AD /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CE5E64AA2C70C2FD009830AD /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		CE5E64AD2C70C391009830AD /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		CE5E64AF2C70C3A4009830AD /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		CE5E64B12C70C3EF009830AD /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		CE5E64B62C70CD81009830AD /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		CE5E64B92C70D4A0009830AD /* SignupForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5E64B52C70CC86009830AD /* SnapKit in Frameworks */,
 				CE5E649A2C6DEFFC009830AD /* RxSwift in Frameworks */,
 				CE5E64982C6DEFFC009830AD /* RxCocoa in Frameworks */,
 			);
@@ -110,7 +124,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
-				CE5E64792C6DE213009830AD /* ViewController.swift */,
+				CE5E64AC2C70C383009830AD /* Signup */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -120,6 +134,8 @@
 			children = (
 				CE5E64912C6DEF19009830AD /* Bases */,
 				CE5E649F2C6DF1A6009830AD /* Extensions */,
+				CE5E64A72C70BA08009830AD /* Managers */,
+				CE5E64B82C70D495009830AD /* Models */,
 				CE5E64A42C6EFE10009830AD /* Routers */,
 				CE5E648F2C6DE548009830AD /* Keys */,
 			);
@@ -129,6 +145,7 @@
 		CE5E648E2C6DE4F1009830AD /* Domains */ = {
 			isa = PBXGroup;
 			children = (
+				CE5E64AA2C70C2FD009830AD /* AuthRepository.swift */,
 			);
 			path = Domains;
 			sourceTree = "<group>";
@@ -156,6 +173,7 @@
 			children = (
 				CE5E64A02C6DF1B3009830AD /* UIButton+.swift */,
 				CE5E64A22C6DF1DD009830AD /* UIButton.Configuration+.swift */,
+				CE5E64B62C70CD81009830AD /* UIStackView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -166,6 +184,32 @@
 				CE5E64A52C6EFE21009830AD /* URLRouter.swift */,
 			);
 			path = Routers;
+			sourceTree = "<group>";
+		};
+		CE5E64A72C70BA08009830AD /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64A82C70BA26009830AD /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		CE5E64AC2C70C383009830AD /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64AD2C70C391009830AD /* SignupView.swift */,
+				CE5E64AF2C70C3A4009830AD /* SignupViewModel.swift */,
+				CE5E64B12C70C3EF009830AD /* SignupViewController.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		CE5E64B82C70D495009830AD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64B92C70D4A0009830AD /* SignupForm.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +231,7 @@
 			packageProductDependencies = (
 				CE5E64972C6DEFFC009830AD /* RxCocoa */,
 				CE5E64992C6DEFFC009830AD /* RxSwift */,
+				CE5E64B42C70CC86009830AD /* SnapKit */,
 			);
 			productName = LZLSLP;
 			productReference = CE5E64722C6DE213009830AD /* LZLSLP.app */;
@@ -218,6 +263,7 @@
 			mainGroup = CE5E64692C6DE213009830AD;
 			packageReferences = (
 				CE5E64962C6DEFFC009830AD /* XCRemoteSwiftPackageReference "RxSwift" */,
+				CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = CE5E64732C6DE213009830AD /* Products */;
 			projectDirPath = "";
@@ -245,10 +291,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5E647A2C6DE213009830AD /* ViewController.swift in Sources */,
+				CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */,
+				CE5E64AB2C70C2FD009830AD /* AuthRepository.swift in Sources */,
 				CE5E64A12C6DF1B3009830AD /* UIButton+.swift in Sources */,
+				CE5E64A92C70BA26009830AD /* NetworkManager.swift in Sources */,
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
+				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
+				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
+				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
+				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
 				CE5E64A62C6EFE21009830AD /* URLRouter.swift in Sources */,
@@ -487,6 +539,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -499,6 +559,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE5E64962C6DEFFC009830AD /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		CE5E64B42C70CC86009830AD /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
