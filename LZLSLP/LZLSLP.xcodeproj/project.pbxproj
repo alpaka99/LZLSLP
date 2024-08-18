@@ -27,6 +27,9 @@
 		CE5E64B52C70CC86009830AD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE5E64B42C70CC86009830AD /* SnapKit */; };
 		CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B62C70CD81009830AD /* UIStackView+.swift */; };
 		CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64B92C70D4A0009830AD /* SignupForm.swift */; };
+		CE5E64BD2C71FB96009830AD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64BC2C71FB96009830AD /* LoginView.swift */; };
+		CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64BE2C71FBA6009830AD /* LoginViewModel.swift */; };
+		CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64C02C71FCCE009830AD /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		CE5E64B12C70C3EF009830AD /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		CE5E64B62C70CD81009830AD /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 		CE5E64B92C70D4A0009830AD /* SignupForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupForm.swift; sourceTree = "<group>"; };
+		CE5E64BC2C71FB96009830AD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		CE5E64BE2C71FBA6009830AD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CE5E64C02C71FCCE009830AD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE5E64BB2C71FB8C009830AD /* Login */,
 				CE5E64AC2C70C383009830AD /* Signup */,
 			);
 			path = Presenters;
@@ -212,6 +219,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CE5E64BB2C71FB8C009830AD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64BC2C71FB96009830AD /* LoginView.swift */,
+				CE5E64BE2C71FBA6009830AD /* LoginViewModel.swift */,
+				CE5E64C02C71FCCE009830AD /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -291,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
 				CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */,
 				CE5E64AB2C70C2FD009830AD /* AuthRepository.swift in Sources */,
 				CE5E64A12C6DF1B3009830AD /* UIButton+.swift in Sources */,
@@ -301,10 +319,12 @@
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
 				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
+				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
 				CE5E64A62C6EFE21009830AD /* URLRouter.swift in Sources */,
 				CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */,
+				CE5E64BD2C71FB96009830AD /* LoginView.swift in Sources */,
 				CE5E649E2C6DF131009830AD /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
