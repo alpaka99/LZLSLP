@@ -14,11 +14,10 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
     override func configureBind() {
         super.configureBind()
         
-        Observable
-            .combineLatest(
+        baseView.submitButton.rx.tap
+            .withLatestFrom(Observable.combineLatest(
                 baseView.emailTextField.rx.text.orEmpty,
-                baseView.passwordTextField.rx.text.orEmpty,
-                baseView.submitButton.rx.tap
+                baseView.passwordTextField.rx.text.orEmpty)
             )
             .bind(with: self) { owner, value in
                 let email = value.0
