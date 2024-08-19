@@ -47,7 +47,7 @@ final class LoginViewModel: RxViewModel {
         
         store.loginResponse
             .bind(with: self) { owner, data in
-                dump(data)
+//                dump(data)
             }
             .disposed(by: disposeBag)
     }

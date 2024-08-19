@@ -23,7 +23,7 @@ final class NetworkManager {
                     }
                     
                     guard let response = response as? HTTPURLResponse, (200..<300).contains(response.statusCode) else {
-                        print(response)
+//                        print(response)
                         observer(.failure(NetworkError.responseStatusCodeError))
                         return
                     }

@@ -15,16 +15,28 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
         super.configureBind()
         
         baseView.submitButton.rx.tap
-            .withLatestFrom(Observable.combineLatest(
-                baseView.emailTextField.rx.text.orEmpty,
-                baseView.passwordTextField.rx.text.orEmpty)
+            .withLatestFrom(
+                Observable.combineLatest(
+                    baseView.emailTextField.rx.text.orEmpty,
+                    baseView.passwordTextField.rx.text.orEmpty)
             )
             .bind(with: self) { owner, value in
                 let email = value.0
                 let password = value.1
-                print(email, password)
                 
                 owner.viewModel.store.loginForm.accept((email, password))
+            }
+            .disposed(by: disposeBag)
+        
+        
+        baseView.signUpButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let signUpViewController = SignupViewController(
+                    baseView: SignupView(),
+                    viewModel: SignupViewModel()
+                )
+                
+                owner.navigationController?.pushViewController(signUpViewController, animated: true)
             }
             .disposed(by: disposeBag)
     }
