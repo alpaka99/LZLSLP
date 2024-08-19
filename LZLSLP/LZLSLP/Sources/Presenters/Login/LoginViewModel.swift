@@ -17,6 +17,7 @@ final class LoginViewModel: RxViewModel {
     
     struct Output: Outputable {
         var loginResponse = PublishRelay<LoginResponse>()
+        var loginCompleted = PublishSubject<Void>()
     }
     
     var store = ViewStore(input: Input(), output: Output())
@@ -44,17 +45,13 @@ final class LoginViewModel: RxViewModel {
                 )
                 .debug("This is Login")
                     .subscribe(with: self) { owner, result in
-                        print("LoginViewModel This", result)
                         switch result {
                         case .success(let loginResponse):
-                            dump(loginResponse)
                             owner.store.loginResponse.accept(loginResponse)
                         case .failure(let error):
                             print("Login error: \(error)")
 //                            break // error handling
                         }
-//                        owner.store.loginResponse
-//                            .accept(data)
                     }
                     .disposed(by: owner.disposeBag)
                     
@@ -62,15 +59,26 @@ final class LoginViewModel: RxViewModel {
             .disposed(by: disposeBag)
         
         store.loginResponse
-            .bind(with: self) { owner, data in
-//                dump(data)
+            .bind(with: self) { owner, loginResponse in
+                let accessToken = AccessToken(token: loginResponse.accessToken)
+                let refreshToken = RefreshToken(token: loginResponse.refreshToken)
+                
+                UserDefaults.standard.save(accessToken)
+                UserDefaults.standard.save(refreshToken)
+                
+                // 저장 제대로 됐는지 확인
+                if let accesToken = UserDefaults.standard.load(of: AccessToken.self), let refreshToken = UserDefaults.standard.load(of: RefreshToken.self) {
+                    print("AccessToken: \(accesToken.token)")
+                    print("RefreshToken: \(refreshToken.token)")
+                    owner.store.loginCompleted.onNext(())
+                }
             }
             .disposed(by: disposeBag)
     }
 }
 
 
-struct LoginResponse: Decodable {
+struct LoginResponse: Codable {
     let userId: String
     let email: String
     let nick: String
@@ -86,4 +94,16 @@ struct LoginResponse: Decodable {
         case accessToken
         case refreshToken
     }
+}
+
+protocol Tokenable: Codable {
+    var token: String { get }
+}
+
+struct AccessToken: Tokenable {
+    let token: String
+}
+
+struct RefreshToken: Tokenable {
+    let token: String
 }

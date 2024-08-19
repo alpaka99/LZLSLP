@@ -30,6 +30,9 @@
 		CE5E64BD2C71FB96009830AD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64BC2C71FB96009830AD /* LoginView.swift */; };
 		CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64BE2C71FBA6009830AD /* LoginViewModel.swift */; };
 		CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64C02C71FCCE009830AD /* LoginViewController.swift */; };
+		CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64CA2C736796009830AD /* UserDefaults+.swift */; };
+		CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64CC2C736A11009830AD /* Encodable+.swift */; };
+		CE5E64CF2C736A19009830AD /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64CE2C736A19009830AD /* Decodable+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,9 @@
 		CE5E64BC2C71FB96009830AD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CE5E64BE2C71FBA6009830AD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CE5E64C02C71FCCE009830AD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CE5E64CA2C736796009830AD /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
+		CE5E64CC2C736A11009830AD /* Encodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+.swift"; sourceTree = "<group>"; };
+		CE5E64CE2C736A19009830AD /* Decodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +187,9 @@
 				CE5E64A02C6DF1B3009830AD /* UIButton+.swift */,
 				CE5E64A22C6DF1DD009830AD /* UIButton.Configuration+.swift */,
 				CE5E64B62C70CD81009830AD /* UIStackView+.swift */,
+				CE5E64CA2C736796009830AD /* UserDefaults+.swift */,
+				CE5E64CC2C736A11009830AD /* Encodable+.swift */,
+				CE5E64CE2C736A19009830AD /* Decodable+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -315,17 +324,20 @@
 				CE5E64A92C70BA26009830AD /* NetworkManager.swift in Sources */,
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
+				CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
 				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
 				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
+				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
 				CE5E64A62C6EFE21009830AD /* URLRouter.swift in Sources */,
 				CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */,
 				CE5E64BD2C71FB96009830AD /* LoginView.swift in Sources */,
 				CE5E649E2C6DF131009830AD /* BaseViewController.swift in Sources */,
+				CE5E64CF2C736A19009830AD /* Decodable+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

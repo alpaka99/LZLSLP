@@ -39,5 +39,12 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
                 owner.navigationController?.pushViewController(signUpViewController, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.store.loginCompleted
+            .debug("Login Completed")
+            .bind(with: self) { owner, _ in
+                print("Login Completed")
+            }
+            .disposed(by: disposeBag)
     }
 }

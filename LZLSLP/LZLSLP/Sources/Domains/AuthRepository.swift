@@ -22,7 +22,6 @@ final class AuthRepository {
                 .subscribe(with: self) { owner, result in
                     switch result {
                     case .success(let data):
-                        print("Success until this")
                         do {
                             let decodedData = try JSONDecoder().decode(T.self, from: data)
                             observer(.success(.success(decodedData)))
