@@ -34,15 +34,15 @@ final class SignupView: BaseView {
         return textField
     }()
     
-    lazy var textFieldStack = {
+    lazy var textFieldStack = {[weak self] in
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.addArrangedSubviews([
-            emailTextField,
-            passwordTextField,
-            nicknameTextField,
-            phoneNumTextField,
-            birthDayTextField
+            self?.emailTextField,
+            self?.passwordTextField,
+            self?.nicknameTextField,
+            self?.phoneNumTextField,
+            self?.birthDayTextField
         ])
         
         stackView.spacing = 8
