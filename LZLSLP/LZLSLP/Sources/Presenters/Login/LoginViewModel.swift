@@ -30,15 +30,31 @@ final class LoginViewModel: RxViewModel {
                 let email = loginForm.0
                 let password = loginForm.1
                 
+                print(email, password)
                 let router = URLRouter.https(.lslp(.auth(.login(email: email, password: password))))
                 
                 /*
                  MARK: Memory Leak의 가능성
+                 +
+                 MARK: 중첩 subscribe 가능성(singUpView + LoginView)
                  */
-                owner.repository.requestAuthAPI(of: LoginResponse.self, router: router)
-                    .subscribe(with: self) { owner, data in
-                        owner.store.loginResponse
-                            .accept(data)
+                owner.repository.requestAuthAPI(
+                    of: LoginResponse.self,
+                    router: router
+                )
+                .debug("This is Login")
+                    .subscribe(with: self) { owner, result in
+                        print("LoginViewModel This", result)
+                        switch result {
+                        case .success(let loginResponse):
+                            dump(loginResponse)
+                            owner.store.loginResponse.accept(loginResponse)
+                        case .failure(let error):
+                            print("Login error: \(error)")
+//                            break // error handling
+                        }
+//                        owner.store.loginResponse
+//                            .accept(data)
                     }
                     .disposed(by: owner.disposeBag)
                     

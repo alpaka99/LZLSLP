@@ -13,7 +13,7 @@ final class NetworkManager {
     static let shared = NetworkManager()
     private init() { }
     
-    func requestCall(router: Router) -> Single<Data> {
+    func requestCall(router: Router) -> Single<Result<Data, Error>> {
         Single.create { observer in
             if let urlRequest = router.build() {
                 URLSession.shared.dataTask(with: urlRequest) { data, response, error in
@@ -23,7 +23,6 @@ final class NetworkManager {
                     }
                     
                     guard let response = response as? HTTPURLResponse, (200..<300).contains(response.statusCode) else {
-//                        print(response)
                         observer(.failure(NetworkError.responseStatusCodeError))
                         return
                     }
@@ -33,7 +32,7 @@ final class NetworkManager {
                         return
                     }
                     
-                    observer(.success(data))
+                    observer(.success(.success(data)))
                 }
                 .resume()
             } else {

@@ -28,9 +28,19 @@ final class SignupViewModel: RxViewModel {
             .bind(with: self) { owner, signUpForm in
                 let router = URLRouter.https(.lslp(.auth(.join(signUpForm))))
 //                owner.authRepository.router.onNext(router)
-                owner.authRepository.requestAuthAPI(of: SignUpResponse.self, router: router)
-                    .subscribe(with: self) { owner, data in
-                        owner.store.singUpResponse.onNext(data)
+                owner.authRepository.requestAuthAPI(
+                    of: SignUpResponse.self,
+                    router: router
+                )
+                    .subscribe(with: self) { owner, result in
+                        print(result)
+                        switch result {
+                        case .success(let signUpResponse):
+                            dump(signUpResponse)
+                            owner.store.singUpResponse.onNext(signUpResponse)
+                        case .failure(let error):
+                            print("SignUp Error:\(error)")
+                        }
                     }
                     .disposed(by: owner.disposeBag)
                     
