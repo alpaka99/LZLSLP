@@ -42,8 +42,11 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
         
         viewModel.store.loginCompleted
             .debug("Login Completed")
-            .bind(with: self) { owner, _ in
-                print("Login Completed")
+            .asDriver(onErrorJustReturn: ())
+            .drive(with: self) { owner, _ in
+                let trendingViewController = TrendingViewController(baseView: TrendingView(), viewModel: TrendingViewModel())
+                
+                owner.navigationController?.pushViewController(trendingViewController, animated: true)
             }
             .disposed(by: disposeBag)
     }

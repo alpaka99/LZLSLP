@@ -33,6 +33,9 @@
 		CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64CA2C736796009830AD /* UserDefaults+.swift */; };
 		CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64CC2C736A11009830AD /* Encodable+.swift */; };
 		CE5E64CF2C736A19009830AD /* Decodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64CE2C736A19009830AD /* Decodable+.swift */; };
+		CE5E64D32C7387D6009830AD /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64D22C7387D6009830AD /* TrendingView.swift */; };
+		CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64D42C7387E7009830AD /* TrendingViewModel.swift */; };
+		CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64D62C73881F009830AD /* TrendingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		CE5E64CA2C736796009830AD /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		CE5E64CC2C736A11009830AD /* Encodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+.swift"; sourceTree = "<group>"; };
 		CE5E64CE2C736A19009830AD /* Decodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+.swift"; sourceTree = "<group>"; };
+		CE5E64D22C7387D6009830AD /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
+		CE5E64D42C7387E7009830AD /* TrendingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewModel.swift; sourceTree = "<group>"; };
+		CE5E64D62C73881F009830AD /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE5E64D12C7387C0009830AD /* Trending */,
 				CE5E64BB2C71FB8C009830AD /* Login */,
 				CE5E64AC2C70C383009830AD /* Signup */,
 			);
@@ -238,6 +245,16 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		CE5E64D12C7387C0009830AD /* Trending */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64D22C7387D6009830AD /* TrendingView.swift */,
+				CE5E64D42C7387E7009830AD /* TrendingViewModel.swift */,
+				CE5E64D62C73881F009830AD /* TrendingViewController.swift */,
+			);
+			path = Trending;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,14 +341,17 @@
 				CE5E64A92C70BA26009830AD /* NetworkManager.swift in Sources */,
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
+				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
 				CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
 				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
 				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
+				CE5E64D32C7387D6009830AD /* TrendingView.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
+				CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
 				CE5E64A62C6EFE21009830AD /* URLRouter.swift in Sources */,
 				CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */,
