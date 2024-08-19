@@ -51,4 +51,5 @@ enum NetworkError: Error {
     case networkError
     case responseStatusCodeError
     case nilDataError
+    case decodingFailure
 }
