@@ -87,7 +87,7 @@ final class Interceptor: RequestInterceptor {
                     UserDefaults.standard.save(accessToken)
                     completion(.retry)
                 case .failure(let error):
-                    completion(.doNotRetryWithError(InterceptorError.tokenFinalError))
+                    completion(.doNotRetryWithError(InterceptorError.accessTokenResponseFailureError))
                 }
             }
     }
@@ -145,7 +145,7 @@ enum InterceptorError: Error {
     case tokenFetchError
     case tokenResponseStatusError
     case nilTokenError
-    case tokenFinalError
+    case accessTokenResponseFailureError
 }
 
 // MARK: Status Code enum으로 뺴기

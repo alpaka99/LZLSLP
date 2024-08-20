@@ -26,10 +26,10 @@ final class AuthRepository {
                             let decodedData = try JSONDecoder().decode(T.self, from: data)
                             observer(.success(.success(decodedData)))
                         } catch {
-                            observer(.failure(error))
+                            observer(.success(.failure(error)))
                         }
                     case.failure(let error):
-                        observer(.failure(error))
+                        observer(.success(.failure(error)))
                     }
                 }
                 .disposed(by: self.disposeBag)
