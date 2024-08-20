@@ -41,36 +41,6 @@ final class NetworkManager {
             return Disposables.create()
         }
     }
-    
-    func requestCall(router: Router) -> Single<Result<Data, Error>> {
-        Single.create { observer in
-            if let urlRequest = router.build() {
-                URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-                    guard error == nil else {
-                        observer(.failure(NetworkError.networkError))
-                        return
-                    }
-                    
-                    guard let response = response as? HTTPURLResponse, (200..<300).contains(response.statusCode) else {
-                        observer(.failure(NetworkError.responseStatusCodeError))
-                        return
-                    }
-                    
-                    guard let data = data else {
-                        observer(.failure(NetworkError.nilDataError))
-                        return
-                    }
-                    
-                    observer(.success(.success(data)))
-                }
-                .resume()
-            } else {
-                observer(.failure(NetworkError.urlRequestCreateError))
-            }
-            
-            return Disposables.create()
-        }
-    }
 }
 
 
@@ -107,7 +77,6 @@ final class Interceptor: RequestInterceptor {
             completion(.doNotRetryWithError(InterceptorError.tokenURLBuildError))
             return
         }
-        
         urlRequest.addValue(accessToken, forHTTPHeaderField: "Authrorization")
         urlRequest.addValue(refreshToken, forHTTPHeaderField: "Refresh")
         
