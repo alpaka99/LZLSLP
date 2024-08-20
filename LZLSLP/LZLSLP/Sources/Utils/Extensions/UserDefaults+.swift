@@ -22,3 +22,9 @@ extension UserDefaults {
         }
     }
 }
+
+
+enum UserDefaultsError: Error {
+    case saveFailure
+    case loadFailure
+}
