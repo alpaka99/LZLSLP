@@ -13,9 +13,6 @@ import RxSwift
 final class AuthRepository {
     let disposeBag = DisposeBag()
     
-    var data = PublishSubject<Data>()
-
-    
     func requestAuthAPI<T: Decodable>(of type: T.Type, router: Router) -> Single<Result<T, Error>> {
         Single.create { observer in
             NetworkManager.shared.requestCall(router: router)

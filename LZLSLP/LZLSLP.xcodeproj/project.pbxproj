@@ -40,6 +40,7 @@
 		CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64DC2C74EDD7009830AD /* PostView.swift */; };
 		CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */; };
 		CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64E02C74EE17009830AD /* PostViewController.swift */; };
+		CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64E22C74FDAA009830AD /* PostRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		CE5E64DC2C74EDD7009830AD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		CE5E64E02C74EE17009830AD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		CE5E64E22C74FDAA009830AD /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				CE5E64AA2C70C2FD009830AD /* AuthRepository.swift */,
+				CE5E64E22C74FDAA009830AD /* PostRepository.swift */,
 			);
 			path = Domains;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
 				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
 				CE5E64D32C7387D6009830AD /* TrendingView.swift in Sources */,
+				CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
 				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,

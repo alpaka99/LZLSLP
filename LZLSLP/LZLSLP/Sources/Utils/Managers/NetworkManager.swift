@@ -19,21 +19,30 @@ final class NetworkManager {
             if let urlRequest = router.build() {
                 AF.request(urlRequest, interceptor: interceptor)
                     .validate(statusCode: 200..<300)
-                    .responseData { result in
+                    .responseString { result in
                         switch result.result {
-                        case .success(let data):
-                            observer(.success(.success(data)))
+                        case .success(let str):
+                            print(str)
                         case .failure(let error):
-                            switch error {
-                            case .createURLRequestFailed:
-                                observer(.failure(NetworkError.urlRequestCreateError))
-                            case .responseValidationFailed:
-                                observer(.failure(NetworkError.responseStatusCodeError))
-                            default:
-                                observer(.failure(NetworkError.networkError))
-                            }
+                            print(error)
                         }
                     }
+//                    .responseData { result in
+//                        switch result.result {
+//                        case .success(let data):
+//                            observer(.success(.success(data)))
+//                        case .failure(let error):
+//                            print("NetworkManager error: \(error)")
+//                            switch error {
+//                            case .createURLRequestFailed:
+//                                observer(.failure(NetworkError.urlRequestCreateError))
+//                            case .responseValidationFailed:
+//                                observer(.failure(NetworkError.responseStatusCodeError))
+//                            default:
+//                                observer(.failure(NetworkError.networkError))
+//                            }
+//                        }
+//                    }
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))
             }
@@ -47,8 +56,22 @@ final class NetworkManager {
 final class Interceptor: RequestInterceptor {
     // 네트워크 호출 이전에 일어나는 adapt(Access Token을 넣어줌)
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
-        guard let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String, 
-        let url = urlRequest.url?.absoluteString, url.hasPrefix(baseURL),
+        
+        print("Interceptor adapt >>>")
+//        let tempURL = URLRouter.https(.lslp(.auth(.accessToken))).build()
+//        let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token
+//        let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token
+//        
+//        print("url: \(tempURL?.url?.absoluteString)")
+//        print("ac: \(accessToken)")
+//        print("rf: \(refreshToken)")
+        
+        let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String
+        
+        
+        
+        guard let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String,
+        let url = urlRequest.url?.absoluteString,
         let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token
         else {
             completion(.failure(InterceptorError.tokenURLBuildError))
@@ -67,8 +90,15 @@ final class Interceptor: RequestInterceptor {
             completion(.doNotRetry)
             return
         }
-        
+        print("Interceptor retry>>>")
         // invalidAccessToken 에러라면 access token을 refresh하는 retry
+        let tempURL = URLRouter.https(.lslp(.auth(.accessToken))).build()
+        let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token
+        let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token
+        
+        print("url: \(tempURL?.url?.absoluteString)")
+        print("ac: \(accessToken)")
+        print("rf: \(refreshToken)")
         guard var urlRequest = URLRouter.https(.lslp(.auth(.accessToken))).build(),
               let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token,
               let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token

@@ -266,19 +266,7 @@ enum LSLPRequest: Pathable {
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
             switch self {
-            case .join(_):
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-            case .validation(_):
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-            case .login:
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-            case .accessToken:
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-            case .withdraw:
+            default:
                 headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
                 headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
             }
@@ -315,7 +303,7 @@ enum LSLPRequest: Pathable {
     
     enum PostType: Endpoitable {
         case postFiles(files: Data)
-        case postPost // 어떤 content를 포스트에 넣을지 생각해보기
+        case postPost(postForm: PostForm) // 어떤 content를 포스트에 넣을지 생각해보기
         case getPosts
         case getPost
         case updatePost
@@ -362,6 +350,12 @@ enum LSLPRequest: Pathable {
         
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
+            switch self {
+            default:
+                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
+                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+            }
+            
             return headerPayload
         }
         
