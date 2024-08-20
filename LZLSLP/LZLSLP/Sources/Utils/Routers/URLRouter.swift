@@ -360,7 +360,25 @@ enum LSLPRequest: Pathable {
         }
         
         var parameters: [String : String] {
-            return [:]
+            switch self {
+            case .postFiles(files: let files):
+                return [:]
+            case .postPost(postForm: let postForm):
+                return [
+                    "title" : postForm.title,
+                    "content" : postForm.content
+                ]
+            case .getPosts:
+                return [:]
+            case .getPost:
+                return [:]
+            case .updatePost:
+                return [:]
+            case .deletePost:
+                return [:]
+            case .getUserPost:
+                return [:]
+            }
         }
     }
     
