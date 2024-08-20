@@ -64,8 +64,7 @@ final class Interceptor: RequestInterceptor {
     func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
         // invalidAccessToken 에러가 아니라면 retry하지 않고 통과시킴
         guard let response = request.response, response.statusCode == StatusCode.invalidAccessToken.rawValue else {
-            
-            completion(.doNotRetryWithError(error))
+            completion(.doNotRetry)
             return
         }
         
@@ -88,7 +87,7 @@ final class Interceptor: RequestInterceptor {
                     UserDefaults.standard.save(accessToken)
                     completion(.retry)
                 case .failure(let error):
-                    completion(.doNotRetryWithError(error))
+                    completion(.doNotRetryWithError(InterceptorError.tokenFinalError))
                 }
             }
     }
@@ -146,6 +145,7 @@ enum InterceptorError: Error {
     case tokenFetchError
     case tokenResponseStatusError
     case nilTokenError
+    case tokenFinalError
 }
 
 // MARK: Status Code enum으로 뺴기
