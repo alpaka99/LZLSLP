@@ -37,6 +37,9 @@
 		CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64D42C7387E7009830AD /* TrendingViewModel.swift */; };
 		CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64D62C73881F009830AD /* TrendingViewController.swift */; };
 		CE5E64DA2C73B3D0009830AD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE5E64D92C73B3D0009830AD /* Alamofire */; };
+		CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64DC2C74EDD7009830AD /* PostView.swift */; };
+		CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */; };
+		CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64E02C74EE17009830AD /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 		CE5E64D22C7387D6009830AD /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
 		CE5E64D42C7387E7009830AD /* TrendingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewModel.swift; sourceTree = "<group>"; };
 		CE5E64D62C73881F009830AD /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
+		CE5E64DC2C74EDD7009830AD /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		CE5E64E02C74EE17009830AD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE5E64DB2C74EDCB009830AD /* Post */,
 				CE5E64D12C7387C0009830AD /* Trending */,
 				CE5E64BB2C71FB8C009830AD /* Login */,
 				CE5E64AC2C70C383009830AD /* Signup */,
@@ -257,6 +264,16 @@
 			path = Trending;
 			sourceTree = "<group>";
 		};
+		CE5E64DB2C74EDCB009830AD /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				CE5E64DC2C74EDD7009830AD /* PostView.swift */,
+				CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */,
+				CE5E64E02C74EE17009830AD /* PostViewController.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -338,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */,
 				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
 				CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */,
 				CE5E64AB2C70C2FD009830AD /* AuthRepository.swift in Sources */,
@@ -346,6 +364,7 @@
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
+				CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */,
 				CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
@@ -354,6 +373,7 @@
 				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
 				CE5E64D32C7387D6009830AD /* TrendingView.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
+				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
