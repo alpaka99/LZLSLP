@@ -1,15 +1,15 @@
 //
-//  SignupView.swift
+//  LoginView.swift
 //  LZLSLP
 //
-//  Created by user on 8/17/24.
+//  Created by user on 8/18/24.
 //
 
 import UIKit
 
 import SnapKit
 
-final class SignupView: BaseView {
+final class LoginView: BaseView {
     let emailTextField = {
         let textField = UITextField()
         textField.placeholder = "이메일을 입력해주세요"
@@ -22,27 +22,12 @@ final class SignupView: BaseView {
         return textField
     }()
     
-    let nicknameTextField = {
-        let textField = UITextField()
-        textField.placeholder = "닉네임을 입력해주세요"
-        return textField
-    }()
-    
-    let phoneNumTextField = {
-        let textField = UITextField()
-        textField.placeholder = "전화번호를 입력해주세요"
-        return textField
-    }()
-    
     lazy var textFieldStack = {[weak self] in
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.addArrangedSubviews([
             self?.emailTextField,
-            self?.passwordTextField,
-            self?.nicknameTextField,
-            self?.phoneNumTextField,
-            self?.birthDayTextField
+            self?.passwordTextField
         ])
         
         stackView.spacing = 8
@@ -52,46 +37,49 @@ final class SignupView: BaseView {
         return stackView
     }()
     
-    let birthDayTextField = {
-        let textField = UITextField()
-        return textField
-    }()
-    
     let submitButton = {
         let button = UIButton.Configuration.plain()
+            .title("로그인")
+            .foregroundColor(.white)
             .backgroundColor(.systemBlue)
-            .title("회원 가입")
             .cornerStyle(.capsule)
             .build()
         
-        button.tintColor = .white
         return button
     }()
     
+    let signUpButton = {
+        let button = UIButton.Configuration.plain()
+            .title("아직 회원이 아니신가요?")
+            .foregroundColor(.systemBlue)
+            .build()
+        
+        return button
+    }()
     
     override func configureHierarchy() {
         super.configureHierarchy()
         
         self.addSubview(textFieldStack)
         self.addSubview(submitButton)
+        self.addSubview(signUpButton)
     }
     
     override func configureLayout() {
         super.configureLayout()
         
-        textFieldStack.snp.makeConstraints { stack in
-            stack.width.equalTo(self.safeAreaLayoutGuide.snp.width)
-                .multipliedBy(0.8)
-            stack.height.equalTo(self.safeAreaLayoutGuide.snp.height)
-                .multipliedBy(0.6)
-            stack.center.equalTo(self.safeAreaLayoutGuide)
+        textFieldStack.snp.makeConstraints { textField in
+            textField.center.equalTo(self.safeAreaLayoutGuide)
         }
         
         submitButton.snp.makeConstraints { btn in
             btn.top.equalTo(textFieldStack.snp.bottom)
                 .offset(20)
-            btn.horizontalEdges.equalTo(textFieldStack.snp.horizontalEdges)
-            btn.height.equalTo(44)
+            btn.centerX.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        signUpButton.snp.makeConstraints { btn in
+            btn.centerX.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }

@@ -278,7 +278,6 @@ enum LSLPRequest: Pathable {
             case .accessToken:
                 headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
                 headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-                headerPayload[HTTPHeaderKey.refreshToken.rawValue] = HTTPHeaderKey.refreshToken.value
             case .withdraw:
                 headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
                 headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
@@ -581,7 +580,8 @@ enum HTTPMethod: String {
 enum HTTPHeaderKey: String {
     case contentType = "Content-Type"
     case sesacKey = "SesacKey"
-    case refreshToken = "Refresh"
+//    case authorization = "Authorization"
+//    case refresh = "Refresh"
     
     var value: String {
         switch self {
@@ -589,8 +589,10 @@ enum HTTPHeaderKey: String {
             return "application/json"
         case .sesacKey:
             return Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
-        case .refreshToken:
-            return "RefreshTokenValue"
+//        case .authorization:
+//            return UserDefaults.standard.load(of: AccessToken.self)?.token ?? ""
+//        case .refresh:
+//            return UserDefaults.standard.load(of: RefreshToken.self)?.token ?? ""
         }
     }
 }
