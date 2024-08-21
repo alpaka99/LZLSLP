@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 import RxSwift
 
@@ -40,9 +41,13 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
         
         baseView.imagePickerButton.rx.tap
             .bind(with: self) { owner, _ in
-                let imagePicker = UIImagePickerController()
+                var configuration = PHPickerConfiguration()
+                configuration.selectionLimit = 5
+                
+                configuration.filter = .images
+                
+                let imagePicker = PHPickerViewController(configuration: configuration)
                 imagePicker.delegate = owner
-                imagePicker.allowsEditing = true
                 
                 owner.present(imagePicker, animated: true)
             }
@@ -51,8 +56,28 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
 }
 
 
-extension PostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+extension PostViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        results.forEach { result in
+            let itemProvider = result.itemProvider
+            guard itemProvider.canLoadObject(ofClass: UIImage.self) else { return }
+            
+            itemProvider.loadObject(ofClass: UIImage.self) {image, error in
+                guard error ==  nil else {
+                    print("Image 로딩 에러")
+                    return
+                }
+                
+                print(image)
+            }
+        }
+        
+        DispatchQueue.main.async {
+            picker.dismiss(animated: true)
+        }
+    }
+        
 }
 
 struct PostForm {
