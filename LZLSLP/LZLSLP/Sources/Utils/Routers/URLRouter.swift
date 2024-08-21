@@ -592,8 +592,6 @@ enum HTTPMethod: String {
 enum HTTPHeaderKey: String {
     case contentType = "Content-Type"
     case sesacKey = "SesacKey"
-//    case authorization = "Authorization"
-//    case refresh = "Refresh"
     
     var value: String {
         switch self {
@@ -601,18 +599,6 @@ enum HTTPHeaderKey: String {
             return "application/json"
         case .sesacKey:
             return Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
-//        case .authorization:
-//            return UserDefaults.standard.load(of: AccessToken.self)?.token ?? ""
-//        case .refresh:
-//            return UserDefaults.standard.load(of: RefreshToken.self)?.token ?? ""
         }
     }
 }
-
-
-class Temp {
-    func temp1() {
-        URLRouter.https(.lslp(.auth(.login(email: "alpaka@pakaland.com", password: "1234")))).build()
-    }
-}
-

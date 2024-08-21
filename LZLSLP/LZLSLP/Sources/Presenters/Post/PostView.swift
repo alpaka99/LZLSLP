@@ -18,6 +18,16 @@ final class PostView: BaseView {
         return textField
     }()
     
+    let imagePickerButton = {
+        let button = UIButton.Configuration.plain()
+            .title("이미지 추가")
+            .foregroundColor(.white)
+            .backgroundColor(.systemRed)
+            .cornerStyle(.medium)
+            .build()
+        return button
+    }()
+    
     let contentView = {
         let textView = UITextView()
         textView.textContainer.maximumNumberOfLines = 10
@@ -43,6 +53,7 @@ final class PostView: BaseView {
         super.configureHierarchy()
         
         self.addSubview(titleTextField)
+        self.addSubview(imagePickerButton)
         self.addSubview(contentView)
         self.addSubview(submitButton)
     }
@@ -51,7 +62,17 @@ final class PostView: BaseView {
         super.configureLayout()
         
         titleTextField.snp.makeConstraints { textField in
-            textField.top.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+            textField.top.equalTo(self.safeAreaLayoutGuide)
+                .inset(16)
+            textField.leading.equalTo(self.safeAreaLayoutGuide)
+                .offset(16)
+        }
+        
+        imagePickerButton.snp.makeConstraints { btn in
+            btn.top.equalTo(titleTextField.snp.top)
+            btn.leading.equalTo(titleTextField.snp.trailing)
+                .offset(16)
+            btn.trailing.equalTo(self.safeAreaLayoutGuide)
                 .inset(16)
         }
         

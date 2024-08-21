@@ -17,6 +17,12 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
         navigationItem.title = "Post View"
     }
     
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        
+    }
+    
     override func configureBind() {
         super.configureBind()
         
@@ -31,7 +37,22 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
                 owner.viewModel.store.postForm.accept(postForm)
             })
             .disposed(by: disposeBag)
+        
+        baseView.imagePickerButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = owner
+                imagePicker.allowsEditing = true
+                
+                owner.present(imagePicker, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
+}
+
+
+extension PostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
 }
 
 struct PostForm {
