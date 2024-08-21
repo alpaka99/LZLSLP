@@ -13,10 +13,11 @@ import RxSwift
 final class PostViewModel: RxViewModel {
     struct Input: Inputable {
         var postForm = PublishRelay<PostForm>()
+        var selectedImageData = PublishRelay<Data>()
     }
     
     struct Output: Outputable {
-        
+        var imageArray = BehaviorRelay<[Data]>(value: [])
     }
     
     var store = ViewStore(input: Input(), output: Output())
@@ -43,6 +44,17 @@ final class PostViewModel: RxViewModel {
                 }
             }
             .disposed(by: disposeBag)
+        
+        
+        store.selectedImageData
+            .bind(with: self) { owner, data in
+                var dataArray = owner.store.imageArray.value
+                dataArray.append(data)
+                owner.store.imageArray.accept(dataArray)
+            }
+            .disposed(by: disposeBag)
+        
+        
     }
 }
 

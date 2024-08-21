@@ -58,18 +58,24 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
 
 extension PostViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        
-        results.forEach { result in
+        for result in results {
             let itemProvider = result.itemProvider
             guard itemProvider.canLoadObject(ofClass: UIImage.self) else { return }
             
-            itemProvider.loadObject(ofClass: UIImage.self) {image, error in
+            itemProvider.loadObject(ofClass: UIImage.self) {[weak self] image, error in
                 guard error ==  nil else {
                     print("Image 로딩 에러")
                     return
                 }
+                // image work
+//                let itemName = itemProvider.suggestedName
+                guard let image = image as? UIImage else { print("Error Converting")
+                    return }
+                guard let data = image.pngData() else {
+                    print("To Data failed")
+                    return }
                 
-                print(image)
+                self?.viewModel.store.selectedImageData.accept(data)
             }
         }
         
@@ -77,7 +83,6 @@ extension PostViewController: PHPickerViewControllerDelegate {
             picker.dismiss(animated: true)
         }
     }
-        
 }
 
 struct PostForm {
