@@ -14,7 +14,7 @@ final class NetworkManager {
     static let shared = NetworkManager()
     private init() { }
     
-    func requestCall(router: Router, interceptor: Interceptor? = nil) -> Single<Result<Data, Error>> {
+    func requestCall(router: Router, interceptor: AuthInterceptor? = nil) -> Single<Result<Data, Error>> {
         Single.create { observer in
             if let urlRequest = router.build() {
                 AF.request(urlRequest, interceptor: interceptor)
@@ -49,77 +49,6 @@ final class NetworkManager {
             
             return Disposables.create()
         }
-    }
-}
-
-
-final class Interceptor: RequestInterceptor {
-    // 네트워크 호출 이전에 일어나는 adapt(Access Token을 넣어줌)
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, any Error>) -> Void) {
-        
-        print("Interceptor adapt >>>")
-//        let tempURL = URLRouter.https(.lslp(.auth(.accessToken))).build()
-//        let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token
-//        let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token
-//        
-//        print("url: \(tempURL?.url?.absoluteString)")
-//        print("ac: \(accessToken)")
-//        print("rf: \(refreshToken)")
-        
-        let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String
-        
-        
-        
-        guard let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String,
-        let url = urlRequest.url?.absoluteString,
-        let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token
-        else {
-            completion(.failure(InterceptorError.tokenURLBuildError))
-            return
-        }
-        
-        var urlRequest = urlRequest
-        urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
-        completion(.success(urlRequest))
-    }
-    
-    
-    func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
-        // invalidAccessToken 에러가 아니라면 retry하지 않고 통과시킴
-        guard let response = request.response, response.statusCode == StatusCode.invalidAccessToken.rawValue else {
-            completion(.doNotRetry)
-            return
-        }
-        print("Interceptor retry>>>")
-        // invalidAccessToken 에러라면 access token을 refresh하는 retry
-        let tempURL = URLRouter.https(.lslp(.auth(.accessToken))).build()
-        let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token
-        let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token
-        
-        print("url: \(tempURL?.url?.absoluteString)")
-        print("ac: \(accessToken)")
-        print("rf: \(refreshToken)")
-        guard var urlRequest = URLRouter.https(.lslp(.auth(.accessToken))).build(),
-              let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token,
-              let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token
-        else {
-            completion(.doNotRetryWithError(InterceptorError.tokenURLBuildError))
-            return
-        }
-        urlRequest.addValue(accessToken, forHTTPHeaderField: "Authrorization")
-        urlRequest.addValue(refreshToken, forHTTPHeaderField: "Refresh")
-        
-        AF.request(urlRequest)
-            .responseDecodable(of: RefreshTokenResponse.self) { result in
-                switch result.result {
-                case .success(let data):
-                    let accessToken = AccessToken(token: data.accessToken)
-                    UserDefaults.standard.save(accessToken)
-                    completion(.retry)
-                case .failure(let error):
-                    completion(.doNotRetryWithError(InterceptorError.accessTokenResponseFailureError))
-                }
-            }
     }
 }
 

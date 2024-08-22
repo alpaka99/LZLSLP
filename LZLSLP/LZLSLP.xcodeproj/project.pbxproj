@@ -41,6 +41,8 @@
 		CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */; };
 		CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64E02C74EE17009830AD /* PostViewController.swift */; };
 		CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64E22C74FDAA009830AD /* PostRepository.swift */; };
+		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
+		CEE75B4B2C76C38200FC61E6 /* MultipartInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* MultipartInterceptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		CE5E64E02C74EE17009830AD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CE5E64E22C74FDAA009830AD /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
+		CEE75B4A2C76C38200FC61E6 /* MultipartInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartInterceptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,7 @@
 			children = (
 				CE5E64912C6DEF19009830AD /* Bases */,
 				CE5E649F2C6DF1A6009830AD /* Extensions */,
+				CEE75B472C76C30900FC61E6 /* Interceptor */,
 				CE5E64A72C70BA08009830AD /* Managers */,
 				CE5E64B82C70D495009830AD /* Models */,
 				CE5E64A42C6EFE10009830AD /* Routers */,
@@ -277,6 +282,15 @@
 			path = Post;
 			sourceTree = "<group>";
 		};
+		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
+			isa = PBXGroup;
+			children = (
+				CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */,
+				CEE75B4A2C76C38200FC61E6 /* MultipartInterceptor.swift */,
+			);
+			path = Interceptor;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -367,12 +381,14 @@
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
+				CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */,
 				CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */,
 				CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
 				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
+				CEE75B4B2C76C38200FC61E6 /* MultipartInterceptor.swift in Sources */,
 				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
 				CE5E64D32C7387D6009830AD /* TrendingView.swift in Sources */,
 				CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */,

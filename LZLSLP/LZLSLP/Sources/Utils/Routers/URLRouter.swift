@@ -267,8 +267,8 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             switch self {
             default:
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+                headerPayload[HTTPHeaderKey.contentType.value] = HTTPHeaderKey.applicationJson.value
+                headerPayload[HTTPHeaderKey.sesacKey.value] = HTTPHeaderKey.sesacKey.value
             }
             
             return headerPayload
@@ -302,7 +302,7 @@ enum LSLPRequest: Pathable {
     }
     
     enum PostType: Endpoitable {
-        case postFiles(files: Data)
+        case postFiles(files: [Data]?)
         case postPost(postForm: PostForm) // 어떤 content를 포스트에 넣을지 생각해보기
         case getPosts
         case getPost
@@ -352,8 +352,8 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             switch self {
             default:
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+                headerPayload[HTTPHeaderKey.contentType.value] = HTTPHeaderKey.applicationJson.value
+                headerPayload[HTTPHeaderKey.sesacKey.value] = HTTPHeaderKey.sesacKey.value
             }
             
             return headerPayload
@@ -361,22 +361,12 @@ enum LSLPRequest: Pathable {
         
         var parameters: [String : String] {
             switch self {
-            case .postFiles(files: let files):
-                return [:]
             case .postPost(postForm: let postForm):
                 return [
                     "title" : postForm.title,
                     "content" : postForm.content
                 ]
-            case .getPosts:
-                return [:]
-            case .getPost:
-                return [:]
-            case .updatePost:
-                return [:]
-            case .deletePost:
-                return [:]
-            case .getUserPost:
+            default:
                 return [:]
             }
         }
@@ -442,8 +432,10 @@ enum LSLPRequest: Pathable {
         }
         
         var httpHeaders: [String : String] {
-            var headerPayload: [String : String] = [:]
-            return headerPayload
+            switch self {
+            default:
+                return [:]
+            }
         }
         
         var parameters: [String : String] {
@@ -591,14 +583,16 @@ enum HTTPMethod: String {
 
 enum HTTPHeaderKey: String {
     case contentType = "Content-Type"
+    case multipart = "multipart/form-data"
+    case applicationJson = "application/json"
     case sesacKey = "SesacKey"
     
     var value: String {
         switch self {
-        case .contentType:
-            return "application/json"
         case .sesacKey:
             return Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
+        default:
+            return self.rawValue
         }
     }
 }

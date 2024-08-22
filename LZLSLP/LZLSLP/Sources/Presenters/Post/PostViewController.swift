@@ -34,7 +34,7 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
                     baseView.contentView.rx.text.orEmpty)
             )
             .bind(with: self, onNext: { owner, value in
-                let postForm = PostForm(title: value.0, content: value.1)
+                let postForm = PostForm(title: value.0, content: value.1, files: [])
                 owner.viewModel.store.postForm.accept(postForm)
             })
             .disposed(by: disposeBag)
@@ -88,4 +88,5 @@ extension PostViewController: PHPickerViewControllerDelegate {
 struct PostForm {
     let title: String
     let content: String
+    var files: [String]
 }

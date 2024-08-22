@@ -12,12 +12,14 @@ import RxSwift
 
 final class PostViewModel: RxViewModel {
     struct Input: Inputable {
-        var postForm = PublishRelay<PostForm>()
+        var postForm = BehaviorRelay<PostForm>(value: PostForm(title: "", content: "", files: []))
         var selectedImageData = PublishRelay<Data>()
+        var submitButtonTapped = PublishSubject<Void>()
     }
     
     struct Output: Outputable {
         var imageArray = BehaviorRelay<[Data]>(value: [])
+        var uploadedImageArray = PublishRelay<[String]>()
     }
     
     var store = ViewStore(input: Input(), output: Output())
@@ -27,22 +29,44 @@ final class PostViewModel: RxViewModel {
     override func configureBind() {
         super.configureBind()
         
-        store.postForm
-            .map { postForm in
-                let router = URLRouter.https(.lslp(.post(.postPost(postForm: postForm))))
-                return router
+        
+        // 1. 우선은 이미지를 서버에 보냄
+        store.submitButtonTapped
+            .withLatestFrom(Observable.combineLatest(store.imageArray, store.postForm))
+            .flatMap { value in
+                let imageArray = value.0
+                let postForm = value.1
+                
+                // send image array with MultiPartFormData
+                let result: Single<Result<[String], Error>> = Single.just(.success([]))
+                return result
             }
-            .flatMap {
-                self.repository.requestAuthAPI(of: PostResponse.self, router: $0)
-            }
-            .bind(with: self) { ower, result in
+            .bind(with: self, onNext: { owner, result in
+                // image response work
                 switch result {
-                case .success(let postResponse):
-                    print(postResponse)
+                case .success(let data):
+                    break
                 case .failure(let error):
-                    print("Error: \(error)")
+                    print(error)
                 }
+                owner.store.uploadedImageArray.accept([])
+            })
+            .disposed(by: disposeBag)
+        
+        // 2. 이미지가 서버에 업로드가 제대로 처리 됐다면, postForm을 올림
+        store.uploadedImageArray
+            .map { value in
+                var postForm = self.store.postForm.value
+                postForm.files = value
+                return postForm
             }
+            .flatMap { postForm in
+                let router = URLRouter.https(.lslp(.post(.postPost(postForm: postForm))))
+                return NetworkManager.shared.requestCall(router: router, interceptor: AuthInterceptor())
+            }
+            .bind(with: self, onNext: { owner, result in
+                // post result work
+            })
             .disposed(by: disposeBag)
         
         

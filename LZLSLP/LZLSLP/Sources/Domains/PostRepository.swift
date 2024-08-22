@@ -14,7 +14,7 @@ final class PostRepository {
     
     func requestAuthAPI<T: Decodable>(of type: T.Type, router: Router) -> Single<Result<T, Error>> {
         Single.create { observer in
-            NetworkManager.shared.requestCall(router: router, interceptor: Interceptor())
+            NetworkManager.shared.requestCall(router: router, interceptor: AuthInterceptor())
                 .subscribe(with: self) { owner, result in
                     switch result {
                     case .success(let data):
