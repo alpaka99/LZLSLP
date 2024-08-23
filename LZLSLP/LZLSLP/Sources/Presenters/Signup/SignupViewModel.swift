@@ -15,19 +15,32 @@ final class SignupViewModel: RxViewModel {
     }
     
     struct Output: Outputable {
-        
+        var singUpResponse = PublishSubject<SignUpResponse>()
     }
     
     var store = ViewStore(input: Input(), output: Output())
-    let authRepository = AuthRepository()
+    private let authRepository = AuthRepository()
     
     override func configureBind() {
         super.configureBind()
         
         store.signUpForm
-            .bind(with: self) { owner, signUpForm in
-                let router = URLRouter.https(.lslp(.auth(.join(signUpForm))))
-                owner.authRepository.router.onNext(router)
+            .flatMap {
+                let router = URLRouter.https(.lslp(.auth(.join($0))))
+                return self.authRepository.requestAuthAPI(
+                    of: SignUpResponse.self,
+                    router: router
+                )
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let signUpResponse):
+                    dump(signUpResponse)
+                    owner.store.singUpResponse.onNext(signUpResponse)
+                case .failure(let error):
+                    print("SignUp Error:\(error)")
+                    
+                }
             }
             .disposed(by: disposeBag)
     }

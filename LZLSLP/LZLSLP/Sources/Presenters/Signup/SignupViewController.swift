@@ -21,12 +21,14 @@ final class SignupViewController: BaseViewController<SignupView, SignupViewModel
     override func configureBind() {
         super.configureBind()
         
-        Observable.combineLatest(
-            baseView.emailTextField.rx.text.orEmpty,
-            baseView.passwordTextField.rx.text.orEmpty,
-            baseView.nicknameTextField.rx.text.orEmpty,
-            baseView.submitButton.rx.tap
-        )
+        baseView.submitButton.rx.tap
+            .withLatestFrom(
+                Observable.combineLatest(
+                    baseView.emailTextField.rx.text.orEmpty,
+                    baseView.passwordTextField.rx.text.orEmpty,
+                    baseView.nicknameTextField.rx.text.orEmpty
+                )
+            )
             .bind(with: self) { owner, value in
                 let email = value.0
                 let password = value.1
@@ -43,7 +45,14 @@ final class SignupViewController: BaseViewController<SignupView, SignupViewModel
                 )
                 
                 owner.viewModel.store.signUpForm
-                    .onNext(signUpForm)   
+                    .onNext(signUpForm)
+            }
+            .disposed(by: disposeBag)
+        
+        
+        viewModel.store.singUpResponse
+            .bind(with: self) { owner, response in
+                dump(response)
             }
             .disposed(by: disposeBag)
     }

@@ -7,35 +7,84 @@
 
 import Foundation
 
+import Alamofire
 import RxSwift
 
 final class NetworkManager {
     static let shared = NetworkManager()
     private init() { }
     
-    func requestCall(router: Router) -> Single<Data> {
+    func requestCall(router: Router, interceptor: Interceptor? = nil) -> Single<Result<Data, Error>> {
         Single.create { observer in
             if let urlRequest = router.build() {
-                URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-                    guard error == nil else {
-                        observer(.failure(NetworkError.networkError))
-                        return
+                AF.request(urlRequest, interceptor: interceptor)
+                    .validate(statusCode: 200..<300)
+                    .responseString { result in
+                        switch result.result {
+                        case .success(let str):
+                            print(str)
+                        case .failure(let error):
+                            print(error)
+                        }
                     }
+//                    .responseData { result in
+//                        switch result.result {
+//                        case .success(let data):
+//                            observer(.success(.success(data)))
+//                        case .failure(let error):
+//                            print("NetworkManager error: \(error)")
+//                            switch error {
+//                            case .createURLRequestFailed:
+//                                observer(.failure(NetworkError.urlRequestCreateError))
+//                            case .responseValidationFailed:
+//                                observer(.failure(NetworkError.responseStatusCodeError))
+//                            default:
+//                                observer(.failure(NetworkError.networkError))
+//                            }
+//                        }
+//                    }
+            } else {
+                observer(.failure(NetworkError.urlRequestCreateError))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func multipartFormRequest(router: URLRouter, data: [Data], interceptor: Interceptor? = nil) -> Single<Result<Data, Error>> {
+        Single.create { observer in
+            if let urlRequest = router.build() {
+                
+                // files라는 parameter 이름으로 이미지 파일들을 올려버림
+                AF.upload(multipartFormData: { multipartFormData in
                     
-                    guard let response = response as? HTTPURLResponse, (200..<300).contains(response.statusCode) else {
-                        print(response)
-                        observer(.failure(NetworkError.responseStatusCodeError))
-                        return
-                    }
-
-                    guard let data = data else { 
-                        observer(.failure(NetworkError.nilDataError))
-                        return
-                    }
-                    
-                    observer(.success(data))
-                }
-                .resume()
+                }, with: urlRequest)
+//                AF.request(urlRequest, interceptor: interceptor)
+//                    .validate(statusCode: 200..<300)
+//                    .responseString { result in
+//                        switch result.result {
+//                        case .success(let str):
+//                            print(str)
+//                        case .failure(let error):
+//                            print(error)
+//                        }
+//                    }
+//                    .responseData { result in
+//                        switch result.result {
+//                        case .success(let data):
+//                            observer(.success(.success(data)))
+//                        case .failure(let error):
+//                            print("NetworkManager error: \(error)")
+//                            switch error {
+//                            case .createURLRequestFailed:
+//                                observer(.failure(NetworkError.urlRequestCreateError))
+//                            case .responseValidationFailed:
+//                                observer(.failure(NetworkError.responseStatusCodeError))
+//                            default:
+//                                observer(.failure(NetworkError.networkError))
+//                            }
+//                        }
+//                    }
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))
             }
@@ -45,10 +94,31 @@ final class NetworkManager {
     }
 }
 
+struct RefreshTokenResponse: Decodable {
+    let accessToken: String
+}
+
 
 enum NetworkError: Error {
     case urlRequestCreateError
     case networkError
     case responseStatusCodeError
     case nilDataError
+    case decodingFailure
+}
+
+enum InterceptorError: Error {
+    case tokenURLBuildError
+    case tokenFetchError
+    case tokenResponseStatusError
+    case nilTokenError
+    case accessTokenResponseFailureError
+}
+
+// MARK: Status Code enum으로 뺴기
+enum StatusCode: Int {
+    case success = 200
+    case invalidAccessToken = 401
+    case forbidden = 403
+    case invalidRefreshToken = 418
 }
