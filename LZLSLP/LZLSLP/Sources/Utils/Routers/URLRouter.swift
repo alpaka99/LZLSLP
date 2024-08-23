@@ -266,21 +266,9 @@ enum LSLPRequest: Pathable {
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
             switch self {
-            case .join(_):
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-            case .validation(_):
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-            case .login:
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-            case .accessToken:
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
-            case .withdraw:
-                headerPayload[HTTPHeaderKey.contentType.rawValue] = HTTPHeaderKey.contentType.value
-                headerPayload[HTTPHeaderKey.sesacKey.rawValue] = HTTPHeaderKey.sesacKey.value
+            default:
+                headerPayload[HTTPHeaderKey.contentType.value] = HTTPHeaderKey.applicationJson.value
+                headerPayload[HTTPHeaderKey.sesacKey.value] = HTTPHeaderKey.sesacKey.value
             }
             
             return headerPayload
@@ -314,8 +302,8 @@ enum LSLPRequest: Pathable {
     }
     
     enum PostType: Endpoitable {
-        case postFiles(files: Data)
-        case postPost // 어떤 content를 포스트에 넣을지 생각해보기
+        case postFiles(files: [Data]?)
+        case postPost(postForm: PostForm) // 어떤 content를 포스트에 넣을지 생각해보기
         case getPosts
         case getPost
         case updatePost
@@ -362,11 +350,25 @@ enum LSLPRequest: Pathable {
         
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
+            switch self {
+            default:
+                headerPayload[HTTPHeaderKey.contentType.value] = HTTPHeaderKey.applicationJson.value
+                headerPayload[HTTPHeaderKey.sesacKey.value] = HTTPHeaderKey.sesacKey.value
+            }
+            
             return headerPayload
         }
         
         var parameters: [String : String] {
-            return [:]
+            switch self {
+            case .postPost(postForm: let postForm):
+                return [
+                    "title" : postForm.title,
+                    "content" : postForm.content
+                ]
+            default:
+                return [:]
+            }
         }
     }
     
@@ -430,8 +432,10 @@ enum LSLPRequest: Pathable {
         }
         
         var httpHeaders: [String : String] {
-            var headerPayload: [String : String] = [:]
-            return headerPayload
+            switch self {
+            default:
+                return [:]
+            }
         }
         
         var parameters: [String : String] {
@@ -579,28 +583,16 @@ enum HTTPMethod: String {
 
 enum HTTPHeaderKey: String {
     case contentType = "Content-Type"
+    case multipart = "multipart/form-data"
+    case applicationJson = "application/json"
     case sesacKey = "SesacKey"
-//    case authorization = "Authorization"
-//    case refresh = "Refresh"
     
     var value: String {
         switch self {
-        case .contentType:
-            return "application/json"
         case .sesacKey:
             return Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
-//        case .authorization:
-//            return UserDefaults.standard.load(of: AccessToken.self)?.token ?? ""
-//        case .refresh:
-//            return UserDefaults.standard.load(of: RefreshToken.self)?.token ?? ""
+        default:
+            return self.rawValue
         }
     }
 }
-
-
-class Temp {
-    func temp1() {
-        URLRouter.https(.lslp(.auth(.login(email: "alpaka@pakaland.com", password: "1234")))).build()
-    }
-}
-

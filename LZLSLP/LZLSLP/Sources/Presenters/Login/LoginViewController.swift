@@ -44,7 +44,7 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
             .debug("Login Completed")
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
-                let trendingViewController = TrendingViewController(baseView: TrendingView(), viewModel: TrendingViewModel())
+                let trendingViewController = PostViewController(baseView: PostView(), viewModel: PostViewModel())
                 
                 owner.navigationController?.pushViewController(trendingViewController, animated: true)
             }
