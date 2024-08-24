@@ -60,19 +60,15 @@ final class NetworkManager {
                         multipartFormData.append(data, withName: "files", fileName: String(Int.random(in: 1...100)), mimeType: "image/png")
                     }
                 }, with: urlRequest, interceptor: interceptor)
-//                .validate(statusCode: 200..<300)
-                .responseString { result in
-                    print(result)
+                .validate(statusCode: 200..<300)
+                .responseData { result in
+                    switch result.result {
+                    case .success(let data):
+                        observer(.success(.success(data)))
+                    case .failure(let error):
+                        observer(.failure(error))
+                    }
                 }
-//                .response { result in
-//                    switch result.result {
-//                    case .success(let data):
-//                        print("Success")
-//                        break
-//                    case .failure(let error):
-//                        print("NetworkManager error: \(error)")
-//                    }
-//                }
                 
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))

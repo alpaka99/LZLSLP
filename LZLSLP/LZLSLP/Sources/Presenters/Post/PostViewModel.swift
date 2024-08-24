@@ -43,12 +43,12 @@ final class PostViewModel: RxViewModel {
                 
                 // send image array with MultiPartFormData
                 let router = URLRouter.https(.lslp(.post(.postFiles)))
-                return self.repository.postImages(of: PostResponse.self, router: router, data: imageArray)
+                return self.repository.postImages(of: ImageUploadResponse.self, router: router, data: imageArray)
             }
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let response):
-                    break
+                    print(response)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -143,4 +143,8 @@ struct Creator: Decodable {
         case nick
         case profileImage
     }
+}
+
+struct ImageUploadResponse: Decodable {
+    let files: [String]
 }

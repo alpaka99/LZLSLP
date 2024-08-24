@@ -41,7 +41,12 @@ final class PostRepository {
                 .subscribe(with: self) { owner, result in
                     switch result {
                     case .success(let data):
-                        break
+                        do {
+                            let decodedData = try JSONDecoder().decode(T.self, from: data)
+                            observer(.success(.success(decodedData)))
+                        } catch {
+                            observer(.success(.failure(error)))
+                        }
                     case .failure(let error):
                         print(error)
                     }
