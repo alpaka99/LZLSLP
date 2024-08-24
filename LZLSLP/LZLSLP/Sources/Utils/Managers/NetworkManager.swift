@@ -19,30 +19,30 @@ final class NetworkManager {
             if let urlRequest = router.build() {
                 AF.request(urlRequest, interceptor: interceptor)
                     .validate(statusCode: 200..<300)
-                    .responseString { result in
-                        switch result.result {
-                        case .success(let str):
-                            print(str)
-                        case .failure(let error):
-                            print(error)
-                        }
-                    }
-//                    .responseData { result in
+//                    .responseString { result in
 //                        switch result.result {
-//                        case .success(let data):
-//                            observer(.success(.success(data)))
+//                        case .success(let str):
+//                            print(str)
 //                        case .failure(let error):
-//                            print("NetworkManager error: \(error)")
-//                            switch error {
-//                            case .createURLRequestFailed:
-//                                observer(.failure(NetworkError.urlRequestCreateError))
-//                            case .responseValidationFailed:
-//                                observer(.failure(NetworkError.responseStatusCodeError))
-//                            default:
-//                                observer(.failure(NetworkError.networkError))
-//                            }
+//                            print(error)
 //                        }
 //                    }
+                    .responseData { result in
+                        switch result.result {
+                        case .success(let data):
+                            observer(.success(.success(data)))
+                        case .failure(let error):
+                            print("NetworkManager error: \(error)")
+                            switch error {
+                            case .createURLRequestFailed:
+                                observer(.failure(NetworkError.urlRequestCreateError))
+                            case .responseValidationFailed:
+                                observer(.failure(NetworkError.responseStatusCodeError))
+                            default:
+                                observer(.failure(NetworkError.networkError))
+                            }
+                        }
+                    }
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))
             }
@@ -57,12 +57,22 @@ final class NetworkManager {
                 // files라는 parameter 이름으로 이미지 파일들을 올려버림
                 AF.upload(multipartFormData: { multipartFormData in
                     data.forEach { data in
-                        multipartFormData.append(data, withName: "files")
+                        multipartFormData.append(data, withName: "files", fileName: String(Int.random(in: 1...100)), mimeType: "image/png")
                     }
                 }, with: urlRequest, interceptor: interceptor)
+//                .validate(statusCode: 200..<300)
                 .responseString { result in
                     print(result)
                 }
+//                .response { result in
+//                    switch result.result {
+//                    case .success(let data):
+//                        print("Success")
+//                        break
+//                    case .failure(let error):
+//                        print("NetworkManager error: \(error)")
+//                    }
+//                }
                 
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))
@@ -97,7 +107,7 @@ enum InterceptorError: Error {
 // MARK: Status Code enum으로 뺴기
 enum StatusCode: Int {
     case success = 200
-    case invalidAccessToken = 401
     case forbidden = 403
+    case invalidAccessToken = 401
     case invalidRefreshToken = 418
 }

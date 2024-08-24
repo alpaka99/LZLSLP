@@ -37,8 +37,6 @@ final class PostRepository {
     
     func postImages<T: Decodable>(of type: T.Type, router: URLRouter, data: [Data]) -> Single<Result<T, Error>> {
         Single.create { observer in
-            print("Repository THis")
-            
             NetworkManager.shared.requestDataCall(router: router, data: data, interceptor: AuthInterceptor())
                 .subscribe(with: self) { owner, result in
                     switch result {

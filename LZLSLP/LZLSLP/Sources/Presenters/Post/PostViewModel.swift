@@ -41,7 +41,6 @@ final class PostViewModel: RxViewModel {
                 let postForm = value.0
                 let imageArray = value.1
                 
-                print("From ViewModel")
                 // send image array with MultiPartFormData
                 let router = URLRouter.https(.lslp(.post(.postFiles)))
                 return self.repository.postImages(of: PostResponse.self, router: router, data: imageArray)
