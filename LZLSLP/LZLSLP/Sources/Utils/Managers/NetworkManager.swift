@@ -51,13 +51,13 @@ final class NetworkManager {
         }
     }
     
-    func requestDataCall(router: URLRouter, data: [Data], interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
+    func requestDataCall(router: URLRouter, dataArray: [Uploadable], interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
         return Single.create { observer in
             if let urlRequest = router.build() {
                 // files라는 parameter 이름으로 이미지 파일들을 올려버림
                 AF.upload(multipartFormData: { multipartFormData in
-                    data.forEach { data in
-                        multipartFormData.append(data, withName: "files", fileName: String(Int.random(in: 1...100)), mimeType: "image/png")
+                    dataArray.forEach { data in
+                        multipartFormData.append(data.data, withName: "files", fileName: data.dataName, mimeType: "image/png")
                     }
                 }, with: urlRequest, interceptor: interceptor)
                 .validate(statusCode: 200..<300)
@@ -66,6 +66,7 @@ final class NetworkManager {
                     case .success(let data):
                         observer(.success(.success(data)))
                     case .failure(let error):
+//                        print("NetworkManager error: \(error)")
                         observer(.failure(error))
                     }
                 }

@@ -13,12 +13,12 @@ import RxSwift
 final class PostViewModel: RxViewModel {
     struct Input: Inputable {
         var postForm = BehaviorRelay<PostForm>(value: PostForm(title: "", content: "", files: []))
-        var selectedImageData = PublishRelay<Data>()
+        var selectedImageData = PublishRelay<ImageForm>()
         var submitButtonTapped = PublishSubject<Void>()
     }
     
     struct Output: Outputable {
-        var imageArray = BehaviorRelay<[Data]>(value: [])
+        var imageArray = BehaviorRelay<[ImageForm]>(value: [])
         var uploadedImageArray = PublishRelay<[String]>()
     }
     
@@ -43,7 +43,7 @@ final class PostViewModel: RxViewModel {
                 
                 // send image array with MultiPartFormData
                 let router = URLRouter.https(.lslp(.post(.postFiles)))
-                return self.repository.postImages(of: ImageUploadResponse.self, router: router, data: imageArray)
+                return self.repository.postImages(of: ImageUploadResponse.self, router: router, imageArray: imageArray)
             }
             .bind(with: self) { owner, result in
                 switch result {
