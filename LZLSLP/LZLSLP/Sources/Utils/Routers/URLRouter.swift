@@ -267,8 +267,8 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             switch self {
             default:
-                headerPayload[HTTPHeaderKey.contentType.value] = HTTPHeaderKey.applicationJson.value
-                headerPayload[HTTPHeaderKey.sesacKey.value] = HTTPHeaderKey.sesacKey.value
+                headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+                headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
             }
             
             return headerPayload
@@ -302,7 +302,7 @@ enum LSLPRequest: Pathable {
     }
     
     enum PostType: Endpoitable {
-        case postFiles(files: [Data]?)
+        case postFiles
         case postPost(postForm: PostForm) // 어떤 content를 포스트에 넣을지 생각해보기
         case getPosts
         case getPost
@@ -351,9 +351,12 @@ enum LSLPRequest: Pathable {
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
             switch self {
+            case .postFiles:
+                headerPayload[HTTPHeaderKey.multipart.key] = HTTPHeaderKey.multipart.value
+                headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
             default:
-                headerPayload[HTTPHeaderKey.contentType.value] = HTTPHeaderKey.applicationJson.value
-                headerPayload[HTTPHeaderKey.sesacKey.value] = HTTPHeaderKey.sesacKey.value
+                headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+                headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
             }
             
             return headerPayload
@@ -581,18 +584,31 @@ enum HTTPMethod: String {
 }
    
 
-enum HTTPHeaderKey: String {
-    case contentType = "Content-Type"
-    case multipart = "multipart/form-data"
-    case applicationJson = "application/json"
-    case sesacKey = "SesacKey"
+enum HTTPHeaderKey {
+    case sesacKey
+    case applicationJson
+    case multipart
+    
+    var key: String {
+        switch self {
+        case .sesacKey:
+            return "SesacKey"
+        case .applicationJson:
+            return "Content-Type"
+        case .multipart:
+            return "Content-Type"
+        }
+    }
+    
     
     var value: String {
         switch self {
         case .sesacKey:
             return Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
-        default:
-            return self.rawValue
+        case .applicationJson:
+            return "application/json"
+        case .multipart:
+            return "multipart/form-data"
         }
     }
 }

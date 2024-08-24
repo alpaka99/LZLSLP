@@ -34,8 +34,10 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
                     baseView.contentView.rx.text.orEmpty)
             )
             .bind(with: self, onNext: { owner, value in
+                print("ThisTHis")
                 let postForm = PostForm(title: value.0, content: value.1, files: [])
                 owner.viewModel.store.postForm.accept(postForm)
+                owner.viewModel.store.submitButtonTapped.onNext(())
             })
             .disposed(by: disposeBag)
         

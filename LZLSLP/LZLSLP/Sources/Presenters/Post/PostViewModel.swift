@@ -32,26 +32,40 @@ final class PostViewModel: RxViewModel {
         
         // 1. 우선은 이미지를 서버에 보냄
         store.submitButtonTapped
-            .withLatestFrom(Observable.combineLatest(store.imageArray, store.postForm))
+            .withLatestFrom(
+                Observable.combineLatest(
+                    store.postForm,
+                    store.imageArray
+                ))
             .flatMap { value in
-                let imageArray = value.0
-                let postForm = value.1
+                let postForm = value.0
+                let imageArray = value.1
                 
+                print("From ViewModel")
                 // send image array with MultiPartFormData
-                let result: Single<Result<[String], Error>> = Single.just(.success([]))
-                return result
+                let router = URLRouter.https(.lslp(.post(.postFiles)))
+                return self.repository.postImages(of: PostResponse.self, router: router, data: imageArray)
             }
-            .bind(with: self, onNext: { owner, result in
-                // image response work
+            .bind(with: self) { owner, result in
                 switch result {
-                case .success(let data):
+                case .success(let response):
                     break
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
-                owner.store.uploadedImageArray.accept([])
-            })
+            }
             .disposed(by: disposeBag)
+//            .bind(with: self, onNext: { owner, result in
+//                // image response work
+//                switch result {
+//                case .success(let data):
+//                    break
+//                case .failure(let error):
+//                    print(error)
+//                }
+//                owner.store.uploadedImageArray.accept([])
+//            })
+//            .disposed(by: disposeBag)
         
         // 2. 이미지가 서버에 업로드가 제대로 처리 됐다면, postForm을 올림
         store.uploadedImageArray

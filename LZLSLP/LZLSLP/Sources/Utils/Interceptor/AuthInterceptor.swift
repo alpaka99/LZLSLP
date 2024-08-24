@@ -20,6 +20,7 @@ final class AuthInterceptor: RequestInterceptor {
         
         var urlRequest = urlRequest
         urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
+        print(urlRequest.headers)
         completion(.success(urlRequest))
     }
     

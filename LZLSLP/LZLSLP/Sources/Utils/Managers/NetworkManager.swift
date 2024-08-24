@@ -14,7 +14,7 @@ final class NetworkManager {
     static let shared = NetworkManager()
     private init() { }
     
-    func requestCall(router: Router, interceptor: Interceptor? = nil) -> Single<Result<Data, Error>> {
+    func requestCall(router: Router, interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
         Single.create { observer in
             if let urlRequest = router.build() {
                 AF.request(urlRequest, interceptor: interceptor)
@@ -51,40 +51,19 @@ final class NetworkManager {
         }
     }
     
-    func multipartFormRequest(router: URLRouter, data: [Data], interceptor: Interceptor? = nil) -> Single<Result<Data, Error>> {
-        Single.create { observer in
+    func requestDataCall(router: URLRouter, data: [Data], interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
+        return Single.create { observer in
             if let urlRequest = router.build() {
-                
                 // files라는 parameter 이름으로 이미지 파일들을 올려버림
                 AF.upload(multipartFormData: { multipartFormData in
-                    
-                }, with: urlRequest)
-//                AF.request(urlRequest, interceptor: interceptor)
-//                    .validate(statusCode: 200..<300)
-//                    .responseString { result in
-//                        switch result.result {
-//                        case .success(let str):
-//                            print(str)
-//                        case .failure(let error):
-//                            print(error)
-//                        }
-//                    }
-//                    .responseData { result in
-//                        switch result.result {
-//                        case .success(let data):
-//                            observer(.success(.success(data)))
-//                        case .failure(let error):
-//                            print("NetworkManager error: \(error)")
-//                            switch error {
-//                            case .createURLRequestFailed:
-//                                observer(.failure(NetworkError.urlRequestCreateError))
-//                            case .responseValidationFailed:
-//                                observer(.failure(NetworkError.responseStatusCodeError))
-//                            default:
-//                                observer(.failure(NetworkError.networkError))
-//                            }
-//                        }
-//                    }
+                    data.forEach { data in
+                        multipartFormData.append(data, withName: "files")
+                    }
+                }, with: urlRequest, interceptor: interceptor)
+                .responseString { result in
+                    print(result)
+                }
+                
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))
             }
