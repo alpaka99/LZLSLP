@@ -43,6 +43,9 @@
 		CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64E22C74FDAA009830AD /* PostRepository.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* MultipartInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* MultipartInterceptor.swift */; };
+		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
+		CEE75B6F2C7B3F5200FC61E6 /* CommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6E2C7B3F5200FC61E6 /* CommunityViewModel.swift */; };
+		CEE75B712C7B3F8600FC61E6 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B702C7B3F8600FC61E6 /* CommunityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +84,9 @@
 		CE5E64E22C74FDAA009830AD /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* MultipartInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartInterceptor.swift; sourceTree = "<group>"; };
+		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
+		CEE75B6E2C7B3F5200FC61E6 /* CommunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewModel.swift; sourceTree = "<group>"; };
+		CEE75B702C7B3F8600FC61E6 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +162,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CEE75B6B2C7B3EC200FC61E6 /* Community */,
 				CE5E64DB2C74EDCB009830AD /* Post */,
 				CE5E64D12C7387C0009830AD /* Trending */,
 				CE5E64BB2C71FB8C009830AD /* Login */,
@@ -291,6 +298,16 @@
 			path = Interceptor;
 			sourceTree = "<group>";
 		};
+		CEE75B6B2C7B3EC200FC61E6 /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */,
+				CEE75B6E2C7B3F5200FC61E6 /* CommunityViewModel.swift */,
+				CEE75B702C7B3F8600FC61E6 /* CommunityViewController.swift */,
+			);
+			path = Community;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -376,6 +393,7 @@
 				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
 				CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */,
 				CE5E64AB2C70C2FD009830AD /* AuthRepository.swift in Sources */,
+				CEE75B6F2C7B3F5200FC61E6 /* CommunityViewModel.swift in Sources */,
 				CE5E64A12C6DF1B3009830AD /* UIButton+.swift in Sources */,
 				CE5E64A92C70BA26009830AD /* NetworkManager.swift in Sources */,
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
@@ -391,11 +409,13 @@
 				CEE75B4B2C76C38200FC61E6 /* MultipartInterceptor.swift in Sources */,
 				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
 				CE5E64D32C7387D6009830AD /* TrendingView.swift in Sources */,
+				CEE75B712C7B3F8600FC61E6 /* CommunityViewController.swift in Sources */,
 				CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
 				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */,
+				CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
 				CE5E64A62C6EFE21009830AD /* URLRouter.swift in Sources */,
 				CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */,
