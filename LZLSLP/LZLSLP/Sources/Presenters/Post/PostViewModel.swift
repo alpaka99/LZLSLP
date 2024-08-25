@@ -48,7 +48,6 @@ final class PostViewModel: RxViewModel {
                     let router = URLRouter.https(.lslp(.post(.postPost(postForm: postForm))))
                     return self.repository.postPost(of: PostResponse.self, router: router)
                 case .failure(let error):
-                    print("Error1")
                     return Single.just(.failure(error))
                 }
             }
@@ -57,7 +56,6 @@ final class PostViewModel: RxViewModel {
                 case .success(let response):
                     print(response)
                 case .failure(let error):
-                    print("Error2")
                     print(error.localizedDescription)
                 }
             }
@@ -94,19 +92,20 @@ final class PostViewModel: RxViewModel {
 
 struct PostResponse: Decodable {
     let postId: String
-    let productId: String
+    let productId: String?
     let title: String
     let content: String
-    let content1: String
-    let content2: String
-    let content3: String
-    let content4: String
-    let content5: String
+//    let content1: String
+//    let content2: String
+//    let content3: String
+//    let content4: String
+//    let content5: String
     let createdAt: String
     let creator: Creator
     let files: [String]
     let likes: [String]
     let likes2: [String]
+    let buyers: [String]
     let hashTags: [String]
     let comments: [String]
     
@@ -115,16 +114,17 @@ struct PostResponse: Decodable {
         case productId = "product_id"
         case title
         case content
-        case content1
-        case content2
-        case content3
-        case content4
-        case content5
+//        case content1
+//        case content2
+//        case content3
+//        case content4
+//        case content5
         case createdAt
         case creator
         case files
         case likes
         case likes2
+        case buyers
         case hashTags
         case comments
     }
@@ -133,7 +133,7 @@ struct PostResponse: Decodable {
 struct Creator: Decodable {
     let userId: String
     let nick: String
-    let profileImage: String
+    let profileImage: String?
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"
