@@ -15,21 +15,21 @@ protocol Schemable {
     var scheme: String { get }
     var httpMethod: String { get }
     var httpHeaders: [String : String] { get }
-    var parameters: [String : String] { get }
+    var parameters: [String : Any] { get }
 }
 
 protocol Pathable {
     var path: String { get }
     var httpMethod: String { get }
     var httpHeaders: [String : String] { get }
-    var parameters: [String : String] { get }
+    var parameters: [String : Any] { get }
 }
 
 protocol Endpoitable {
     var endpoint: String { get }
     var httpMethod: HTTPMethod { get }
     var httpHeaders: [String : String] { get }
-    var parameters: [String : String] { get }
+    var parameters: [String : Any] { get }
 }
 
 
@@ -62,7 +62,12 @@ enum URLRouter: Router {
                 
                 
                 // parameter as body
-                guard let requestBody = try? JSONEncoder().encode(request.parameters) else { return nil }
+//                guard let requestBody = try? JSONEncoder().encode(request.parameters) else { return nil }
+                print("UnEncoded paramaters: \(request.parameters)")
+                guard let requestBody = try? JSONSerialization.data(withJSONObject: request.parameters, options: []) else {
+                    print("Cannot encode request body")
+                    return nil
+                }
                 urlRequest.httpBody = requestBody
                 
                 print("url", urlRequest.url?.absoluteString)
@@ -111,7 +116,7 @@ enum URLRouter: Router {
             }
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             switch self {
             case .lslp(let request):
                 return request.parameters
@@ -204,7 +209,7 @@ enum LSLPRequest: Pathable {
     }
     
     
-    var parameters: [String : String] {
+    var parameters: [String : Any] {
         switch self {
         case .auth(let endpoint):
             return endpoint.parameters
@@ -274,7 +279,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             switch self {
             case .join(let registerForm):
                 return [
@@ -362,12 +367,13 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             switch self {
             case .postPost(postForm: let postForm):
                 return [
                     "title" : postForm.title,
-                    "content" : postForm.content
+                    "content" : postForm.content,
+                    "files" : postForm.files
                 ]
             default:
                 return [:]
@@ -407,7 +413,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -441,7 +447,7 @@ enum LSLPRequest: Pathable {
             }
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -473,7 +479,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -505,7 +511,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -542,7 +548,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -569,7 +575,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
