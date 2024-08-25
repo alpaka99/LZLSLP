@@ -15,21 +15,21 @@ protocol Schemable {
     var scheme: String { get }
     var httpMethod: String { get }
     var httpHeaders: [String : String] { get }
-    var parameters: [String : String] { get }
+    var parameters: [String : Any] { get }
 }
 
 protocol Pathable {
     var path: String { get }
     var httpMethod: String { get }
     var httpHeaders: [String : String] { get }
-    var parameters: [String : String] { get }
+    var parameters: [String : Any] { get }
 }
 
 protocol Endpoitable {
     var endpoint: String { get }
     var httpMethod: HTTPMethod { get }
     var httpHeaders: [String : String] { get }
-    var parameters: [String : String] { get }
+    var parameters: [String : Any] { get }
 }
 
 
@@ -62,7 +62,12 @@ enum URLRouter: Router {
                 
                 
                 // parameter as body
-                guard let requestBody = try? JSONEncoder().encode(request.parameters) else { return nil }
+//                guard let requestBody = try? JSONEncoder().encode(request.parameters) else { return nil }
+                print("UnEncoded paramaters: \(request.parameters)")
+                guard let requestBody = try? JSONSerialization.data(withJSONObject: request.parameters, options: []) else {
+                    print("Cannot encode request body")
+                    return nil
+                }
                 urlRequest.httpBody = requestBody
                 
                 print("url", urlRequest.url?.absoluteString)
@@ -111,7 +116,7 @@ enum URLRouter: Router {
             }
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             switch self {
             case .lslp(let request):
                 return request.parameters
@@ -204,7 +209,7 @@ enum LSLPRequest: Pathable {
     }
     
     
-    var parameters: [String : String] {
+    var parameters: [String : Any] {
         switch self {
         case .auth(let endpoint):
             return endpoint.parameters
@@ -267,14 +272,14 @@ enum LSLPRequest: Pathable {
             var headerPayload: [String : String] = [:]
             switch self {
             default:
-                headerPayload[HTTPHeaderKey.contentType.value] = HTTPHeaderKey.applicationJson.value
-                headerPayload[HTTPHeaderKey.sesacKey.value] = HTTPHeaderKey.sesacKey.value
+                headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+                headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
             }
             
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             switch self {
             case .join(let registerForm):
                 return [
@@ -302,7 +307,7 @@ enum LSLPRequest: Pathable {
     }
     
     enum PostType: Endpoitable {
-        case postFiles(files: [Data]?)
+        case postFiles
         case postPost(postForm: PostForm) // 어떤 content를 포스트에 넣을지 생각해보기
         case getPosts
         case getPost
@@ -351,20 +356,24 @@ enum LSLPRequest: Pathable {
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
             switch self {
+            case .postFiles:
+                headerPayload[HTTPHeaderKey.multipart.key] = HTTPHeaderKey.multipart.value
+                headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
             default:
-                headerPayload[HTTPHeaderKey.contentType.value] = HTTPHeaderKey.applicationJson.value
-                headerPayload[HTTPHeaderKey.sesacKey.value] = HTTPHeaderKey.sesacKey.value
+                headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+                headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
             }
             
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             switch self {
             case .postPost(postForm: let postForm):
                 return [
                     "title" : postForm.title,
-                    "content" : postForm.content
+                    "content" : postForm.content,
+                    "files" : postForm.files
                 ]
             default:
                 return [:]
@@ -404,7 +413,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -438,7 +447,7 @@ enum LSLPRequest: Pathable {
             }
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -470,7 +479,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -502,7 +511,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -539,7 +548,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -566,7 +575,7 @@ enum LSLPRequest: Pathable {
             return headerPayload
         }
         
-        var parameters: [String : String] {
+        var parameters: [String : Any] {
             return [:]
         }
     }
@@ -581,18 +590,31 @@ enum HTTPMethod: String {
 }
    
 
-enum HTTPHeaderKey: String {
-    case contentType = "Content-Type"
-    case multipart = "multipart/form-data"
-    case applicationJson = "application/json"
-    case sesacKey = "SesacKey"
+enum HTTPHeaderKey {
+    case sesacKey
+    case applicationJson
+    case multipart
+    
+    var key: String {
+        switch self {
+        case .sesacKey:
+            return "SesacKey"
+        case .applicationJson:
+            return "Content-Type"
+        case .multipart:
+            return "Content-Type"
+        }
+    }
+    
     
     var value: String {
         switch self {
         case .sesacKey:
             return Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
-        default:
-            return self.rawValue
+        case .applicationJson:
+            return "application/json"
+        case .multipart:
+            return "multipart/form-data"
         }
     }
 }
