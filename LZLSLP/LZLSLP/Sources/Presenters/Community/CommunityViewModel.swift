@@ -14,6 +14,7 @@ final class CommunityViewModel: RxViewModel {
     struct Input: Inputable {
         var viewIsAppearing = PublishSubject<Void>()
         var currentPage = BehaviorRelay(value: 0)
+        var postResponses = PublishSubject<[PostResponse]>()
     }
     
     struct Output: Outputable {
@@ -34,7 +35,12 @@ final class CommunityViewModel: RxViewModel {
                 return self.repository.requestPostAPI(of: GetPostResponse.self, router: router)
             }
             .bind(with: self) { owner, result in
-                print(result)
+                switch result {
+                case .success(let response):
+                    owner.store.postResponses.onNext(response.data)
+                case .failure(let error):
+                    break
+                }
             }
             .disposed(by: disposeBag)
         
@@ -46,4 +52,9 @@ final class CommunityViewModel: RxViewModel {
 struct GetPostResponse: Decodable {
     let data: [PostResponse]
     let nextCursor: String
+    
+    enum CodingKeys: String, CodingKey {
+        case data
+        case nextCursor = "next_cursor"
+    }
 }

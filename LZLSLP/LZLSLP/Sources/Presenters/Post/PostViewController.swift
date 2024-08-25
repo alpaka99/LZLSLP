@@ -18,12 +18,6 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
         navigationItem.title = "Post View"
     }
     
-    override func configureDelegate() {
-        super.configureDelegate()
-        
-        
-    }
-    
     override func configureBind() {
         super.configureBind()
         

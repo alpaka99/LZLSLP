@@ -7,6 +7,25 @@
 
 import UIKit
 
+import SnapKit
+
 final class CommunityView: BaseView {
+    let tableView = {
+        let tableView = UITableView()
+        return tableView
+    }()
     
+    override func configureHierarchy() {
+        super.configureHierarchy()
+        
+        self.addSubview(tableView)
+    }
+    
+    override func configureLayout() {
+        super.configureLayout()
+        
+        tableView.snp.makeConstraints { tableView in
+            tableView.edges.equalTo(self.safeAreaLayoutGuide)
+        }
+    }
 }
