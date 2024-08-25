@@ -12,6 +12,7 @@ import SnapKit
 final class CommunityView: BaseView {
     let tableView = {
         let tableView = UITableView()
+        tableView.rowHeight = 80
         return tableView
     }()
     

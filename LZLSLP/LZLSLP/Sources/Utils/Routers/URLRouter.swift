@@ -311,7 +311,7 @@ enum LSLPRequest: Pathable {
     enum PostType: Endpoitable {
         case postFiles
         case postPost(postForm: PostForm) // 어떤 content를 포스트에 넣을지 생각해보기
-        case getPosts
+        case getPosts(nextCursor: String, limit: Int, productId: String = "gasoline_post")
         case getPost(id: String)
         case updatePost
         case deletePost
@@ -323,8 +323,8 @@ enum LSLPRequest: Pathable {
                 return "/posts/files"
             case .postPost:
                 return "/posts"
-            case .getPosts:
-                return "/posts?limit=100&product_id=gasoline_post"
+            case .getPosts(let next, let limit, let productId):
+                return "/posts?next=\(next)&limit=\(limit)&product_id=\(productId)"
             case .getPost:
                 return "/posts/"
             case .updatePost:
