@@ -19,29 +19,29 @@ final class NetworkManager {
             if let urlRequest = router.build() {
                 AF.request(urlRequest, interceptor: interceptor)
                     .validate(statusCode: 200..<300)
-//                    .responseString { result in
+//                    .responseData { result in
 //                        switch result.result {
-//                        case .success(let str):
-//                            print(str)
+//                        case .success(let data):
+//                            print("Data: \(data)")
+//                            observer(.success(.success(data)))
 //                        case .failure(let error):
-//                            print(error)
+//                            print("NetworkManager error: \(error)")
+//                            switch error {
+//                            case .createURLRequestFailed:
+//                                observer(.failure(NetworkError.urlRequestCreateError))
+//                            case .responseValidationFailed:
+//                                observer(.failure(NetworkError.responseStatusCodeError))
+//                            default:
+//                                observer(.failure(NetworkError.networkError))
+//                            }
 //                        }
 //                    }
-                    .responseData { result in
+                    .responseString { result in
                         switch result.result {
-                        case .success(let data):
-                            print("Data: \(data)")
-                            observer(.success(.success(data)))
+                        case .success(let str):
+                            print(str)
                         case .failure(let error):
-                            print("NetworkManager error: \(error)")
-                            switch error {
-                            case .createURLRequestFailed:
-                                observer(.failure(NetworkError.urlRequestCreateError))
-                            case .responseValidationFailed:
-                                observer(.failure(NetworkError.responseStatusCodeError))
-                            default:
-                                observer(.failure(NetworkError.networkError))
-                            }
+                            print(error)
                         }
                     }
             } else {

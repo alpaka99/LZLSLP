@@ -12,7 +12,7 @@ import RxSwift
 final class PostRepository {
     let disposeBag = DisposeBag()
     
-    func postPost<T: Decodable>(of type: T.Type, router: Router) -> Single<Result<T, Error>> {
+    func requestPostAPI<T: Decodable>(of type: T.Type, router: Router) -> Single<Result<T, Error>> {
         Single.create { observer in
             NetworkManager.shared.requestCall(router: router, interceptor: AuthInterceptor())
                 .subscribe(with: self) { owner, result in
@@ -36,7 +36,7 @@ final class PostRepository {
         }
     }
     
-    func postImages<T: Decodable>(of type: T.Type, router: URLRouter, imageArray: [ImageForm]) -> Single<Result<T, Error>> {
+    func requestPostDataAPI<T: Decodable>(of type: T.Type, router: URLRouter, imageArray: [ImageForm]) -> Single<Result<T, Error>> {
         Single.create { observer in
             NetworkManager.shared.requestDataCall(router: router, dataArray: imageArray, interceptor: AuthInterceptor())
                 .subscribe(with: self) { owner, result in

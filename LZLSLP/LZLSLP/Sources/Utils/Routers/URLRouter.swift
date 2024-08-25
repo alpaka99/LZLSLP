@@ -62,13 +62,15 @@ enum URLRouter: Router {
                 
                 
                 // parameter as body
-//                guard let requestBody = try? JSONEncoder().encode(request.parameters) else { return nil }
-                print("UnEncoded paramaters: \(request.parameters)")
+                print("UnEncoded paramaters: \(request.parameters.isEmpty)")
                 guard let requestBody = try? JSONSerialization.data(withJSONObject: request.parameters, options: []) else {
                     print("Cannot encode request body")
                     return nil
                 }
-                urlRequest.httpBody = requestBody
+                
+                if !request.parameters.isEmpty { // MARK: 이 부분 수정 가능하지 않을까?
+                    urlRequest.httpBody = requestBody
+                }
                 
                 print("url", urlRequest.url?.absoluteString)
                 print("Methods", urlRequest.httpMethod)
@@ -310,7 +312,7 @@ enum LSLPRequest: Pathable {
         case postFiles
         case postPost(postForm: PostForm) // 어떤 content를 포스트에 넣을지 생각해보기
         case getPosts
-        case getPost
+        case getPost(id: String)
         case updatePost
         case deletePost
         case getUserPost
@@ -322,7 +324,7 @@ enum LSLPRequest: Pathable {
             case .postPost:
                 return "/posts"
             case .getPosts:
-                return "/posts"
+                return "/posts?limit=100&product_id=gasoline_post"
             case .getPost:
                 return "/posts/"
             case .updatePost:
@@ -363,7 +365,6 @@ enum LSLPRequest: Pathable {
                 headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
                 headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
             }
-            
             return headerPayload
         }
         
@@ -373,7 +374,8 @@ enum LSLPRequest: Pathable {
                 return [
                     "title" : postForm.title,
                     "content" : postForm.content,
-                    "files" : postForm.files
+                    "files" : postForm.files,
+                    "product_id" : postForm.product_id
                 ]
             default:
                 return [:]

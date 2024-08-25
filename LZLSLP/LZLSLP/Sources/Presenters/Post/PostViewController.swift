@@ -91,6 +91,7 @@ struct PostForm {
     let title: String
     let content: String
     var files: [String]
+    let product_id: String = "gasoline_post"
 }
 
 protocol Uploadable {
