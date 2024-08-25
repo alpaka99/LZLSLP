@@ -68,7 +68,7 @@ final class CommunityViewModel: RxViewModel {
                     print("DateCOunt: \(response.data.count)")
                     var data = owner.store.postResponses.value
                     let newData = response.data.filter {
-                        var formatter = DateFormatter()
+                        var formatter = DateFormatter() // MARK: Constant로 분리
                         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 
                         if let date = formatter.date(from: $0.createdAt) {
