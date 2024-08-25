@@ -26,15 +26,14 @@ final class AuthInterceptor: RequestInterceptor {
     
     
     func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
-        print("Retry")
         // invalidAccessToken 에러가 아니라면 retry하지 않고 통과시킴
         guard let response = request.response, response.statusCode == StatusCode.invalidAccessToken.rawValue else {
-            print("This is not auth error")
+            print("Access Token is correct, so pass")
             completion(.doNotRetry)
             return
         }
         
-        print("Retry logic start")
+        print("Retry Sequnce Start")
         // invalidAccessToken 에러라면 access token을 refresh하는 retry
         let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token
         let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token
@@ -53,20 +52,20 @@ final class AuthInterceptor: RequestInterceptor {
         
         AF.request(urlRequest)
 //            .validate(statusCode: 200..<300)
-            .responseString { result in
-                print(result)
-            }
-//            .responseDecodable(of: RefreshTokenResponse.self) { result in
-//                print(result.response?.statusCode)
-//                switch result.result {
-//                case .success(let data):
-//                    let accessToken = AccessToken(token: data.accessToken)
-//                    UserDefaults.standard.save(accessToken)
-//                    completion(.retry)
-//                case .failure(let error):
-//                    print("AccessToken Refresh Failure")
-//                    completion(.doNotRetryWithError(InterceptorError.accessTokenResponseFailureError))
-//                }
+//            .responseString { result in
+//                print(result)
 //            }
+            .responseDecodable(of: RefreshTokenResponse.self) { result in
+                print(result.response?.statusCode)
+                switch result.result {
+                case .success(let data):
+                    let accessToken = AccessToken(token: data.accessToken)
+                    UserDefaults.standard.save(accessToken)
+                    completion(.retry)
+                case .failure(let error):
+                    print("AccessToken Refresh Failure")
+                    completion(.doNotRetryWithError(InterceptorError.accessTokenResponseFailureError))
+                }
+            }
     }
 }

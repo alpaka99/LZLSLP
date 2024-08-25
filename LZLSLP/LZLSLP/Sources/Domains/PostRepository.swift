@@ -22,6 +22,7 @@ final class PostRepository {
                             let decodedData = try JSONDecoder().decode(T.self, from: data)
                             observer(.success(.success(decodedData)))
                         } catch {
+                            print("Catched")
                             observer(.success(.failure(error)))
                         }
                     case.failure(let error):

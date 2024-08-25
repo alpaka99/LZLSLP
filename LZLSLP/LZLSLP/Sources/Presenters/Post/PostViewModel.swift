@@ -32,39 +32,36 @@ final class PostViewModel: RxViewModel {
         
         // 1. 우선은 이미지를 서버에 보냄
         store.submitButtonTapped
-            .withLatestFrom(
-                Observable.combineLatest(
-                    store.postForm,
-                    store.imageArray
-                ))
-            .flatMap { value in
-                let postForm = value.0
-                let imageArray = value.1
+            .flatMap { _ in // 1. image 요청
+                let imageArray = self.store.imageArray.value
                 
                 // send image array with MultiPartFormData
                 let router = URLRouter.https(.lslp(.post(.postFiles)))
                 return self.repository.postImages(of: ImageUploadResponse.self, router: router, imageArray: imageArray)
+            }
+            .flatMap { result in
+                var postForm = self.store.postForm.value
+                switch result {
+                case .success(let imageResponse):
+                    postForm.files = imageResponse.files
+                    print(postForm)
+                    let router = URLRouter.https(.lslp(.post(.postPost(postForm: postForm))))
+                    return self.repository.postPost(of: PostResponse.self, router: router)
+                case .failure(let error):
+                    print("Error1")
+                    return Single.just(.failure(error))
+                }
             }
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let response):
                     print(response)
                 case .failure(let error):
+                    print("Error2")
                     print(error.localizedDescription)
                 }
             }
             .disposed(by: disposeBag)
-//            .bind(with: self, onNext: { owner, result in
-//                // image response work
-//                switch result {
-//                case .success(let data):
-//                    break
-//                case .failure(let error):
-//                    print(error)
-//                }
-//                owner.store.uploadedImageArray.accept([])
-//            })
-//            .disposed(by: disposeBag)
         
         // 2. 이미지가 서버에 업로드가 제대로 처리 됐다면, postForm을 올림
         store.uploadedImageArray
