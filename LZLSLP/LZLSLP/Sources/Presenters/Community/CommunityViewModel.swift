@@ -60,14 +60,27 @@ final class CommunityViewModel: RxViewModel {
                 let router = URLRouter.https(.lslp(.post(.getPosts(nextCursor: nextCursor, limit: 8, productId: "gasoline_post"))))
                 
                 return self.repository.requestPostAPI(of: GetPostResponse.self, router: router)
-            }
+            }            
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let response):
                     owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
-                    
+                    print("DateCOunt: \(response.data.count)")
                     var data = owner.store.postResponses.value
-                    data.append(contentsOf: response.data)
+                    let newData = response.data.filter {
+                        var formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+
+                        if let date = formatter.date(from: $0.createdAt) {
+                            print(date)
+                            return Calendar.current.isDateInToday(date)
+                        } else {
+                            print("Date Error")
+                            return false
+                        }
+                    }
+                    print("newData: \(newData)")
+                    data.append(contentsOf: newData)
                     owner.store.postResponses.accept(data)
                 case .failure(let error):
                     print(error)
