@@ -40,6 +40,12 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
             }
             .disposed(by: disposeBag)
             
+        
+        baseView.tableView.rx.modelSelected(PostResponse.self)
+            .bind(with: self) { owner, postResponse in
+                print(postResponse)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureDelegate() {
