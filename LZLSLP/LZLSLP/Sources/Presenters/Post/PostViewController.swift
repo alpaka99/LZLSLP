@@ -18,12 +18,6 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
         navigationItem.title = "Post View"
     }
     
-    override func configureDelegate() {
-        super.configureDelegate()
-        
-        
-    }
-    
     override func configureBind() {
         super.configureBind()
         
@@ -91,6 +85,7 @@ struct PostForm {
     let title: String
     let content: String
     var files: [String]
+    let product_id: String = "gasoline_post"
 }
 
 protocol Uploadable {
