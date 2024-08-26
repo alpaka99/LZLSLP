@@ -62,7 +62,6 @@ enum URLRouter: Router {
                 
                 
                 // parameter as body
-                print("UnEncoded paramaters: \(request.parameters.isEmpty)")
                 guard let requestBody = try? JSONSerialization.data(withJSONObject: request.parameters, options: []) else {
                     print("Cannot encode request body")
                     return nil
@@ -72,10 +71,10 @@ enum URLRouter: Router {
                     urlRequest.httpBody = requestBody
                 }
                 
-                print("url", urlRequest.url?.absoluteString)
-                print("Methods", urlRequest.httpMethod)
-                print("Headers", urlRequest.allHTTPHeaderFields)
-                print("Body", urlRequest.httpBody)
+//                print("url", urlRequest.url?.absoluteString)
+//                print("Methods", urlRequest.httpMethod)
+//                print("Headers", urlRequest.allHTTPHeaderFields)
+//                print("Body", urlRequest.httpBody)
                 return urlRequest
             } else {
                 print("Cannot create urlRequest")

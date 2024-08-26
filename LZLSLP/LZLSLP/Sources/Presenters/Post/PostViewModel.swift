@@ -54,6 +54,7 @@ final class PostViewModel: RxViewModel {
                 }
             }
             .bind(with: self) { owner, result in
+                print("HERE")
                 switch result {
                 case .success(let response):
                     print(response)
