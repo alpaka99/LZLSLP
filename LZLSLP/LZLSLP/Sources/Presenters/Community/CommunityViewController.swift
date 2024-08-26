@@ -43,7 +43,16 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         
         baseView.tableView.rx.modelSelected(PostResponse.self)
             .bind(with: self) { owner, postResponse in
-                print(postResponse)
+                
+                let detailPostViewModel = DetailPostViewModel()
+                detailPostViewModel.store.postId.onNext(postResponse.postId)
+                
+                let detailPostViewController = DetailPostViewController(
+                    baseView: DetailPostView(),
+                    viewModel: detailPostViewModel
+                )
+                
+                owner.navigationController?.pushViewController(detailPostViewController, animated: true)
             }
             .disposed(by: disposeBag)
     }
@@ -52,7 +61,6 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         super.configureDelegate()
         
         baseView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-//        baseView.tableView.prefetchDataSource = self
     }
     
     override func configureNavigationItem() {
@@ -61,9 +69,3 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         navigationItem.title = "Community View"
     }
 }
-//
-//extension CommunityViewController: UITableViewDataSourcePrefetching {
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        print(indexPaths)
-//    }
-//}

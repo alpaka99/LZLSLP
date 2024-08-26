@@ -326,8 +326,8 @@ enum LSLPRequest: Pathable {
                 return "/posts"
             case .getPosts(let next, let limit, let productId):
                 return "/posts?next=\(next)&limit=\(limit)&product_id=\(productId)"
-            case .getPost:
-                return "/posts/"
+            case .getPost(let postId):
+                return "/posts/\(postId)"
             case .updatePost:
                 return "/posts/"
             case .deletePost:

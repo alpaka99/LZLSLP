@@ -69,7 +69,7 @@ final class CommunityViewModel: RxViewModel {
                     var data = owner.store.postResponses.value
 //                    var newData = response.data
                     let newData = response.data.filter {
-                        let formatter = ConstDateFormatter.formatter // MARK: Constant로 분리
+                        let formatter = ConstDateFormatter.formatter
                         formatter.dateFormat = ConstDateFormatter.iso8601format
                         if let date = formatter.date(from: $0.createdAt) {
                             return Calendar.current.isDateInToday(date)
