@@ -44,7 +44,7 @@ final class PostInterceptor: RequestInterceptor {
                     UserDefaults.standard.save(accessToken)
                     completion(.retry)
                 case .failure(let error):
-                    print("PostInterceptor Error")
+                    print("PostInterceptor Error: \(error)")
                     completion(.doNotRetryWithError(InterceptorError.accessTokenResponseFailureError))
                 }
             }

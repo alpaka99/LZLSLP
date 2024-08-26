@@ -56,20 +56,20 @@ final class AuthInterceptor: RequestInterceptor {
         
         AF.request(urlRequest)
             .validate(statusCode: 200..<300)
-            .responseString { result in
-                print(result)
-            }
-//            .responseDecodable(of: RefreshTokenResponse.self) { result in
-//                print("Status Code: \(result.response?.statusCode)")
-//                switch result.result {
-//                case .success(let data):
-//                    let accessToken = AccessToken(token: data.accessToken)
-//                    UserDefaults.standard.save(accessToken)
-//                    completion(.retry)
-//                case .failure(let error):
-//                    print("AccessToken Refresh Failure")
-//                    completion(.doNotRetryWithError(InterceptorError.accessTokenResponseFailureError))
-//                }
+//            .responseString { result in
+//                print(result)
 //            }
+            .responseDecodable(of: RefreshTokenResponse.self) { result in
+                print("Status Code: \(result.response?.statusCode)")
+                switch result.result {
+                case .success(let data):
+                    let accessToken = AccessToken(token: data.accessToken)
+                    UserDefaults.standard.save(accessToken)
+                    completion(.retry)
+                case .failure(let error):
+                    print("AccessToken Refresh Failure")
+                    completion(.doNotRetryWithError(InterceptorError.accessTokenResponseFailureError))
+                }
+            }
     }
 }
