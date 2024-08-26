@@ -18,12 +18,6 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
         navigationItem.title = "Post View"
     }
     
-    override func configureDelegate() {
-        super.configureDelegate()
-        
-        
-    }
-    
     override func configureBind() {
         super.configureBind()
         
@@ -36,6 +30,7 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
             .bind(with: self, onNext: { owner, value in
                 let postForm = PostForm(title: value.0, content: value.1, files: [])
                 owner.viewModel.store.postForm.accept(postForm)
+                owner.viewModel.store.submitButtonTapped.onNext(())
             })
             .disposed(by: disposeBag)
         
@@ -68,14 +63,15 @@ extension PostViewController: PHPickerViewControllerDelegate {
                     return
                 }
                 // image work
-//                let itemName = itemProvider.suggestedName
-                guard let image = image as? UIImage else { print("Error Converting")
+                
+                guard let imageName = itemProvider.suggestedName, let image = image as? UIImage else { print("Error Converting")
                     return }
-                guard let data = image.pngData() else {
+                guard let imageData = image.pngData() else {
                     print("To Data failed")
                     return }
                 
-                self?.viewModel.store.selectedImageData.accept(data)
+                let imageForm = ImageForm(dataName: imageName, data: imageData)
+                self?.viewModel.store.selectedImageData.accept(imageForm)
             }
         }
         
@@ -89,4 +85,14 @@ struct PostForm {
     let title: String
     let content: String
     var files: [String]
+    let product_id: String = "gasoline_post"
+}
+
+protocol Uploadable {
+    var dataName: String { get }
+    var data: Data { get }
+}
+struct ImageForm: Uploadable {
+    let dataName: String
+    let data: Data
 }
