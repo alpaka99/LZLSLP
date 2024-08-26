@@ -67,12 +67,11 @@ final class CommunityViewModel: RxViewModel {
                     owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
                     print("DateCOunt: \(response.data.count)")
                     var data = owner.store.postResponses.value
+//                    var newData = response.data
                     let newData = response.data.filter {
-                        var formatter = DateFormatter() // MARK: Constant로 분리
-                        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-
+                        let formatter = ConstDateFormatter.formatter // MARK: Constant로 분리
+                        formatter.dateFormat = ConstDateFormatter.iso8601format
                         if let date = formatter.date(from: $0.createdAt) {
-                            print(date)
                             return Calendar.current.isDateInToday(date)
                         } else {
                             print("Date Error")

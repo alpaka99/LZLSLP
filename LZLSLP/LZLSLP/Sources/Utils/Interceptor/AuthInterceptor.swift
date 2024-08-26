@@ -34,7 +34,7 @@ final class AuthInterceptor: RequestInterceptor {
             print("request have no response")
             return
         }
-        print(String(describing: self), response.statusCode) // MARK: 403?
+        print(String(describing: self), response.statusCode) // MARK: 401?
         guard response.statusCode == StatusCode.invalidAccessToken.rawValue else {
             print("Access Token is correct, so pass")
             completion(.doNotRetry)
@@ -50,15 +50,18 @@ final class AuthInterceptor: RequestInterceptor {
             completion(.doNotRetryWithError(InterceptorError.tokenURLBuildError))
             return
         }
+        
         urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
         urlRequest.addValue(refreshToken, forHTTPHeaderField: "Refresh")
         
+        print("Auth Requqst: \(urlRequest)")
+        print("Auth Request Header: \(urlRequest.headers)")
         
         AF.request(urlRequest)
             .validate(statusCode: 200..<300)
-//            .responseString { result in
-//                print(result)
-//            }
+            .responseString { result in
+                print("Auth Result: \(result)")
+            }
             .responseDecodable(of: RefreshTokenResponse.self) { result in
                 print("Status Code: \(result.response?.statusCode)")
                 switch result.result {

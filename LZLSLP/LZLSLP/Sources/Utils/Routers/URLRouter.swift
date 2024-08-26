@@ -272,6 +272,8 @@ enum LSLPRequest: Pathable {
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
             switch self {
+            case .accessToken:
+                headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
             default:
                 headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
                 headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value

@@ -41,6 +41,7 @@
 		CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */; };
 		CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64E02C74EE17009830AD /* PostViewController.swift */; };
 		CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E64E22C74FDAA009830AD /* PostRepository.swift */; };
+		CE80D0092C7C88D900A45249 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D0082C7C88D900A45249 /* DateFormatter.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -82,6 +83,7 @@
 		CE5E64DE2C74EDE8009830AD /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		CE5E64E02C74EE17009830AD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		CE5E64E22C74FDAA009830AD /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		CE80D0082C7C88D900A45249 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		CE5E648D2C6DE4EC009830AD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CE80D0072C7C88CC00A45249 /* Constants */,
 				CE5E64912C6DEF19009830AD /* Bases */,
 				CE5E649F2C6DF1A6009830AD /* Extensions */,
 				CEE75B472C76C30900FC61E6 /* Interceptor */,
@@ -287,6 +290,14 @@
 				CE5E64E02C74EE17009830AD /* PostViewController.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		CE80D0072C7C88CC00A45249 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				CE80D0082C7C88D900A45249 /* DateFormatter.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
@@ -413,6 +424,7 @@
 				CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
 				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
+				CE80D0092C7C88D900A45249 /* DateFormatter.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
 				CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */,
 				CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */,
