@@ -45,7 +45,7 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
             .bind(with: self) { owner, postResponse in
                 
                 let detailPostViewModel = DetailPostViewModel()
-                detailPostViewModel.store.detailPostData.onNext(postResponse)
+                detailPostViewModel.store.detailPostData.accept(postResponse)
                 
                 let detailPostViewController = DetailPostViewController(
                     baseView: DetailPostView(),

@@ -26,7 +26,8 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
         
         viewModel.store.likedStatus
             .bind(with: self) { owner, value in
-                print(value)
+                
+                owner.baseView.fireButton.updateImage(value ? "flame.fill" : "flame")
             }
             .disposed(by: disposeBag)
     }
