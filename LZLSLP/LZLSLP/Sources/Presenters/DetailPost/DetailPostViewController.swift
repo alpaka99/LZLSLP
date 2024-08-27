@@ -9,9 +9,25 @@ import UIKit
 
 final class DetailPostViewController: BaseViewController<DetailPostView, DetailPostViewModel> {
     
-    override func configureNavigationItem() {
-        super.configureNavigationItem()
+    override func configureBind() {
+        super.configureBind()
         
-        navigationItem.title = "Detail View"
+        viewModel.store.detailPostData
+            .map {
+                $0.title
+            }
+            .bind(to: self.navigationItem.rx.title)
+            .disposed(by: disposeBag)
+        
+        
+        baseView.fireButton.rx.tap
+            .bind(to: viewModel.store.fireButtonTapped)
+            .disposed(by: disposeBag)
+        
+        viewModel.store.likedStatus
+            .bind(with: self) { owner, value in
+                print(value)
+            }
+            .disposed(by: disposeBag)
     }
 }

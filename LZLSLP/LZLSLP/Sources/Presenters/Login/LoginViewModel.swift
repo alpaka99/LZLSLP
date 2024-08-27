@@ -84,9 +84,11 @@ final class LoginViewModel: RxViewModel {
             .bind(with: self) { owner, loginResponse in
                 let accessToken = AccessToken(token: loginResponse.accessToken)
                 let refreshToken = RefreshToken(token: loginResponse.refreshToken)
+                let userId = UserInfo(userId: loginResponse.userId)
                 
                 UserDefaults.standard.save(accessToken)
                 UserDefaults.standard.save(refreshToken)
+                UserDefaults.standard.save(userId)
                 
                 // 저장 제대로 됐는지 확인
                 if let accesToken = UserDefaults.standard.load(of: AccessToken.self), let refreshToken = UserDefaults.standard.load(of: RefreshToken.self) {
@@ -126,4 +128,8 @@ struct AccessToken: Tokenable {
 
 struct RefreshToken: Tokenable {
     let token: String
+}
+
+struct UserInfo: Codable {
+    let userId: String
 }
