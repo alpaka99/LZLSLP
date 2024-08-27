@@ -24,7 +24,6 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         viewModel.store.postResponses
             .bind(to: baseView.tableView.rx.items(cellIdentifier: "UITableViewCell")) { row, item, cell in
                 
-//                cell.textLabel?.text = "\(item.title): \(item.createdAt)"
                 cell.textLabel?.text = item.createdAt
             }
             .disposed(by: disposeBag)

@@ -25,12 +25,20 @@ final class DetailPostView: BaseView {
         return label
     }()
     
+    let commentTextField = {
+        let textField = UITextField()
+        textField.placeholder = "댓글 추가"
+        textField.layer.borderColor = UIColor.darkGray.cgColor
+        textField.layer.borderWidth = 2
+        return textField
+    }()
     
     override func configureHierarchy() {
         super.configureHierarchy()
         
         self.addSubview(fireButton)
         self.addSubview(likedUsersLabel)
+        self.addSubview(commentTextField)
     }
     
     override func configureLayout() {
@@ -46,6 +54,14 @@ final class DetailPostView: BaseView {
                 .offset(16)
             label.centerY.equalTo(fireButton.snp.centerY)
             label.trailing.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        commentTextField.snp.makeConstraints { textField in
+            textField.top.equalTo(fireButton.snp.bottom)
+                .offset(16)
+            textField.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+                .inset(16)
+            textField.height.equalTo(44)
         }
     }
 }

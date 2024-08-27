@@ -39,7 +39,7 @@ final class NetworkManager {
 //                    .responseString { result in
 //                        switch result.result {
 //                        case .success(let str):
-//                            print(str)
+//                            dump(str)
 //                        case .failure(let error):
 //                            print(error)
 //                        }

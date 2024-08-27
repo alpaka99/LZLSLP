@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxSwift
+
 final class DetailPostViewController: BaseViewController<DetailPostView, DetailPostViewModel> {
     
     override func configureBind() {
@@ -30,5 +32,12 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
                 owner.baseView.fireButton.updateImage(value ? "flame.fill" : "flame")
             }
             .disposed(by: disposeBag)
+        
+        baseView.commentTextField.rx.controlEvent([.editingDidEndOnExit])
+            .withLatestFrom(baseView.commentTextField.rx.text.orEmpty)
+            .bind(to: viewModel.store.comment)
+            .disposed(by: disposeBag)
+            
+
     }
 }

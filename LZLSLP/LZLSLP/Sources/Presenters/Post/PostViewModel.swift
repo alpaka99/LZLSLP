@@ -120,7 +120,7 @@ struct PostResponse: Decodable {
     let likes2: [String]
     let buyers: [String]
     let hashTags: [String]
-    let comments: [String]
+    let comments: [CommentResponse]
     
     enum CodingKeys: String, CodingKey {
         case postId = "post_id"

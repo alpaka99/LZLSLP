@@ -385,14 +385,14 @@ enum LSLPRequest: Pathable {
     }
     
     enum CommentType: Endpoitable {
-        case postComment
+        case postComment(id: String, comment: String)
         case updateComment
         case deleteComment
         
         var endpoint: String {
             switch self {
-            case .postComment:
-                return "/posts/:id/comments"
+            case .postComment(let id, _):
+                return "/posts/\(id)/comments"
             case .updateComment:
                 return "/posts/:id/comments/:commentID"
             case .deleteComment:
@@ -420,7 +420,14 @@ enum LSLPRequest: Pathable {
         }
         
         var parameters: [String : Any] {
-            return [:]
+            switch self {
+            case .postComment(_, let comment):
+                return [
+                    "content" : comment
+                    ]
+            default:
+                return [:]
+            }
         }
     }
     
