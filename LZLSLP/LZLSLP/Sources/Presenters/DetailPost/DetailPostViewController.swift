@@ -32,10 +32,18 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
             .map {
                 return $0.comments
             }
-            .bind(to: baseView.commentTableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { row, item ,cell in
-                print(item.content)
-                cell.textLabel?.text = item.content
-            }
+            .asDriver(onErrorJustReturn: [CommentResponse]())
+            .drive(baseView.commentTableView.rx.items) { tableView, row ,data in
+                let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: IndexPath(row: row, section: 0))
+                cell.textLabel?.text = data.content
+                return cell
+//                    print(item.content)
+//                    cell.textLabel?.text = item.content
+                }
+//            .bind(to: baseView.commentTableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { row, item ,cell in
+//                print(item.content)
+//                cell.textLabel?.text = item.content
+//            }
             .disposed(by: disposeBag)
         
         viewModel.store.detailPostData
@@ -59,7 +67,8 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
         
         baseView.commentTextField.rx.controlEvent([.editingDidEndOnExit])
             .withLatestFrom(baseView.commentTextField.rx.text.orEmpty)
-            .bind(to: viewModel.store.comment)
+            .asDriver(onErrorJustReturn: "")
+            .drive(viewModel.store.comment)
             .disposed(by: disposeBag)
     }
 }

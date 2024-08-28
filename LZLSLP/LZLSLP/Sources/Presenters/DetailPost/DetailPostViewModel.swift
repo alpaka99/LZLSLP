@@ -59,7 +59,7 @@ final class DetailPostViewModel: RxViewModel {
         
         
         Observable
-            .zip(store.postId, store.comment)
+            .combineLatest(store.postId, store.comment)
             .flatMap { value in
                 let postId = value.0
                 let comment = value.1
