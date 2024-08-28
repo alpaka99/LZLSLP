@@ -30,17 +30,20 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
         
         viewModel.store.detailPostData
             .map {
-                print($0.comments)
                 return $0.comments
             }
             .bind(to: baseView.commentTableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { row, item ,cell in
-                
-                print("Cell row: \(row)")
-                print("Comment: \(item.content)")
+                print(item.content)
                 cell.textLabel?.text = item.content
             }
             .disposed(by: disposeBag)
         
+        viewModel.store.detailPostData
+            .bind(with: self) { owner, postData in
+                owner.navigationItem.rx.title.onNext(postData.title)
+                owner.baseView.contentLabel.rx.text.onNext(postData.content)
+            }
+            .disposed(by: disposeBag)
         
         
         baseView.fireButton.rx.tap

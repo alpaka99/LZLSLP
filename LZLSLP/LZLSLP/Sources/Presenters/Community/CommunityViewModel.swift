@@ -67,7 +67,6 @@ final class CommunityViewModel: RxViewModel {
                     owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
                     print("DateCOunt: \(response.data.count)")
                     var data = owner.store.postResponses.value
-//                    var newData = response.data
                     let newData = response.data.filter {
                         let formatter = ConstDateFormatter.formatter
                         formatter.dateFormat = ConstDateFormatter.iso8601format

@@ -10,6 +10,31 @@ import UIKit
 import SnapKit
 
 final class DetailPostView: BaseView {
+    let scrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        return scrollView
+    }()
+    
+    let contentView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    let imageCollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.createFlowLayout(numberOfRowsInLine: 1, spacing: 10, heightMultiplier: 1))
+        return collectionView
+    }()
+    
+    let contentLabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textAlignment = .left
+        label.backgroundColor = . systemBlue
+        return label
+    }()
+    
     let fireButton = {
         let button = UIButton.Configuration.plain()
             .image(systemName: "flame")
@@ -17,11 +42,6 @@ final class DetailPostView: BaseView {
             .build()
         
         return button
-    }()
-    
-    let imageCollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.createFlowLayout(numberOfRowsInLine: 1, spacing: 10, heightMultiplier: 1))
-        return collectionView
     }()
     
     let likedUsersLabel = {
@@ -35,43 +55,69 @@ final class DetailPostView: BaseView {
         textField.placeholder = "댓글 추가"
         textField.layer.borderColor = UIColor.darkGray.cgColor
         textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 8
         return textField
     }()
     
     let commentTableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .systemBlue
         return tableView
     }()
     
     override func configureHierarchy() {
         super.configureHierarchy()
         
-        self.addSubview(fireButton)
-        self.addSubview(likedUsersLabel)
-        self.addSubview(commentTextField)
-        self.addSubview(commentTableView)
+        contentView.addSubview(imageCollectionView)
+        contentView.addSubview(contentLabel)
+        contentView.addSubview(fireButton)
+        contentView.addSubview(likedUsersLabel)
+        contentView.addSubview(commentTextField)
+        contentView.addSubview(commentTableView)
+        
+        scrollView.addSubview(contentView)
+        
+        self.addSubview(scrollView)
     }
     
     override func configureLayout() {
         super.configureLayout()
         
+        contentView.snp.makeConstraints { view in
+            view.horizontalEdges.equalTo(scrollView.frameLayoutGuide)
+            view.verticalEdges.equalTo(scrollView.contentLayoutGuide)
+        }
+        
+        imageCollectionView.snp.makeConstraints { collectionView in
+            collectionView.top.equalTo(contentView)
+                .offset(16)
+            collectionView.centerX.equalTo(contentView)
+        }
+        
+        contentLabel.snp.makeConstraints { label in
+            label.top.equalTo(imageCollectionView.snp.bottom)
+                .offset(16)
+            label.horizontalEdges.equalTo(contentView)
+                .inset(16)
+        }
+        
         fireButton.snp.makeConstraints { btn in
             btn.size.equalTo(44)
-            btn.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            btn.top.equalTo(contentLabel.snp.bottom)
+                .offset(16)
+            btn.centerX.equalTo(contentView)
         }
         
         likedUsersLabel.snp.makeConstraints { label in
-            label.leading.equalTo(fireButton.snp.trailing)
+            label.top.equalTo(fireButton.snp.bottom)
                 .offset(16)
-            label.centerY.equalTo(fireButton.snp.centerY)
-            label.trailing.equalTo(self.safeAreaLayoutGuide)
+            label.horizontalEdges.equalTo(contentView)
+                .inset(16)
         }
         
         commentTextField.snp.makeConstraints { textField in
-            textField.top.equalTo(fireButton.snp.bottom)
+            textField.top.equalTo(likedUsersLabel.snp.bottom)
                 .offset(16)
-            textField.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+            textField.horizontalEdges.equalTo(contentView)
                 .inset(16)
             textField.height.equalTo(44)
         }
@@ -79,7 +125,12 @@ final class DetailPostView: BaseView {
         commentTableView.snp.makeConstraints { tableView in
             tableView.top.equalTo(commentTextField.snp.bottom)
                 .offset(16)
-            tableView.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
+            tableView.height.equalTo(500)
+            tableView.horizontalEdges.bottom.equalTo(contentView)
+        }
+        
+        scrollView.snp.makeConstraints { scrollView in
+            scrollView.edges.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }

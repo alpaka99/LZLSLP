@@ -12,6 +12,8 @@ import RxSwift
 
 final class CommunityViewController: BaseViewController<CommunityView, CommunityViewModel> {
     
+    // MARK: ViewDidLoad로 수정하고 tableView에 refresh 로직 구현
+    // MARK: Pagenation 오류 수정
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

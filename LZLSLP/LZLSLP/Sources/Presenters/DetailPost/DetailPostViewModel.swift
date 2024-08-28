@@ -33,7 +33,6 @@ final class DetailPostViewModel: RxViewModel {
             .share()
             .bind(with: self) { owner, postData in
                 guard let userId = UserDefaults.standard.load(of: UserInfo.self)?.userId else { return }
-                
                 owner.store.likedStatus.accept(postData.likes.contains(userId))
             }
             .disposed(by: disposeBag)
@@ -70,7 +69,6 @@ final class DetailPostViewModel: RxViewModel {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let response):
-                    print("Comment response: \(response)")
                     owner.store.loadDetailPostData.onNext(())
                 case .failure(let error):
                     print("Comment error: \(error)")
@@ -95,7 +93,7 @@ final class DetailPostViewModel: RxViewModel {
             })
             .disposed(by: disposeBag)
         
-        
+        // load post when need
         store.loadDetailPostData
             .withLatestFrom(store.postId)
             .flatMap { id in

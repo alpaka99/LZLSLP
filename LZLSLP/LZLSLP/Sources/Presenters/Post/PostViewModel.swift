@@ -30,8 +30,6 @@ final class PostViewModel: RxViewModel {
     override func configureBind() {
         super.configureBind()
         
-        
-        
         store.submitButtonTapped
             .flatMap { _ in // 1. 우선은 이미지를 서버에 보냄
                 let imageArray = self.store.imageArray.value
@@ -54,10 +52,9 @@ final class PostViewModel: RxViewModel {
                 }
             }
             .bind(with: self) { owner, result in
-                print("HERE")
                 switch result {
                 case .success(let response):
-                    print(response)
+                    print("Success Send Comment: \(response)")
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -67,40 +64,39 @@ final class PostViewModel: RxViewModel {
         
     }
     
-    func transform() {
-        
-        store.submitButtonTapped
-            .flatMap { _ in // 1. image 요청
-                let imageArray = self.store.imageArray.value
-                
-                // send image array with MultiPartFormData
-                let router = URLRouter.https(.lslp(.post(.postFiles)))
-                return self.repository.requestPostDataAPI(of: ImageUploadResponse.self, router: router, imageArray: imageArray)
-            }
-            .flatMap { result in
-                var postForm = self.store.postForm.value
-                
-                switch result {
-                case .success(let imageResponse):
-                    postForm.files = imageResponse.files
-                    print(postForm)
-                    let router = URLRouter.https(.lslp(.post(.postPost(postForm: postForm))))
-                    return self.repository.requestPostAPI(of: PostResponse.self, router: router)
-                case .failure(let error):
-                    return Single.just(.failure(error))
-                }
-            }
-            .bind(with: self) { owner, result in
-                switch result {
-                case .success(let response):
-                    print(response)
-                case .failure(let error):
-//                    owner.store.toastMessage.onNext("토스트 바삭바삭") // 토스트 메세지 넣어주기
-                    print(error.localizedDescription)
-                }
-            }
-            .disposed(by: disposeBag)
-    }
+//    func transform() {
+//        store.submitButtonTapped
+//            .flatMap { _ in // 1. image 요청
+//                let imageArray = self.store.imageArray.value
+//                
+//                // send image array with MultiPartFormData
+//                let router = URLRouter.https(.lslp(.post(.postFiles)))
+//                return self.repository.requestPostDataAPI(of: ImageUploadResponse.self, router: router, imageArray: imageArray)
+//            }
+//            .flatMap { result in
+//                var postForm = self.store.postForm.value
+//                
+//                switch result {
+//                case .success(let imageResponse):
+//                    postForm.files = imageResponse.files
+//                    print(postForm)
+//                    let router = URLRouter.https(.lslp(.post(.postPost(postForm: postForm))))
+//                    return self.repository.requestPostAPI(of: PostResponse.self, router: router)
+//                case .failure(let error):
+//                    return Single.just(.failure(error))
+//                }
+//            }
+//            .bind(with: self) { owner, result in
+//                switch result {
+//                case .success(let response):
+//                    print(response)
+//                case .failure(let error):
+////                    owner.store.toastMessage.onNext("토스트 바삭바삭") // 토스트 메세지 넣어주기
+//                    print(error.localizedDescription)
+//                }
+//            }
+//            .disposed(by: disposeBag)
+//    }
 }
 
 struct PostResponse: Decodable {
