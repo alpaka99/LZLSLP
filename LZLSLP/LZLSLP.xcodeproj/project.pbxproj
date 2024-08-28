@@ -45,6 +45,8 @@
 		CE80D00C2C7CE32C00A45249 /* DetailPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D00B2C7CE32C00A45249 /* DetailPostView.swift */; };
 		CE80D00E2C7CE33A00A45249 /* DetailPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D00D2C7CE33A00A45249 /* DetailPostViewModel.swift */; };
 		CE80D0102C7CE35400A45249 /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D00F2C7CE35400A45249 /* DetailPostViewController.swift */; };
+		CE80D02B2C7F321000A45249 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE80D02A2C7F321000A45249 /* Kingfisher */; };
+		CE80D02D2C7F331200A45249 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D02C2C7F331200A45249 /* ScreenSize.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -90,6 +92,7 @@
 		CE80D00B2C7CE32C00A45249 /* DetailPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostView.swift; sourceTree = "<group>"; };
 		CE80D00D2C7CE33A00A45249 /* DetailPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewModel.swift; sourceTree = "<group>"; };
 		CE80D00F2C7CE35400A45249 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
+		CE80D02C2C7F331200A45249 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 				CE5E64DA2C73B3D0009830AD /* Alamofire in Frameworks */,
 				CE5E649A2C6DEFFC009830AD /* RxSwift in Frameworks */,
 				CE5E64982C6DEFFC009830AD /* RxCocoa in Frameworks */,
+				CE80D02B2C7F321000A45249 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				CE80D0082C7C88D900A45249 /* DateFormatter.swift */,
+				CE80D02C2C7F331200A45249 /* ScreenSize.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 				CE5E64992C6DEFFC009830AD /* RxSwift */,
 				CE5E64B42C70CC86009830AD /* SnapKit */,
 				CE5E64D92C73B3D0009830AD /* Alamofire */,
+				CE80D02A2C7F321000A45249 /* Kingfisher */,
 			);
 			productName = LZLSLP;
 			productReference = CE5E64722C6DE213009830AD /* LZLSLP.app */;
@@ -390,6 +396,7 @@
 				CE5E64962C6DEFFC009830AD /* XCRemoteSwiftPackageReference "RxSwift" */,
 				CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */,
 				CE5E64D82C73B3D0009830AD /* XCRemoteSwiftPackageReference "Alamofire" */,
+				CE80D0292C7F321000A45249 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = CE5E64732C6DE213009830AD /* Products */;
 			projectDirPath = "";
@@ -435,6 +442,7 @@
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
 				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
+				CE80D02D2C7F331200A45249 /* ScreenSize.swift in Sources */,
 				CE80D0102C7CE35400A45249 /* DetailPostViewController.swift in Sources */,
 				CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */,
 				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
@@ -703,6 +711,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		CE80D0292C7F321000A45249 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -725,6 +741,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE5E64D82C73B3D0009830AD /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		CE80D02A2C7F321000A45249 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE80D0292C7F321000A45249 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

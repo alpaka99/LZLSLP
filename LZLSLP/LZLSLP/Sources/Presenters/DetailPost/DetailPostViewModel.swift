@@ -37,7 +37,6 @@ final class DetailPostViewModel: RxViewModel {
                 owner.store.likedStatus.accept(postData.likes.contains(userId))
             }
             .disposed(by: disposeBag)
-//        
         
         store.fireButtonTapped
             .withLatestFrom(Observable.combineLatest(store.detailPostData, store.likedStatus))
@@ -84,15 +83,12 @@ final class DetailPostViewModel: RxViewModel {
         store.postId
             .flatMap { id in
                 let router = URLRouter.https(.lslp(.post(.getPost(id: id))))
-//                print("URL: ", router.build()?.url?.absoluteString)
                 return self.postRepository.requestPostAPI(of: PostResponse.self, router: router)
-//                return NetworkManager.shared.requestStringResult(router: router, interceptor: PostInterceptor())
             }
             .bind(with: self, onNext: { owner, result in
                 switch result {
                 case .success(let response):
                     owner.store.detailPostData.accept(response)
-//                    print("Success")
                 case .failure(let error):
                     print(error)
                 }
@@ -104,14 +100,12 @@ final class DetailPostViewModel: RxViewModel {
             .withLatestFrom(store.postId)
             .flatMap { id in
                 let router = URLRouter.https(.lslp(.post(.getPost(id: id))))
-//                print("URL: ", router.build()?.url?.absoluteString)
                 return self.postRepository.requestPostAPI(of: PostResponse.self, router: router)
             }
             .bind(with: self, onNext: { owner, result in
                 switch result {
                 case .success(let response):
                     owner.store.detailPostData.accept(response)
-//                    print("Success")
                 case .failure(let error):
                     print(error)
                 }
