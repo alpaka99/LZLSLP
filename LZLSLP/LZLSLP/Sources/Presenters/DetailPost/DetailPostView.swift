@@ -33,12 +33,19 @@ final class DetailPostView: BaseView {
         return textField
     }()
     
+    let commentTableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .systemBlue
+        return tableView
+    }()
+    
     override func configureHierarchy() {
         super.configureHierarchy()
         
         self.addSubview(fireButton)
         self.addSubview(likedUsersLabel)
         self.addSubview(commentTextField)
+        self.addSubview(commentTableView)
     }
     
     override func configureLayout() {
@@ -46,7 +53,7 @@ final class DetailPostView: BaseView {
         
         fireButton.snp.makeConstraints { btn in
             btn.size.equalTo(44)
-            btn.center.equalTo(self.safeAreaLayoutGuide.snp.center)
+            btn.top.equalTo(self.safeAreaLayoutGuide.snp.top)
         }
         
         likedUsersLabel.snp.makeConstraints { label in
@@ -62,6 +69,12 @@ final class DetailPostView: BaseView {
             textField.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
                 .inset(16)
             textField.height.equalTo(44)
+        }
+        
+        commentTableView.snp.makeConstraints { tableView in
+            tableView.top.equalTo(commentTextField.snp.bottom)
+                .offset(16)
+            tableView.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }

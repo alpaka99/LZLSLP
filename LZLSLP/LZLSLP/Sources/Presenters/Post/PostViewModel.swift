@@ -141,6 +141,8 @@ struct PostResponse: Decodable {
         case hashTags
         case comments
     }
+    
+    static var dummyData = Self(postId: "", productId: nil, title: "", content: "", createdAt: "", creator: Creator(userId: "", nick: "", profileImage: nil), files: [], likes: [], likes2: [], buyers: [], hashTags: [], comments: [])
 }
 
 struct Creator: Decodable {

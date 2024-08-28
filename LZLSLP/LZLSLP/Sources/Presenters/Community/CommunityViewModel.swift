@@ -12,7 +12,7 @@ import RxSwift
 
 final class CommunityViewModel: RxViewModel {
     struct Input: Inputable {
-        var viewIsAppearing = PublishSubject<Void>()
+        var viewWillAppear = PublishSubject<Void>()
         var currentPage = BehaviorRelay(value: 0)
         var postResponses = BehaviorRelay(value: [PostResponse]())
         var nextCursor: String = ""
@@ -30,7 +30,7 @@ final class CommunityViewModel: RxViewModel {
     override func configureBind() {
         super.configureBind()
         
-        store.viewIsAppearing
+        store.viewWillAppear
             .flatMap { _ in
                 let nextCursor: String = self.store.nextCursor
                 

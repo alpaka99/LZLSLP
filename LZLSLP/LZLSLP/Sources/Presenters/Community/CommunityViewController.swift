@@ -12,10 +12,10 @@ import RxSwift
 
 final class CommunityViewController: BaseViewController<CommunityView, CommunityViewModel> {
     
-    override func viewIsAppearing(_ animated: Bool) {
-        super.viewIsAppearing(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        viewModel.store.viewIsAppearing.onNext(())
+        viewModel.store.viewWillAppear.onNext(())
     }
     
     override func configureBind() {
@@ -44,7 +44,7 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
             .bind(with: self) { owner, postResponse in
                 
                 let detailPostViewModel = DetailPostViewModel()
-                detailPostViewModel.store.detailPostData.accept(postResponse)
+                detailPostViewModel.store.postId.accept(postResponse.postId)
                 
                 let detailPostViewController = DetailPostViewController(
                     baseView: DetailPostView(),

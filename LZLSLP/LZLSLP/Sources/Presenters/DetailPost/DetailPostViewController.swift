@@ -7,9 +7,16 @@
 
 import UIKit
 
+import RxCocoa
 import RxSwift
 
 final class DetailPostViewController: BaseViewController<DetailPostView, DetailPostViewModel> {
+    
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        baseView.commentTableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+    }
     
     override func configureBind() {
         super.configureBind()
@@ -20,6 +27,20 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
             }
             .bind(to: self.navigationItem.rx.title)
             .disposed(by: disposeBag)
+        
+        viewModel.store.detailPostData
+            .map {
+                print($0.comments)
+                return $0.comments
+            }
+            .bind(to: baseView.commentTableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { row, item ,cell in
+                
+                print("Cell row: \(row)")
+                print("Comment: \(item.content)")
+                cell.textLabel?.text = item.content
+            }
+            .disposed(by: disposeBag)
+        
         
         
         baseView.fireButton.rx.tap
@@ -37,7 +58,5 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
             .withLatestFrom(baseView.commentTextField.rx.text.orEmpty)
             .bind(to: viewModel.store.comment)
             .disposed(by: disposeBag)
-            
-
     }
 }

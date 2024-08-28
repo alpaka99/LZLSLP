@@ -12,13 +12,15 @@ import RxSwift
 
 final class DetailPostViewModel: RxViewModel {
     struct Input: Inputable {
-        var detailPostData = PublishRelay<PostResponse>()
+        var postId = PublishRelay<String>()
         var fireButtonTapped = PublishSubject<Void>()
         var comment = PublishSubject<String>()
+        var loadDetailPostData = PublishSubject<Void>()
     }
     
     struct Output: Outputable {
         var likedStatus = BehaviorRelay(value: false)
+        var detailPostData = BehaviorRelay<PostResponse>(value: PostResponse.dummyData)
     }
     var store = ViewStore(input: Input(), output: Output())
     
@@ -28,13 +30,14 @@ final class DetailPostViewModel: RxViewModel {
         super.configureBind()
         
         store.detailPostData
+            .share()
             .bind(with: self) { owner, postData in
                 guard let userId = UserDefaults.standard.load(of: UserInfo.self)?.userId else { return }
                 
                 owner.store.likedStatus.accept(postData.likes.contains(userId))
             }
             .disposed(by: disposeBag)
-        
+//        
         
         store.fireButtonTapped
             .withLatestFrom(Observable.combineLatest(store.detailPostData, store.likedStatus))
@@ -58,28 +61,62 @@ final class DetailPostViewModel: RxViewModel {
         
         
         Observable
-            .zip(store.detailPostData, store.comment)
+            .zip(store.postId, store.comment)
             .flatMap { value in
-                let postData = value.0
+                let postId = value.0
                 let comment = value.1
-                
-                let router = URLRouter.https(.lslp(.comment(.postComment(id: postData.postId, comment: comment))))
+                let router = URLRouter.https(.lslp(.comment(.postComment(id: postId, comment: comment))))
                 return self.postRepository.requestPostAPI(of: CommentResponse.self, router: router)
             }
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let response):
                     print("Comment response: \(response)")
+                    owner.store.loadDetailPostData.onNext(())
                 case .failure(let error):
                     print("Comment error: \(error)")
                 }
             }
             .disposed(by: disposeBag)
-//            .flatMap {
-//                let comment = $0
-//                let router = URLRouter.https(.lslp(.comment(.postComment(id: <#T##String#>, comment: <#T##String#>))))
-//                
-//            }
+        
+        
+        // initial load DetailPost Data
+        store.postId
+            .flatMap { id in
+                let router = URLRouter.https(.lslp(.post(.getPost(id: id))))
+//                print("URL: ", router.build()?.url?.absoluteString)
+                return self.postRepository.requestPostAPI(of: PostResponse.self, router: router)
+//                return NetworkManager.shared.requestStringResult(router: router, interceptor: PostInterceptor())
+            }
+            .bind(with: self, onNext: { owner, result in
+                switch result {
+                case .success(let response):
+                    owner.store.detailPostData.accept(response)
+//                    print("Success")
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        
+        store.loadDetailPostData
+            .withLatestFrom(store.postId)
+            .flatMap { id in
+                let router = URLRouter.https(.lslp(.post(.getPost(id: id))))
+//                print("URL: ", router.build()?.url?.absoluteString)
+                return self.postRepository.requestPostAPI(of: PostResponse.self, router: router)
+            }
+            .bind(with: self, onNext: { owner, result in
+                switch result {
+                case .success(let response):
+                    owner.store.detailPostData.accept(response)
+//                    print("Success")
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
