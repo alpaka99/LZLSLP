@@ -12,7 +12,7 @@ import RxSwift
 
 final class CommunityViewModel: RxViewModel {
     struct Input: Inputable {
-        var viewIsAppearing = PublishSubject<Void>()
+//        var viewWillAppear = PublishSubject<Void>()
         var currentPage = BehaviorRelay(value: 0)
         var postResponses = BehaviorRelay(value: [PostResponse]())
         var nextCursor: String = ""
@@ -30,24 +30,24 @@ final class CommunityViewModel: RxViewModel {
     override func configureBind() {
         super.configureBind()
         
-        store.viewIsAppearing
-            .flatMap { _ in
-                let nextCursor: String = self.store.nextCursor
-                
-                let router = URLRouter.https(.lslp(.post(.getPosts(nextCursor: nextCursor, limit: 8, productId: "gasoline_post"))))
-                
-                return self.repository.requestPostAPI(of: GetPostResponse.self, router: router)
-            }
-            .bind(with: self) { owner, result in
-                switch result {
-                case .success(let response):
-                    owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
-                    owner.store.postResponses.accept(response.data)
-                case .failure(let error):
-                    break
-                }
-            }
-            .disposed(by: disposeBag)
+//        store.viewWillAppear
+//            .flatMap { _ in
+//                let nextCursor: String = self.store.nextCursor
+//                
+//                let router = URLRouter.https(.lslp(.post(.getPosts(nextCursor: nextCursor, limit: 8, productId: "gasoline_post"))))
+//                
+//                return self.repository.requestPostAPI(of: GetPostResponse.self, router: router)
+//            }
+//            .bind(with: self) { owner, result in
+//                switch result {
+//                case .success(let response):
+//                    owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
+//                    owner.store.postResponses.accept(response.data)
+//                case .failure(let error):
+//                    break
+//                }
+//            }
+//            .disposed(by: disposeBag)
         
         store.prefetchTriggered
             .filter {
@@ -62,17 +62,18 @@ final class CommunityViewModel: RxViewModel {
                 return self.repository.requestPostAPI(of: GetPostResponse.self, router: router)
             }            
             .bind(with: self) { owner, result in
-                switch result {
+                switch result { // MARK: 만약 cursor의 마지막 데이터의 날짜가 오늘 날짜가 아니라면 nextCursor를 "0"으로 바꿈, REfresh시ㅣ cursor를 ""으로 바꿈
                 case .success(let response):
                     owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
                     print("DateCOunt: \(response.data.count)")
                     var data = owner.store.postResponses.value
-//                    var newData = response.data
                     let newData = response.data.filter {
-                        let formatter = ConstDateFormatter.formatter // MARK: Constant로 분리
+                        let formatter = ConstDateFormatter.formatter
                         formatter.dateFormat = ConstDateFormatter.iso8601format
                         if let date = formatter.date(from: $0.createdAt) {
-                            return Calendar.current.isDateInToday(date)
+                            print("\(date) is in sameMonth in today: \(Calendar.current.isDate(date, inSameDayAs: Date.now))")
+//                            return Calendar.current.isDate(date, inSameDayAs: Date.now)
+                            return true
                         } else {
                             print("Date Error")
                             return false

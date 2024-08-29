@@ -12,10 +12,12 @@ import RxSwift
 
 final class CommunityViewController: BaseViewController<CommunityView, CommunityViewModel> {
     
-    override func viewIsAppearing(_ animated: Bool) {
-        super.viewIsAppearing(animated)
+    // MARK: ViewDidLoad로 수정하고 tableView에 refresh 로직 구현
+    // MARK: Pagenation 오류 수정
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        viewModel.store.viewIsAppearing.onNext(())
+        viewModel.store.prefetchTriggered.onNext(())
     }
     
     override func configureBind() {
@@ -24,7 +26,6 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         viewModel.store.postResponses
             .bind(to: baseView.tableView.rx.items(cellIdentifier: "UITableViewCell")) { row, item, cell in
                 
-//                cell.textLabel?.text = "\(item.title): \(item.createdAt)"
                 cell.textLabel?.text = item.createdAt
             }
             .disposed(by: disposeBag)
@@ -40,13 +41,27 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
             }
             .disposed(by: disposeBag)
             
+        
+        baseView.tableView.rx.modelSelected(PostResponse.self)
+            .bind(with: self) { owner, postResponse in
+                
+                let detailPostViewModel = DetailPostViewModel()
+                detailPostViewModel.store.postId.accept(postResponse.postId)
+                
+                let detailPostViewController = DetailPostViewController(
+                    baseView: DetailPostView(),
+                    viewModel: detailPostViewModel
+                )
+                
+                owner.navigationController?.pushViewController(detailPostViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureDelegate() {
         super.configureDelegate()
         
         baseView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-//        baseView.tableView.prefetchDataSource = self
     }
     
     override func configureNavigationItem() {
@@ -55,9 +70,3 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         navigationItem.title = "Community View"
     }
 }
-//
-//extension CommunityViewController: UITableViewDataSourcePrefetching {
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        print(indexPaths)
-//    }
-//}
