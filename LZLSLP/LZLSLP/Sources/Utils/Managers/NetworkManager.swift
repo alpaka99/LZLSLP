@@ -39,7 +39,7 @@ final class NetworkManager {
 //                    .responseString { result in
 //                        switch result.result {
 //                        case .success(let str):
-//                            print(str)
+//                            dump(str)
 //                        case .failure(let error):
 //                            print(error)
 //                        }
@@ -72,6 +72,27 @@ final class NetworkManager {
                     }
                 }
                 
+            } else {
+                observer(.failure(NetworkError.urlRequestCreateError))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func requestStringResult(router: Router, interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
+        Single.create { observer in
+            if let urlRequest = router.build() {
+                AF.request(urlRequest, interceptor: interceptor)
+                    .validate(statusCode: 200..<300)
+                    .responseString { result in
+                        switch result.result {
+                        case .success(let str):
+                            dump(str)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))
             }

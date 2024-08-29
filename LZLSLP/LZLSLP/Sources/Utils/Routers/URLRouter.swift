@@ -326,8 +326,8 @@ enum LSLPRequest: Pathable {
                 return "/posts"
             case .getPosts(let next, let limit, let productId):
                 return "/posts?next=\(next)&limit=\(limit)&product_id=\(productId)"
-            case .getPost:
-                return "/posts/"
+            case .getPost(let postId):
+                return "/posts/\(postId)"
             case .updatePost:
                 return "/posts/"
             case .deletePost:
@@ -385,14 +385,14 @@ enum LSLPRequest: Pathable {
     }
     
     enum CommentType: Endpoitable {
-        case postComment
+        case postComment(id: String, comment: String)
         case updateComment
         case deleteComment
         
         var endpoint: String {
             switch self {
-            case .postComment:
-                return "/posts/:id/comments"
+            case .postComment(let id, _):
+                return "/posts/\(id)/comments"
             case .updateComment:
                 return "/posts/:id/comments/:commentID"
             case .deleteComment:
@@ -413,22 +413,32 @@ enum LSLPRequest: Pathable {
         
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
+            headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+            headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
+
             return headerPayload
         }
         
         var parameters: [String : Any] {
-            return [:]
+            switch self {
+            case .postComment(_, let comment):
+                return [
+                    "content" : comment
+                    ]
+            default:
+                return [:]
+            }
         }
     }
     
     enum LikeType: Endpoitable {
-        case likePost
+        case likePost(String, Bool)
         case getLike
         
         var endpoint: String {
             switch self {
-            case .likePost:
-                return "/posts/:id/like"
+            case .likePost(let postId, _):
+                return "/posts/\(postId)/like"
             case .getLike:
                 return "/posts/likes/me"
             }
@@ -444,14 +454,22 @@ enum LSLPRequest: Pathable {
         }
         
         var httpHeaders: [String : String] {
-            switch self {
-            default:
-                return [:]
-            }
+            var headerPayload: [String : String] = [:]
+            headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+            headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
+
+            return headerPayload
         }
         
         var parameters: [String : Any] {
-            return [:]
+            switch self {
+            case .likePost(_, let likedStatus):
+                return [
+                    "like_status" : likedStatus
+                ]
+            default:
+                return [:]
+            }
         }
     }
     
