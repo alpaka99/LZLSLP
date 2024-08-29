@@ -14,10 +14,10 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
     
     // MARK: ViewDidLoad로 수정하고 tableView에 refresh 로직 구현
     // MARK: Pagenation 오류 수정
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        viewModel.store.viewWillAppear.onNext(())
+        viewModel.store.prefetchTriggered.onNext(())
     }
     
     override func configureBind() {

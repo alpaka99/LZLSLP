@@ -31,7 +31,6 @@ final class DetailPostView: BaseView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textAlignment = .left
-        label.backgroundColor = . systemBlue
         return label
     }()
     
