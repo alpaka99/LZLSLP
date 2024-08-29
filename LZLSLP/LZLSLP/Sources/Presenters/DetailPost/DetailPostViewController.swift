@@ -16,7 +16,7 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
         super.configureDelegate()
         
         baseView.commentTableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-        baseView.imageCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        baseView.imageCollectionView.register(TempImageCell.self, forCellWithReuseIdentifier: "TempImageCell")
     }
     
     override func configureBind() {
@@ -69,11 +69,42 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
         
         viewModel.store.loadedImages
             .debug("DetailViewController")
-            .bind(to: baseView.imageCollectionView.rx.items(cellIdentifier: "UICollectionViewCell", cellType: UICollectionViewCell.self)) { row, item, cell in
+            .bind(to: baseView.imageCollectionView.rx.items(cellIdentifier: "TempImageCell", cellType: TempImageCell.self)) { row, data, cell in
                 
-                print("\(row)번째 Cell")
-                cell.largeContentImage = UIImage(data: item)
+                let image = UIImage(data: data)
+                
+                
+                
+                cell.imageView.image = image
             }
             .disposed(by: disposeBag)
+            
     }
+}
+
+final class TempImageCell: UICollectionViewCell {
+    let imageView = {
+        let view = UIImageView()
+        return view
+    }()
+    
+    override init(frame: CGRect) {
+           super.init(frame: frame)
+           setImageView()
+       }
+
+       required init?(coder aDecoder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+       }
+
+
+       func setImageView(){
+           backgroundColor = .systemGroupedBackground
+           
+           addSubview(imageView)
+           
+           imageView.snp.makeConstraints {
+               $0.edges.equalTo(self)
+           }
+       }
 }
