@@ -16,6 +16,7 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
         super.configureDelegate()
         
         baseView.commentTableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        baseView.imageCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
     }
     
     override func configureBind() {
@@ -37,13 +38,7 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: IndexPath(row: row, section: 0))
                 cell.textLabel?.text = data.content
                 return cell
-//                    print(item.content)
-//                    cell.textLabel?.text = item.content
                 }
-//            .bind(to: baseView.commentTableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { row, item ,cell in
-//                print(item.content)
-//                cell.textLabel?.text = item.content
-//            }
             .disposed(by: disposeBag)
         
         viewModel.store.detailPostData
@@ -69,6 +64,16 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
             .withLatestFrom(baseView.commentTextField.rx.text.orEmpty)
             .asDriver(onErrorJustReturn: "")
             .drive(viewModel.store.comment)
+            .disposed(by: disposeBag)
+        
+        
+        viewModel.store.loadedImages
+            .debug("DetailViewController")
+            .bind(to: baseView.imageCollectionView.rx.items(cellIdentifier: "UICollectionViewCell", cellType: UICollectionViewCell.self)) { row, item, cell in
+                
+                print("\(row)번째 Cell")
+                cell.largeContentImage = UIImage(data: item)
+            }
             .disposed(by: disposeBag)
     }
 }

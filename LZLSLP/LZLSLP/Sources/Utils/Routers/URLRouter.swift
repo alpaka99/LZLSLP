@@ -137,6 +137,7 @@ enum LSLPRequest: Pathable {
     case follow(FollowType)
     case profile(ProfileType)
     case hashtag(HashtagType)
+    case image(ImageType)
     
     var baseURL: String {
         return "naver.com"
@@ -164,6 +165,8 @@ enum LSLPRequest: Pathable {
             return endpoint.endpoint
         case .hashtag(let endpoint):
             return endpoint.endpoint
+        case .image(let endpoint):
+            return endpoint.endpoint
         }
     }
     
@@ -184,6 +187,8 @@ enum LSLPRequest: Pathable {
         case .post(let endpoint):
             return endpoint.httpMethod.rawValue
         case .comment(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .image(let endpoint):
             return endpoint.httpMethod.rawValue
         }
     }
@@ -206,6 +211,8 @@ enum LSLPRequest: Pathable {
             return endpoint.httpHeaders
         case .comment(let endpoint):
             return endpoint.httpHeaders
+        case .image(let endpoint):
+            return endpoint.httpHeaders
         }
     }
     
@@ -227,6 +234,8 @@ enum LSLPRequest: Pathable {
         case .post(let endpoint):
             return endpoint.parameters
         case .comment(let endpoint):
+            return endpoint.parameters
+        case .image(let endpoint):
             return endpoint.parameters
         }
     }
@@ -566,6 +575,9 @@ enum LSLPRequest: Pathable {
         
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
+            headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+            headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
+
             return headerPayload
         }
         
@@ -593,6 +605,34 @@ enum LSLPRequest: Pathable {
         
         var httpHeaders: [String : String] {
             var headerPayload: [String : String] = [:]
+            return headerPayload
+        }
+        
+        var parameters: [String : Any] {
+            return [:]
+        }
+    }
+    
+    enum ImageType: Endpoitable {
+        case image(String)
+        
+        var endpoint: String {
+            switch self {
+            case .image(let imageURL):
+                return "/\(imageURL)"
+            }
+        }
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .image:
+                return .get
+            }
+        }
+        var httpHeaders: [String : String] { 
+            var headerPayload: [String : String] = [:]
+            headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+            headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
+
             return headerPayload
         }
         

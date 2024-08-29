@@ -21,21 +21,15 @@ final class DetailPostViewModel: RxViewModel {
     struct Output: Outputable {
         var likedStatus = BehaviorRelay(value: false)
         var detailPostData = BehaviorRelay<PostResponse>(value: PostResponse.dummyData)
+        var loadedImages = BehaviorSubject<[Data]>(value: [])
     }
     var store = ViewStore(input: Input(), output: Output())
     
     let postRepository = PostRepository()
+    let imageRepository = ImageRepository()
     
     override func configureBind() {
         super.configureBind()
-        
-        store.detailPostData
-            .share()
-            .bind(with: self) { owner, postData in
-                guard let userId = UserDefaults.standard.load(of: UserInfo.self)?.userId else { return }
-                owner.store.likedStatus.accept(postData.likes.contains(userId))
-            }
-            .disposed(by: disposeBag)
         
         store.fireButtonTapped
             .withLatestFrom(Observable.combineLatest(store.detailPostData, store.likedStatus))
@@ -108,6 +102,59 @@ final class DetailPostViewModel: RxViewModel {
                     print(error)
                 }
             })
+            .disposed(by: disposeBag)
+        
+        store.detailPostData
+            .share()
+            .bind(with: self) { owner, postData in
+                guard let userId = UserDefaults.standard.load(of: UserInfo.self)?.userId else { return }
+                owner.store.likedStatus.accept(postData.likes.contains(userId))
+            }
+            .disposed(by: disposeBag)
+        
+
+        store.detailPostData
+            .flatMap {
+                Observable.of($0.files)
+            }
+            .map {
+                let tmep = $0
+            }
+
+        
+        store.detailPostData
+            .flatMap {
+                Driver.from($0.files)
+            }
+            .concatMap { fileURL in
+                let router = URLRouter.https(.lslp(.image(.image(fileURL))))
+                print("url", router.build()?.url?.absoluteString)
+                return self.imageRepository.loadImageData(router: router)
+            }
+            .map { result in
+                switch result {
+                case .success(let data):
+                    return data
+                case .failure(let error):
+                    print(error)
+                    return Data()
+                }
+            }
+            .buffer(timeSpan: .milliseconds(500), count: 100, scheduler: MainScheduler.instance)
+            .flatMap {[weak self] value in
+                return Observable<[Data]>.create { observer in
+                    if let store = self?.store {
+                        let fileCount = store.detailPostData.value.files.count
+                        if value.count == fileCount {
+                            observer.onNext(value)
+                        }
+                    }
+                    
+                    return Disposables.create()
+                }
+            }
+//            .toArray() // MARK: 이게 onCompleted되어서 문제 -> Stream을 폐기 -> 그렇다면 drive해주면 되지 않은가? -> Buffer로 해결
+            .bind(to: store.loadedImages)
             .disposed(by: disposeBag)
     }
 }

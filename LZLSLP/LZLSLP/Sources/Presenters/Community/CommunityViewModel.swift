@@ -65,13 +65,13 @@ final class CommunityViewModel: RxViewModel {
                 switch result { // MARK: 만약 cursor의 마지막 데이터의 날짜가 오늘 날짜가 아니라면 nextCursor를 "0"으로 바꿈, REfresh시ㅣ cursor를 ""으로 바꿈
                 case .success(let response):
                     owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
-                    print("DateCOunt: \(response.data.count)")
+//                    print("DateCOunt: \(response.data.count)")
                     var data = owner.store.postResponses.value
                     let newData = response.data.filter {
                         let formatter = ConstDateFormatter.formatter
                         formatter.dateFormat = ConstDateFormatter.iso8601format
                         if let date = formatter.date(from: $0.createdAt) {
-                            print("\(date) is in sameMonth in today: \(Calendar.current.isDate(date, inSameDayAs: Date.now))")
+//                            print("\(date) is in sameMonth in today: \(Calendar.current.isDate(date, inSameDayAs: Date.now))")
 //                            return Calendar.current.isDate(date, inSameDayAs: Date.now)
                             return true
                         } else {
@@ -79,7 +79,6 @@ final class CommunityViewModel: RxViewModel {
                             return false
                         }
                     }
-                    print("newData: \(newData)")
                     data.append(contentsOf: newData)
                     owner.store.postResponses.accept(data)
                 case .failure(let error):

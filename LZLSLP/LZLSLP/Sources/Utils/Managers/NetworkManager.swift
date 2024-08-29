@@ -52,12 +52,12 @@ final class NetworkManager {
         }
     }
     
-    func requestDataCall(router: URLRouter, dataArray: [Uploadable], interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
+    func uploadDataCall(router: URLRouter, dataArray: [Uploadable], interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
         return Single.create { observer in
             if let urlRequest = router.build() {
                 // files라는 parameter 이름으로 이미지 파일들을 올려버림
                 AF.upload(multipartFormData: { multipartFormData in
-                    dataArray.forEach { data in
+                    for data in dataArray {
                         multipartFormData.append(data.data, withName: "files", fileName: data.dataName, mimeType: "image/png")
                     }
                 }, with: urlRequest, interceptor: interceptor)
