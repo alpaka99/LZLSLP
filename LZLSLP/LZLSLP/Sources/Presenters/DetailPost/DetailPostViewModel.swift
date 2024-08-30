@@ -21,21 +21,15 @@ final class DetailPostViewModel: RxViewModel {
     struct Output: Outputable {
         var likedStatus = BehaviorRelay(value: false)
         var detailPostData = BehaviorRelay<PostResponse>(value: PostResponse.dummyData)
+        var loadedImages = BehaviorSubject<[Data]>(value: [])
     }
     var store = ViewStore(input: Input(), output: Output())
     
     let postRepository = PostRepository()
+    let imageRepository = ImageRepository()
     
     override func configureBind() {
         super.configureBind()
-        
-        store.detailPostData
-            .share()
-            .bind(with: self) { owner, postData in
-                guard let userId = UserDefaults.standard.load(of: UserInfo.self)?.userId else { return }
-                owner.store.likedStatus.accept(postData.likes.contains(userId))
-            }
-            .disposed(by: disposeBag)
         
         store.fireButtonTapped
             .withLatestFrom(Observable.combineLatest(store.detailPostData, store.likedStatus))
@@ -109,6 +103,32 @@ final class DetailPostViewModel: RxViewModel {
                 }
             })
             .disposed(by: disposeBag)
+        
+        store.detailPostData
+            .share()
+            .bind(with: self) { owner, postData in
+                guard let userId = UserDefaults.standard.load(of: UserInfo.self)?.userId else { return }
+                owner.store.likedStatus.accept(postData.likes.contains(userId))
+            }
+            .disposed(by: disposeBag)
+        
+
+        
+        // image loading sequence
+        store.detailPostData
+            .flatMap {
+                self.imageRepository.loadImageData(fileURLS: $0.files)
+            }
+            .bind(with: self, onNext: { owner, result in
+                switch result {
+                case .success(let imageArray):
+                    owner.store.loadedImages.onNext(imageArray)
+                case .failure(let error):
+                    print(error)
+                }
+            })
+            .disposed(by: disposeBag)
+        
     }
 }
 

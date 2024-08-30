@@ -24,6 +24,8 @@ final class DetailPostView: BaseView {
     
     let imageCollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.createFlowLayout(numberOfRowsInLine: 1, spacing: 10, heightMultiplier: 1))
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -89,7 +91,9 @@ final class DetailPostView: BaseView {
         imageCollectionView.snp.makeConstraints { collectionView in
             collectionView.top.equalTo(contentView)
                 .offset(16)
-            collectionView.centerX.equalTo(contentView)
+
+            collectionView.horizontalEdges.equalTo(contentView)
+            collectionView.height.equalTo(self.safeAreaLayoutGuide.snp.width)
         }
         
         contentLabel.snp.makeConstraints { label in
@@ -155,6 +159,8 @@ extension UICollectionViewLayout {
             width: length,
             height: length * heightMultiplier
         )
+        
+        print("itemSize", flowLayout.itemSize)
         
         return flowLayout
     }

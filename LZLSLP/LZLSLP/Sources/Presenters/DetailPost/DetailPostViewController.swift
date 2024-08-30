@@ -16,6 +16,7 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
         super.configureDelegate()
         
         baseView.commentTableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        baseView.imageCollectionView.register(TempImageCell.self, forCellWithReuseIdentifier: "TempImageCell")
     }
     
     override func configureBind() {
@@ -37,13 +38,7 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: IndexPath(row: row, section: 0))
                 cell.textLabel?.text = data.content
                 return cell
-//                    print(item.content)
-//                    cell.textLabel?.text = item.content
                 }
-//            .bind(to: baseView.commentTableView.rx.items(cellIdentifier: "UITableViewCell", cellType: UITableViewCell.self)) { row, item ,cell in
-//                print(item.content)
-//                cell.textLabel?.text = item.content
-//            }
             .disposed(by: disposeBag)
         
         viewModel.store.detailPostData
@@ -70,5 +65,46 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
             .asDriver(onErrorJustReturn: "")
             .drive(viewModel.store.comment)
             .disposed(by: disposeBag)
+        
+        
+        viewModel.store.loadedImages
+            .debug("DetailViewController")
+            .bind(to: baseView.imageCollectionView.rx.items(cellIdentifier: "TempImageCell", cellType: TempImageCell.self)) { row, data, cell in
+                
+                let image = UIImage(data: data)
+                
+                
+                
+                cell.imageView.image = image
+            }
+            .disposed(by: disposeBag)
+            
     }
+}
+
+final class TempImageCell: UICollectionViewCell {
+    let imageView = {
+        let view = UIImageView()
+        return view
+    }()
+    
+    override init(frame: CGRect) {
+           super.init(frame: frame)
+           setImageView()
+       }
+
+       required init?(coder aDecoder: NSCoder) {
+           fatalError("init(coder:) has not been implemented")
+       }
+
+
+       func setImageView(){
+           backgroundColor = .systemGroupedBackground
+           
+           addSubview(imageView)
+           
+           imageView.snp.makeConstraints {
+               $0.edges.equalTo(self)
+           }
+       }
 }
