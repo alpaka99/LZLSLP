@@ -10,15 +10,28 @@ import UIKit
 import SnapKit
 
 final class LoginView: BaseView {
+    let background = {
+        let view = UIView()
+        view.backgroundColor = .lightGray.withAlphaComponent(0.15)
+        return view
+    }()
+    
     let emailTextField = {
         let textField = UITextField()
         textField.placeholder = "이메일을 입력해주세요"
+        textField.layer.borderColor = UIColor.darkGray.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 8
         return textField
     }()
     
     let passwordTextField = {
         let textField = UITextField()
         textField.placeholder = "비밀번호를 입력해주세요"
+        textField.layer.borderColor = UIColor.darkGray.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 8
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -40,8 +53,9 @@ final class LoginView: BaseView {
     let submitButton = {
         let button = UIButton.Configuration.plain()
             .title("로그인")
-            .foregroundColor(.white)
-            .backgroundColor(.systemBlue)
+            .font(ofSize: 24, weight: .bold)
+            .foregroundColor(.systemRed)
+            .backgroundColor(.black)
             .cornerStyle(.capsule)
             .build()
         
@@ -51,7 +65,7 @@ final class LoginView: BaseView {
     let signUpButton = {
         let button = UIButton.Configuration.plain()
             .title("아직 회원이 아니신가요?")
-            .foregroundColor(.systemBlue)
+            .foregroundColor(.systemRed)
             .build()
         
         return button
@@ -59,6 +73,8 @@ final class LoginView: BaseView {
     
     override func configureHierarchy() {
         super.configureHierarchy()
+        
+        self.addSubview(background)
         
         self.addSubview(textFieldStack)
         self.addSubview(submitButton)
@@ -68,14 +84,32 @@ final class LoginView: BaseView {
     override func configureLayout() {
         super.configureLayout()
         
-        textFieldStack.snp.makeConstraints { textField in
-            textField.center.equalTo(self.safeAreaLayoutGuide)
+        background.snp.makeConstraints { view in
+            view.edges.equalTo(self)
+        }
+        
+        emailTextField.snp.makeConstraints { textField in
+            textField.height.equalTo(50)
+            textField.horizontalEdges.equalTo(textFieldStack.snp.horizontalEdges)
+        }
+        
+        passwordTextField.snp.makeConstraints { textField in
+            textField.height.equalTo(50)
+            textField.horizontalEdges.equalTo(textFieldStack.snp.horizontalEdges)
+        }
+        
+        textFieldStack.snp.makeConstraints { stack in
+            stack.center.equalTo(self.safeAreaLayoutGuide)
+            stack.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+                .inset(40)
         }
         
         submitButton.snp.makeConstraints { btn in
             btn.top.equalTo(textFieldStack.snp.bottom)
                 .offset(20)
             btn.centerX.equalTo(self.safeAreaLayoutGuide)
+            
+            btn.horizontalEdges.equalTo(textFieldStack.snp.horizontalEdges)
         }
         
         signUpButton.snp.makeConstraints { btn in

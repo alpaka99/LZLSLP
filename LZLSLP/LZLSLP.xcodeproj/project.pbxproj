@@ -55,6 +55,8 @@
 		CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AF2C820AA6000656E0 /* TabBarController.swift */; };
 		CE91E4B32C8226E3000656E0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE91E4B22C8226E3000656E0 /* Lottie */; };
 		CE91E4B62C822889000656E0 /* gasoline_launch.json in Resources */ = {isa = PBXBuildFile; fileRef = CE91E4B52C822889000656E0 /* gasoline_launch.json */; };
+		CE91E4BA2C822D32000656E0 /* gasoline_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CE91E4B92C822D32000656E0 /* gasoline_loading.json */; };
+		CE91E4BC2C8234BF000656E0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4BB2C8234BF000656E0 /* Color.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -108,6 +110,8 @@
 		CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		CE91E4AF2C820AA6000656E0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CE91E4B52C822889000656E0 /* gasoline_launch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasoline_launch.json; sourceTree = "<group>"; };
+		CE91E4B92C822D32000656E0 /* gasoline_loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasoline_loading.json; sourceTree = "<group>"; };
+		CE91E4BB2C8234BF000656E0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 			children = (
 				CE80D0082C7C88D900A45249 /* DateFormatter.swift */,
 				CE80D02C2C7F331200A45249 /* ScreenSize.swift */,
+				CE91E4BB2C8234BF000656E0 /* Color.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -364,6 +369,7 @@
 		CE91E4B42C8226F4000656E0 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4B92C822D32000656E0 /* gasoline_loading.json */,
 				CE91E4B52C822889000656E0 /* gasoline_launch.json */,
 			);
 			path = Lottie;
@@ -461,6 +467,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE91E4BA2C822D32000656E0 /* gasoline_loading.json in Resources */,
 				CE5E647F2C6DE215009830AD /* Assets.xcassets in Resources */,
 				CE5E64822C6DE215009830AD /* Base in Resources */,
 				CE91E4B62C822889000656E0 /* gasoline_launch.json in Resources */,
@@ -482,6 +489,7 @@
 				CE5E64AB2C70C2FD009830AD /* AuthRepository.swift in Sources */,
 				CEE75B6F2C7B3F5200FC61E6 /* CommunityViewModel.swift in Sources */,
 				CE5E64A12C6DF1B3009830AD /* UIButton+.swift in Sources */,
+				CE91E4BC2C8234BF000656E0 /* Color.swift in Sources */,
 				CE80D0382C805CDD00A45249 /* ImageRepository.swift in Sources */,
 				CE5E64A92C70BA26009830AD /* NetworkManager.swift in Sources */,
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
