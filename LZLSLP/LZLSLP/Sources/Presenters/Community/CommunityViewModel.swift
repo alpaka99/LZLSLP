@@ -12,15 +12,14 @@ import RxSwift
 
 final class CommunityViewModel: RxViewModel {
     struct Input: Inputable {
-//        var viewWillAppear = PublishSubject<Void>()
-        var currentPage = BehaviorRelay(value: 0)
         var postResponses = BehaviorRelay(value: [PostResponse]())
         var nextCursor: String = ""
         var prefetchTriggered = PublishSubject<Void>()
+        var refreshTriggered = PublishSubject<Void>()
     }
     
     struct Output: Outputable {
-        
+        var isRefreshing = BehaviorSubject(value: false)
     }
     
     let repository = PostRepository()
@@ -29,25 +28,6 @@ final class CommunityViewModel: RxViewModel {
     
     override func configureBind() {
         super.configureBind()
-        
-//        store.viewWillAppear
-//            .flatMap { _ in
-//                let nextCursor: String = self.store.nextCursor
-//                
-//                let router = URLRouter.https(.lslp(.post(.getPosts(nextCursor: nextCursor, limit: 8, productId: "gasoline_post"))))
-//                
-//                return self.repository.requestPostAPI(of: GetPostResponse.self, router: router)
-//            }
-//            .bind(with: self) { owner, result in
-//                switch result {
-//                case .success(let response):
-//                    owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
-//                    owner.store.postResponses.accept(response.data)
-//                case .failure(let error):
-//                    break
-//                }
-//            }
-//            .disposed(by: disposeBag)
         
         store.prefetchTriggered
             .filter {
@@ -65,7 +45,6 @@ final class CommunityViewModel: RxViewModel {
                 switch result { // MARK: 만약 cursor의 마지막 데이터의 날짜가 오늘 날짜가 아니라면 nextCursor를 "0"으로 바꿈, REfresh시ㅣ cursor를 ""으로 바꿈
                 case .success(let response):
                     owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
-//                    print("DateCOunt: \(response.data.count)")
                     var data = owner.store.postResponses.value
                     let newData = response.data.filter {
                         let formatter = ConstDateFormatter.formatter
@@ -81,14 +60,21 @@ final class CommunityViewModel: RxViewModel {
                     }
                     data.append(contentsOf: newData)
                     owner.store.postResponses.accept(data)
+                    owner.store.isRefreshing.onNext(false)
                 case .failure(let error):
                     print(error)
                 }
             }
             .disposed(by: disposeBag)
+        
+        store.refreshTriggered
+            .bind(with: self) { owner, _ in
+                owner.store.reduce(owner.store.nextCursor, into: "")
+                owner.store.postResponses.accept([])
+                owner.store.prefetchTriggered.onNext(())
+            }
+            .disposed(by: disposeBag)
     }
-    
-    
 }
 
 struct GetPostResponse: Decodable {

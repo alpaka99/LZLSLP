@@ -10,10 +10,17 @@ import UIKit
 import SnapKit
 
 final class CommunityView: BaseView {
-    let tableView = {
+    lazy var tableView = {
         let tableView = UITableView()
         tableView.rowHeight = 80
+        tableView.refreshControl = refreshControl
         return tableView
+    }()
+    
+    let refreshControl = {
+        let control = UIRefreshControl()
+        control.endRefreshing()
+        return control
     }()
     
     override func configureHierarchy() {

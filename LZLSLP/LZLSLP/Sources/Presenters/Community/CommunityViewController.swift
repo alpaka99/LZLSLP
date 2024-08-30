@@ -13,7 +13,7 @@ import RxSwift
 final class CommunityViewController: BaseViewController<CommunityView, CommunityViewModel> {
     
     // MARK: ViewDidLoad로 수정하고 tableView에 refresh 로직 구현
-    // MARK: Pagenation 오류 수정
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,6 +55,15 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
                 
                 owner.navigationController?.pushViewController(detailPostViewController, animated: true)
             }
+            .disposed(by: disposeBag)
+        
+        viewModel.store.isRefreshing
+            .bind(to: baseView.refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        baseView.refreshControl.rx.controlEvent(.valueChanged)
+            .share()
+            .bind(to: viewModel.store.refreshTriggered)
             .disposed(by: disposeBag)
     }
     
