@@ -12,31 +12,36 @@ import RxSwift
 
 final class ImageRepository {
     let disposeBag = DisposeBag()
-    func loadImageData(router: Router) -> Single<Result<Data, Error>> {
-        return Single.create { observer in
+    
+    func loadImageData(fileURLS: [String]) -> Single<Result<[Data], Error>> {
+        return Single.create {[weak self] observer in
             
-            NetworkManager.shared.requestCall(router: router, interceptor: AuthInterceptor())
-                .subscribe(with: self) { owner, result in
-                    switch result {
-                    case .success(let data):
-                        observer(.success(.success(data)))
-                    case .failure(let error):
-                        observer(.failure(error))
-                    }
+            guard let repository = self else { return Disposables.create() }
+            
+            Observable.from(fileURLS)
+            .concatMap { fileURL in
+                let router = URLRouter.https(.lslp(.image(.image(fileURL))))
+                return NetworkManager.shared.requestCall(router: router, interceptor: AuthInterceptor())
+            }
+            .map { result in
+                switch result {
+                case .success(let data):
+                    return data
+                case .failure(let error):
+                    return Data()
                 }
-                .disposed(by: self.disposeBag)
+            }
+            .buffer(timeSpan: .milliseconds(500), count: 100, scheduler: MainScheduler.asyncInstance)
+            .bind(with: repository) { owner, dataArray in
+                if dataArray.count == fileURLS.count {
+                    observer(.success(.success(dataArray)))
+                }
+            }
+            .disposed(by: repository.disposeBag)
+            
             
             return Disposables.create()
         }
     }
     
-    func loadThumbnailImageData(_ images: [String]) -> Data {
-        if let thumbnailURL = images.first {
-            let router = URLRouter.https(.lslp(.image(.image(thumbnailURL))))
-            
-            return Data()
-        } else {
-            return Data()
-        }
-    }
 }

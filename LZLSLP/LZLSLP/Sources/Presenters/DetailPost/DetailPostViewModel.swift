@@ -113,49 +113,22 @@ final class DetailPostViewModel: RxViewModel {
             .disposed(by: disposeBag)
         
 
-        store.detailPostData
-            .flatMap {
-                Observable.of($0.files)
-            }
-            .map {
-                let tmep = $0
-            }
-
         
+        // image loading sequence
         store.detailPostData
             .flatMap {
-                Driver.from($0.files)
+                self.imageRepository.loadImageData(fileURLS: $0.files)
             }
-            .concatMap { fileURL in
-                let router = URLRouter.https(.lslp(.image(.image(fileURL))))
-                print("url", router.build()?.url?.absoluteString)
-                return self.imageRepository.loadImageData(router: router)
-            }
-            .map { result in
+            .bind(with: self, onNext: { owner, result in
                 switch result {
-                case .success(let data):
-                    return data
+                case .success(let imageArray):
+                    owner.store.loadedImages.onNext(imageArray)
                 case .failure(let error):
                     print(error)
-                    return Data()
                 }
-            }
-            .buffer(timeSpan: .milliseconds(500), count: 100, scheduler: MainScheduler.instance)
-            .flatMap {[weak self] value in
-                return Observable<[Data]>.create { observer in
-                    if let store = self?.store {
-                        let fileCount = store.detailPostData.value.files.count
-                        if value.count == fileCount {
-                            observer.onNext(value)
-                        }
-                    }
-                    
-                    return Disposables.create()
-                }
-            }
-//            .toArray() // MARK: 이게 onCompleted되어서 문제 -> Stream을 폐기 -> 그렇다면 drive해주면 되지 않은가? -> Buffer로 해결
-            .bind(to: store.loadedImages)
+            })
             .disposed(by: disposeBag)
+        
     }
 }
 
