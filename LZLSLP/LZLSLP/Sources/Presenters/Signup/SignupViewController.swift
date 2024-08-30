@@ -15,7 +15,8 @@ final class SignupViewController: BaseViewController<SignupView, SignupViewModel
     override func configureNavigationItem() {
         super.configureNavigationItem()
         
-        navigationItem.title = "Signup ViewController"
+        navigationItem.titleView = LogoView(fontSize: 20, weight: .semibold, logoColor: .black)
+        
     }
     
     override func configureBind() {

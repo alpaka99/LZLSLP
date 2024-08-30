@@ -16,6 +16,8 @@ final class LoginView: BaseView {
         return view
     }()
     
+    let logoView = LogoView(fontSize: 50, weight: .bold, logoColor: .systemRed)
+    
     let emailTextField = {
         let textField = UITextField()
         textField.placeholder = "이메일을 입력해주세요"
@@ -76,6 +78,7 @@ final class LoginView: BaseView {
         
         self.addSubview(background)
         
+        self.addSubview(logoView)
         self.addSubview(textFieldStack)
         self.addSubview(submitButton)
         self.addSubview(signUpButton)
@@ -86,6 +89,13 @@ final class LoginView: BaseView {
         
         background.snp.makeConstraints { view in
             view.edges.equalTo(self)
+        }
+        
+        
+        logoView.snp.makeConstraints { view in
+            view.centerX.equalTo(self.safeAreaLayoutGuide)
+            view.centerY.equalTo(self.safeAreaLayoutGuide)
+                .multipliedBy(0.5)
         }
         
         emailTextField.snp.makeConstraints { textField in
