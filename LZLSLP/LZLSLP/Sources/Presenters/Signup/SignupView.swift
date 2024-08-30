@@ -13,24 +13,37 @@ final class SignupView: BaseView {
     let emailTextField = {
         let textField = UITextField()
         textField.placeholder = "이메일을 입력해주세요"
+        textField.layer.borderColor = UIColor.darkGray.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 8
         return textField
     }()
     
     let passwordTextField = {
         let textField = UITextField()
         textField.placeholder = "비밀번호를 입력해주세요"
+        textField.layer.borderColor = UIColor.darkGray.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 8
+        textField.isSecureTextEntry = true
         return textField
     }()
     
     let nicknameTextField = {
         let textField = UITextField()
         textField.placeholder = "닉네임을 입력해주세요"
+        textField.layer.borderColor = UIColor.darkGray.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 8
         return textField
     }()
     
     let phoneNumTextField = {
         let textField = UITextField()
         textField.placeholder = "전화번호를 입력해주세요"
+        textField.layer.borderColor = UIColor.darkGray.cgColor
+        textField.layer.borderWidth = 2
+        textField.layer.cornerRadius = 8
         return textField
     }()
     
@@ -59,8 +72,10 @@ final class SignupView: BaseView {
     
     let submitButton = {
         let button = UIButton.Configuration.plain()
-            .backgroundColor(.systemBlue)
             .title("회원 가입")
+            .font(ofSize: 24, weight: .bold)
+            .foregroundColor(.systemRed)
+            .backgroundColor(.black)
             .cornerStyle(.capsule)
             .build()
         
@@ -78,6 +93,26 @@ final class SignupView: BaseView {
     
     override func configureLayout() {
         super.configureLayout()
+        
+        emailTextField.snp.makeConstraints { textField in
+            textField.height.equalTo(50)
+            textField.horizontalEdges.equalTo(textFieldStack.snp.horizontalEdges)
+        }
+        
+        passwordTextField.snp.makeConstraints { textField in
+            textField.height.equalTo(50)
+            textField.horizontalEdges.equalTo(textFieldStack.snp.horizontalEdges)
+        }
+        
+        nicknameTextField.snp.makeConstraints { textField in
+            textField.height.equalTo(50)
+            textField.horizontalEdges.equalTo(textFieldStack.snp.horizontalEdges)
+        }
+        
+        phoneNumTextField.snp.makeConstraints { textField in
+            textField.height.equalTo(50)
+            textField.horizontalEdges.equalTo(textFieldStack.snp.horizontalEdges)
+        }
         
         textFieldStack.snp.makeConstraints { stack in
             stack.width.equalTo(self.safeAreaLayoutGuide.snp.width)
