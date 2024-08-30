@@ -28,24 +28,16 @@ final class NetworkManager {
                             print("NetworkManager error: \(error)")
                             switch error {
                             case .createURLRequestFailed:
-                                observer(.failure(NetworkError.urlRequestCreateError))
+                                observer(.success(.failure(NetworkError.urlRequestCreateError)))
                             case .responseValidationFailed:
-                                observer(.failure(NetworkError.responseStatusCodeError))
+                                observer(.success(.failure(NetworkError.responseStatusCodeError)))
                             default:
-                                observer(.failure(NetworkError.networkError))
+                                observer(.success(.failure(NetworkError.networkError)))
                             }
                         }
                     }
-//                    .responseString { result in
-//                        switch result.result {
-//                        case .success(let str):
-//                            dump(str)
-//                        case .failure(let error):
-//                            print(error)
-//                        }
-//                    }
             } else {
-                observer(.failure(NetworkError.urlRequestCreateError))
+                observer(.success(.failure(NetworkError.urlRequestCreateError)))
             }
             
             return Disposables.create()
@@ -88,8 +80,10 @@ final class NetworkManager {
                     .responseString { result in
                         switch result.result {
                         case .success(let str):
+                            print("String Result")
                             dump(str)
                         case .failure(let error):
+                            print("String Error Result")
                             print(error)
                         }
                     }

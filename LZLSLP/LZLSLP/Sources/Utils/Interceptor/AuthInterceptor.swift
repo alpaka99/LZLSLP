@@ -31,6 +31,7 @@ final class AuthInterceptor: RequestInterceptor {
         print(#function, String(describing: self))
         // invalidAccessToken 에러가 아니라면 retry하지 않고 통과시킴
         guard let response = request.response else {
+            completion(.doNotRetryWithError(NetworkError.networkError))
             print("request have no response")
             return
         }

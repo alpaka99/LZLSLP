@@ -41,44 +41,8 @@ final class LoginViewModel: RxViewModel {
                 case .failure(let error):
                     print("Login error: \(error)")
                 }
-//                switch response {
-//                    case .success(let loginResponse):
-//                        owner.store.loginResponse.accept(loginResponse)
-//                    case .failure(let error):
-//                        print("Login error: \(error)")
-////                            break // error handling
-//                    }
             })
-            .disposed(by: disposeBag)
-//            .bind(with: self) { owner, loginForm in
-//                let email = loginForm.0
-//                let password = loginForm.1
-//                
-//                print(email, password)
-//                let router = URLRouter.https(.lslp(.auth(.login(email: email, password: password))))
-//                
-//                /*
-//                 MARK: Memory Leak의 가능성
-//                 +
-//                 MARK: 중첩 subscribe 가능성(singUpView + LoginView)
-//                 */
-//                owner.repository.requestAuthAPI(
-//                    of: LoginResponse.self,
-//                    router: router
-//                )
-//                .debug("This is Login")
-//                    .subscribe(with: self) { owner, result in
-//                        switch result {
-//                        case .success(let loginResponse):
-//                            owner.store.loginResponse.accept(loginResponse)
-//                        case .failure(let error):
-//                            print("Login error: \(error)")
-////                            break // error handling
-//                        }
-//                    }
-//                    .disposed(by: owner.disposeBag)
-//            }
-//            .disposed(by: disposeBag)
+            .disposed(by: disposeBag) 
         
         store.loginResponse
             .bind(with: self) { owner, loginResponse in
@@ -90,8 +54,11 @@ final class LoginViewModel: RxViewModel {
                 UserDefaults.standard.save(refreshToken)
                 UserDefaults.standard.save(userId)
                 
+                print(accessToken)
+                print(refreshToken)
+                
                 // 저장 제대로 됐는지 확인
-                if let accesToken = UserDefaults.standard.load(of: AccessToken.self), let refreshToken = UserDefaults.standard.load(of: RefreshToken.self) {
+                if let _ = UserDefaults.standard.load(of: AccessToken.self), let _ = UserDefaults.standard.load(of: RefreshToken.self) {
                     owner.store.loginCompleted.onNext(())
                 }
             }

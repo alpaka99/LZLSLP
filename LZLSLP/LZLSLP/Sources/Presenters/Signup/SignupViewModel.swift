@@ -15,7 +15,8 @@ final class SignupViewModel: RxViewModel {
     }
     
     struct Output: Outputable {
-        var singUpResponse = PublishSubject<SignUpResponse>()
+        var signUpResponse = PublishSubject<SignUpResponse>()
+        var alertMessage = PublishSubject<String>()
     }
     
     var store = ViewStore(input: Input(), output: Output())
@@ -35,12 +36,17 @@ final class SignupViewModel: RxViewModel {
             .bind(with: self) { owner, result in
                 switch result {
                 case .success(let signUpResponse):
-                    dump(signUpResponse)
-                    owner.store.singUpResponse.onNext(signUpResponse)
+                    owner.store.signUpResponse.onNext(signUpResponse)
                 case .failure(let error):
                     print("SignUp Error:\(error)")
-                    
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        
+        store.signUpResponse
+            .bind(with: self) { owner, value in
+                owner.store.alertMessage.onNext("회원 가입이 완료되었습니다!")
             }
             .disposed(by: disposeBag)
     }

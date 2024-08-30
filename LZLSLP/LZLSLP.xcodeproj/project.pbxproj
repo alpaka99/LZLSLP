@@ -48,6 +48,16 @@
 		CE80D02B2C7F321000A45249 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE80D02A2C7F321000A45249 /* Kingfisher */; };
 		CE80D02D2C7F331200A45249 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D02C2C7F331200A45249 /* ScreenSize.swift */; };
 		CE80D0382C805CDD00A45249 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D0372C805CDD00A45249 /* ImageRepository.swift */; };
+		CE91E4A72C81C415000656E0 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4A62C81C415000656E0 /* LaunchView.swift */; };
+		CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4A82C81C42A000656E0 /* LaunchViewModel.swift */; };
+		CE91E4AB2C81C4A5000656E0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */; };
+		CE91E4AD2C81D14C000656E0 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */; };
+		CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AF2C820AA6000656E0 /* TabBarController.swift */; };
+		CE91E4B32C8226E3000656E0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE91E4B22C8226E3000656E0 /* Lottie */; };
+		CE91E4B62C822889000656E0 /* gasoline_launch.json in Resources */ = {isa = PBXBuildFile; fileRef = CE91E4B52C822889000656E0 /* gasoline_launch.json */; };
+		CE91E4BA2C822D32000656E0 /* gasoline_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CE91E4B92C822D32000656E0 /* gasoline_loading.json */; };
+		CE91E4BC2C8234BF000656E0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4BB2C8234BF000656E0 /* Color.swift */; };
+		CE91E4BF2C8240AA000656E0 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4BE2C8240AA000656E0 /* LogoView.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -95,6 +105,15 @@
 		CE80D00F2C7CE35400A45249 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
 		CE80D02C2C7F331200A45249 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		CE80D0372C805CDD00A45249 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		CE91E4A62C81C415000656E0 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		CE91E4A82C81C42A000656E0 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
+		CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		CE91E4AF2C820AA6000656E0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CE91E4B52C822889000656E0 /* gasoline_launch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasoline_launch.json; sourceTree = "<group>"; };
+		CE91E4B92C822D32000656E0 /* gasoline_loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasoline_loading.json; sourceTree = "<group>"; };
+		CE91E4BB2C8234BF000656E0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		CE91E4BE2C8240AA000656E0 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -112,6 +131,7 @@
 				CE5E649A2C6DEFFC009830AD /* RxSwift in Frameworks */,
 				CE5E64982C6DEFFC009830AD /* RxCocoa in Frameworks */,
 				CE80D02B2C7F321000A45249 /* Kingfisher in Frameworks */,
+				CE91E4B32C8226E3000656E0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +166,7 @@
 		CE5E64892C6DE422009830AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4B42C8226F4000656E0 /* Lottie */,
 				CE5E647E2C6DE215009830AD /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -176,6 +197,9 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4BD2C8240A3000656E0 /* Logo */,
+				CE91E4AE2C820A9E000656E0 /* TabBar */,
+				CE91E4A52C81C40E000656E0 /* Launch */,
 				CE80D00A2C7CE32700A45249 /* DetailPost */,
 				CEE75B6B2C7B3EC200FC61E6 /* Community */,
 				CE5E64DB2C74EDCB009830AD /* Post */,
@@ -238,6 +262,7 @@
 				CE5E64CA2C736796009830AD /* UserDefaults+.swift */,
 				CE5E64CC2C736A11009830AD /* Encodable+.swift */,
 				CE5E64CE2C736A19009830AD /* Decodable+.swift */,
+				CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -311,6 +336,7 @@
 			children = (
 				CE80D0082C7C88D900A45249 /* DateFormatter.swift */,
 				CE80D02C2C7F331200A45249 /* ScreenSize.swift */,
+				CE91E4BB2C8234BF000656E0 /* Color.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -323,6 +349,41 @@
 				CE80D00F2C7CE35400A45249 /* DetailPostViewController.swift */,
 			);
 			path = DetailPost;
+			sourceTree = "<group>";
+		};
+		CE91E4A52C81C40E000656E0 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4A62C81C415000656E0 /* LaunchView.swift */,
+				CE91E4A82C81C42A000656E0 /* LaunchViewModel.swift */,
+				CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		CE91E4AE2C820A9E000656E0 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4AF2C820AA6000656E0 /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		CE91E4B42C8226F4000656E0 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4B92C822D32000656E0 /* gasoline_loading.json */,
+				CE91E4B52C822889000656E0 /* gasoline_launch.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		CE91E4BD2C8240A3000656E0 /* Logo */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4BE2C8240AA000656E0 /* LogoView.swift */,
+			);
+			path = Logo;
 			sourceTree = "<group>";
 		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
@@ -366,6 +427,7 @@
 				CE5E64B42C70CC86009830AD /* SnapKit */,
 				CE5E64D92C73B3D0009830AD /* Alamofire */,
 				CE80D02A2C7F321000A45249 /* Kingfisher */,
+				CE91E4B22C8226E3000656E0 /* Lottie */,
 			);
 			productName = LZLSLP;
 			productReference = CE5E64722C6DE213009830AD /* LZLSLP.app */;
@@ -400,6 +462,7 @@
 				CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */,
 				CE5E64D82C73B3D0009830AD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE80D0292C7F321000A45249 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				CE91E4B12C8226E3000656E0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = CE5E64732C6DE213009830AD /* Products */;
 			projectDirPath = "";
@@ -415,8 +478,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE91E4BA2C822D32000656E0 /* gasoline_loading.json in Resources */,
 				CE5E647F2C6DE215009830AD /* Assets.xcassets in Resources */,
 				CE5E64822C6DE215009830AD /* Base in Resources */,
+				CE91E4B62C822889000656E0 /* gasoline_launch.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,22 +493,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */,
+				CE91E4A72C81C415000656E0 /* LaunchView.swift in Sources */,
 				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
 				CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */,
 				CE80D00C2C7CE32C00A45249 /* DetailPostView.swift in Sources */,
 				CE5E64AB2C70C2FD009830AD /* AuthRepository.swift in Sources */,
 				CEE75B6F2C7B3F5200FC61E6 /* CommunityViewModel.swift in Sources */,
 				CE5E64A12C6DF1B3009830AD /* UIButton+.swift in Sources */,
+				CE91E4BC2C8234BF000656E0 /* Color.swift in Sources */,
 				CE80D0382C805CDD00A45249 /* ImageRepository.swift in Sources */,
 				CE5E64A92C70BA26009830AD /* NetworkManager.swift in Sources */,
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
+				CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */,
 				CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */,
 				CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */,
+				CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */,
 				CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
+				CE91E4AB2C81C4A5000656E0 /* LaunchViewController.swift in Sources */,
 				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
 				CE80D02D2C7F331200A45249 /* ScreenSize.swift in Sources */,
@@ -451,12 +521,14 @@
 				CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */,
 				CE5E64BF2C71FBA6009830AD /* LoginViewModel.swift in Sources */,
 				CE5E64D32C7387D6009830AD /* TrendingView.swift in Sources */,
+				CE91E4BF2C8240AA000656E0 /* LogoView.swift in Sources */,
 				CEE75B712C7B3F8600FC61E6 /* CommunityViewController.swift in Sources */,
 				CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
 				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
 				CE80D0092C7C88D900A45249 /* DateFormatter.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
+				CE91E4AD2C81D14C000656E0 /* UIViewController+.swift in Sources */,
 				CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */,
 				CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,
@@ -723,6 +795,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		CE91E4B12C8226E3000656E0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -750,6 +830,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE80D0292C7F321000A45249 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		CE91E4B22C8226E3000656E0 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE91E4B12C8226E3000656E0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
