@@ -12,6 +12,8 @@ import SnapKit
 final class CommunityTableViewCell: BaseTableViewCell {
     let image = {
        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "flame.fill")
+        imageView.tintColor = UIColor.randomColor()
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.clipsToBounds = true
         return imageView
@@ -54,7 +56,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
             label.leading.equalTo(image.snp.trailing)
                 .offset(16)
             label.top.equalTo(self)
-                .offset(8)
+                .offset(16)
             label.trailing.equalTo(self)
                 .inset(8)
         }
@@ -63,10 +65,21 @@ final class CommunityTableViewCell: BaseTableViewCell {
             label.leading.equalTo(image.snp.trailing)
                 .offset(16)
             label.bottom.equalTo(self)
-                .offset(-8)
+                .offset(-16)
             label.trailing.equalTo(self)
                 .inset(8)
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        image.image = UIImage(systemName: "flame.fill")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        image.layer.cornerRadius = 8
     }
 }
 

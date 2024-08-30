@@ -24,9 +24,11 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         super.configureBind()
         
         viewModel.store.postResponses
-            .bind(to: baseView.tableView.rx.items(cellIdentifier: "UITableViewCell")) { row, item, cell in
+            .bind(to: baseView.tableView.rx.items(cellIdentifier: CommunityTableViewCell.identifier, cellType: CommunityTableViewCell.self)) { row, item, cell in
                 
-                cell.textLabel?.text = item.createdAt
+                cell.title.text = item.title
+                cell.content.text = item.content
+                
             }
             .disposed(by: disposeBag)
         
@@ -69,12 +71,13 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
     override func configureDelegate() {
         super.configureDelegate()
         
-        baseView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+//        baseView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifier)
+        baseView.tableView.register(CommunityTableViewCell.self, forCellReuseIdentifier: CommunityTableViewCell.identifier)
     }
     
     override func configureNavigationItem() {
         super.configureNavigationItem()
         
-        navigationItem.title = "Community View"
+        navigationItem.titleView = LogoView(fontSize: 16, weight: .semibold, logoColor: .black)
     }
 }
