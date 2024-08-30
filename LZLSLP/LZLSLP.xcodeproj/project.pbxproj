@@ -48,6 +48,10 @@
 		CE80D02B2C7F321000A45249 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE80D02A2C7F321000A45249 /* Kingfisher */; };
 		CE80D02D2C7F331200A45249 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D02C2C7F331200A45249 /* ScreenSize.swift */; };
 		CE80D0382C805CDD00A45249 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE80D0372C805CDD00A45249 /* ImageRepository.swift */; };
+		CE91E4A72C81C415000656E0 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4A62C81C415000656E0 /* LaunchView.swift */; };
+		CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4A82C81C42A000656E0 /* LaunchViewModel.swift */; };
+		CE91E4AB2C81C4A5000656E0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */; };
+		CE91E4AD2C81D14C000656E0 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -95,6 +99,10 @@
 		CE80D00F2C7CE35400A45249 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
 		CE80D02C2C7F331200A45249 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		CE80D0372C805CDD00A45249 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		CE91E4A62C81C415000656E0 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		CE91E4A82C81C42A000656E0 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
+		CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -176,6 +184,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4A52C81C40E000656E0 /* Launch */,
 				CE80D00A2C7CE32700A45249 /* DetailPost */,
 				CEE75B6B2C7B3EC200FC61E6 /* Community */,
 				CE5E64DB2C74EDCB009830AD /* Post */,
@@ -238,6 +247,7 @@
 				CE5E64CA2C736796009830AD /* UserDefaults+.swift */,
 				CE5E64CC2C736A11009830AD /* Encodable+.swift */,
 				CE5E64CE2C736A19009830AD /* Decodable+.swift */,
+				CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -323,6 +333,16 @@
 				CE80D00F2C7CE35400A45249 /* DetailPostViewController.swift */,
 			);
 			path = DetailPost;
+			sourceTree = "<group>";
+		};
+		CE91E4A52C81C40E000656E0 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4A62C81C415000656E0 /* LaunchView.swift */,
+				CE91E4A82C81C42A000656E0 /* LaunchViewModel.swift */,
+				CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
@@ -428,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */,
+				CE91E4A72C81C415000656E0 /* LaunchView.swift in Sources */,
 				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
 				CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */,
 				CE80D00C2C7CE32C00A45249 /* DetailPostView.swift in Sources */,
@@ -441,9 +462,11 @@
 				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
 				CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */,
 				CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */,
+				CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */,
 				CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
+				CE91E4AB2C81C4A5000656E0 /* LaunchViewController.swift in Sources */,
 				CE5E64BA2C70D4A0009830AD /* SignupForm.swift in Sources */,
 				CE5E64B22C70C3EF009830AD /* SignupViewController.swift in Sources */,
 				CE80D02D2C7F331200A45249 /* ScreenSize.swift in Sources */,
@@ -457,6 +480,7 @@
 				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
 				CE80D0092C7C88D900A45249 /* DateFormatter.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
+				CE91E4AD2C81D14C000656E0 /* UIViewController+.swift in Sources */,
 				CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */,
 				CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */,
 				CE5E64782C6DE213009830AD /* SceneDelegate.swift in Sources */,

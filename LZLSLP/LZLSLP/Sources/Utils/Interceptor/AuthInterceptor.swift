@@ -18,6 +18,10 @@ final class AuthInterceptor: RequestInterceptor {
             completion(.failure(InterceptorError.tokenURLBuildError))
             return
         }
+//        
+        
+//        let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token ?? ""
+//        let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token ?? ""
         
         print("\(String(describing: self)) loaded AccessToken")
         var urlRequest = urlRequest
@@ -31,6 +35,7 @@ final class AuthInterceptor: RequestInterceptor {
         print(#function, String(describing: self))
         // invalidAccessToken 에러가 아니라면 retry하지 않고 통과시킴
         guard let response = request.response else {
+            completion(.doNotRetryWithError(NetworkError.networkError))
             print("request have no response")
             return
         }

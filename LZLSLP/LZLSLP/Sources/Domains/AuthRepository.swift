@@ -21,11 +21,14 @@ final class AuthRepository {
                     case .success(let data):
                         do {
                             let decodedData = try JSONDecoder().decode(T.self, from: data)
+                            print("1")
                             observer(.success(.success(decodedData)))
                         } catch {
+                            print("2")
                             observer(.success(.failure(error)))
                         }
                     case.failure(let error):
+                        print("3")
                         observer(.success(.failure(error)))
                     }
                 }
@@ -33,27 +36,6 @@ final class AuthRepository {
             
             return Disposables.create()
         }
-        
-        
-//        return singleResult
-        
-//        Single.create { observer in
-//             let singleData = NetworkManager.shared.requestCall(router: router)
-//                .catch { error in
-//                    return Single.just(.failure(error))
-//                }
-////                .asDriver(onErrorJustReturn: Single.just(Data()))
-////                .drive(with: self) { owner, data in
-////                    do {
-////                        let decodedData = try JSONDecoder().decode(T.self, from: data)
-////                        observer(.success(decodedData))
-////                    } catch {
-////                        observer(.failure(NetworkError.decodingFailure))
-////                    }
-////                }
-//            
-//            return Disposables.create()
-//        }
     }
 }
 
