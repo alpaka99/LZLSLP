@@ -27,7 +27,7 @@ final class ImageRepository {
                 switch result {
                 case .success(let data):
                     return data
-                case .failure(let error):
+                case .failure:
                     return Data()
                 }
             }
@@ -39,9 +39,36 @@ final class ImageRepository {
             }
             .disposed(by: repository.disposeBag)
             
-            
             return Disposables.create()
         }
     }
     
+    
+    func loadThumbnailImage(fileURLs: [String]) -> Single<Result<Data, Error>> {
+        
+        return Single.create {[weak self] observer in
+            
+            guard let repository = self else { return Disposables.create() }
+            
+            if let thumbnailURL = fileURLs.first {
+                repository.loadImageData(fileURLS: [thumbnailURL])
+                    .map { result in
+                        switch result {
+                        case .success(let dataArray):
+                            if let thumbnailData = dataArray.first {
+                                observer(.success(.success(thumbnailData)))
+                            }
+                        case .failure(let error):
+                            observer(.failure(error))
+                        }
+                    }
+                    .subscribe()
+                    .disposed(by: repository.disposeBag)
+            } else {
+                observer(.success(.success(Data())))
+            }
+            
+            return Disposables.create()
+        }
+    }
 }
