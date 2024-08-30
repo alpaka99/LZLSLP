@@ -53,6 +53,8 @@
 		CE91E4AB2C81C4A5000656E0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */; };
 		CE91E4AD2C81D14C000656E0 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */; };
 		CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AF2C820AA6000656E0 /* TabBarController.swift */; };
+		CE91E4B32C8226E3000656E0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CE91E4B22C8226E3000656E0 /* Lottie */; };
+		CE91E4B62C822889000656E0 /* gasoline_launch.json in Resources */ = {isa = PBXBuildFile; fileRef = CE91E4B52C822889000656E0 /* gasoline_launch.json */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -105,6 +107,7 @@
 		CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		CE91E4AF2C820AA6000656E0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CE91E4B52C822889000656E0 /* gasoline_launch.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasoline_launch.json; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 				CE5E649A2C6DEFFC009830AD /* RxSwift in Frameworks */,
 				CE5E64982C6DEFFC009830AD /* RxCocoa in Frameworks */,
 				CE80D02B2C7F321000A45249 /* Kingfisher in Frameworks */,
+				CE91E4B32C8226E3000656E0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +160,7 @@
 		CE5E64892C6DE422009830AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4B42C8226F4000656E0 /* Lottie */,
 				CE5E647E2C6DE215009830AD /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -356,6 +361,14 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		CE91E4B42C8226F4000656E0 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4B52C822889000656E0 /* gasoline_launch.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +410,7 @@
 				CE5E64B42C70CC86009830AD /* SnapKit */,
 				CE5E64D92C73B3D0009830AD /* Alamofire */,
 				CE80D02A2C7F321000A45249 /* Kingfisher */,
+				CE91E4B22C8226E3000656E0 /* Lottie */,
 			);
 			productName = LZLSLP;
 			productReference = CE5E64722C6DE213009830AD /* LZLSLP.app */;
@@ -431,6 +445,7 @@
 				CE5E64B32C70CC86009830AD /* XCRemoteSwiftPackageReference "SnapKit" */,
 				CE5E64D82C73B3D0009830AD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE80D0292C7F321000A45249 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				CE91E4B12C8226E3000656E0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = CE5E64732C6DE213009830AD /* Products */;
 			projectDirPath = "";
@@ -448,6 +463,7 @@
 			files = (
 				CE5E647F2C6DE215009830AD /* Assets.xcassets in Resources */,
 				CE5E64822C6DE215009830AD /* Base in Resources */,
+				CE91E4B62C822889000656E0 /* gasoline_launch.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +775,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		CE91E4B12C8226E3000656E0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -786,6 +810,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE80D0292C7F321000A45249 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		CE91E4B22C8226E3000656E0 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE91E4B12C8226E3000656E0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

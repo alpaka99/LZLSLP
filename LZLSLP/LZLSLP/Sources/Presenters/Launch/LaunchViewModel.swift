@@ -34,10 +34,8 @@ final class LaunchViewModel: RxViewModel {
                 
                 return self.authRepository.requestAuthAPI(of: RefreshTokenResponse.self, router: router, interceptor: AuthInterceptor())
             }
-            .debug()
-            .delay(.seconds(1), scheduler: MainScheduler.instance)
+            .delay(.milliseconds(2500), scheduler: MainScheduler.instance)
             .bind(with: self) { owner, result in
-                print(result)
                 switch result {
                 case .success:
                     print("Success")
@@ -50,9 +48,6 @@ final class LaunchViewModel: RxViewModel {
             .disposed(by: disposeBag)
         
         
-        store.viewDidLoad
-            .bind(to: store.triggerAnimation)
-            .disposed(by: disposeBag)
     }
 }
 
