@@ -62,7 +62,6 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
             .disposed(by: disposeBag)
         
         baseView.refreshControl.rx.controlEvent(.valueChanged)
-            .share()
             .bind(to: viewModel.store.refreshTriggered)
             .disposed(by: disposeBag)
     }

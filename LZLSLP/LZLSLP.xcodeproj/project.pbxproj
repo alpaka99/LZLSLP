@@ -58,6 +58,9 @@
 		CE91E4BA2C822D32000656E0 /* gasoline_loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CE91E4B92C822D32000656E0 /* gasoline_loading.json */; };
 		CE91E4BC2C8234BF000656E0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4BB2C8234BF000656E0 /* Color.swift */; };
 		CE91E4BF2C8240AA000656E0 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4BE2C8240AA000656E0 /* LogoView.swift */; };
+		CE91E4C12C82636D000656E0 /* CommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C02C82636D000656E0 /* CommunityTableViewCell.swift */; };
+		CE91E4C32C82673F000656E0 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C22C82673F000656E0 /* BaseTableViewCell.swift */; };
+		CE91E4C62C8269FD000656E0 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C52C8269FD000656E0 /* Reusable.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -114,6 +117,9 @@
 		CE91E4B92C822D32000656E0 /* gasoline_loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasoline_loading.json; sourceTree = "<group>"; };
 		CE91E4BB2C8234BF000656E0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE91E4BE2C8240AA000656E0 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
+		CE91E4C02C82636D000656E0 /* CommunityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTableViewCell.swift; sourceTree = "<group>"; };
+		CE91E4C22C82673F000656E0 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		CE91E4C52C8269FD000656E0 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -213,6 +219,7 @@
 		CE5E648D2C6DE4EC009830AD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4C42C8269F4000656E0 /* Protocols */,
 				CE80D0072C7C88CC00A45249 /* Constants */,
 				CE5E64912C6DEF19009830AD /* Bases */,
 				CE5E649F2C6DF1A6009830AD /* Extensions */,
@@ -249,6 +256,7 @@
 				CE5E64942C6DEF54009830AD /* BaseView.swift */,
 				CE5E649B2C6DF017009830AD /* RxViewModel.swift */,
 				CE5E649D2C6DF131009830AD /* BaseViewController.swift */,
+				CE91E4C22C82673F000656E0 /* BaseTableViewCell.swift */,
 			);
 			path = Bases;
 			sourceTree = "<group>";
@@ -386,6 +394,14 @@
 			path = Logo;
 			sourceTree = "<group>";
 		};
+		CE91E4C42C8269F4000656E0 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4C52C8269FD000656E0 /* Reusable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +417,7 @@
 				CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */,
 				CEE75B6E2C7B3F5200FC61E6 /* CommunityViewModel.swift */,
 				CEE75B702C7B3F8600FC61E6 /* CommunityViewController.swift */,
+				CE91E4C02C82636D000656E0 /* CommunityTableViewCell.swift */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -495,6 +512,7 @@
 				CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */,
 				CE91E4A72C81C415000656E0 /* LaunchView.swift in Sources */,
 				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
+				CE91E4C12C82636D000656E0 /* CommunityTableViewCell.swift in Sources */,
 				CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */,
 				CE80D00C2C7CE32C00A45249 /* DetailPostView.swift in Sources */,
 				CE5E64AB2C70C2FD009830AD /* AuthRepository.swift in Sources */,
@@ -507,6 +525,7 @@
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
 				CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */,
+				CE91E4C32C82673F000656E0 /* BaseTableViewCell.swift in Sources */,
 				CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */,
 				CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */,
 				CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */,
@@ -538,6 +557,7 @@
 				CE5E64BD2C71FB96009830AD /* LoginView.swift in Sources */,
 				CE5E649E2C6DF131009830AD /* BaseViewController.swift in Sources */,
 				CE5E64CF2C736A19009830AD /* Decodable+.swift in Sources */,
+				CE91E4C62C8269FD000656E0 /* Reusable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
