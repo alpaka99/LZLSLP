@@ -49,6 +49,11 @@ final class LaunchView: BaseView {
         super.configureUI()
         self.backgroundColor = .black
         logoAnimation.play()
-//        textAnimation.play()
+        
+        self.alpha = 0
+        
+        UIView.animate(withDuration: 1) { [weak self] in
+            self?.alpha = 1
+        }
     }
 }
