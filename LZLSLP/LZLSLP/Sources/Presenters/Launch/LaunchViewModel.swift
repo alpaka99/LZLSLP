@@ -31,11 +31,11 @@ final class LaunchViewModel: RxViewModel {
             .share()
             .flatMap {
                 let router = URLRouter.https(.lslp(.auth(.accessToken)))
-//                return NetworkManager.shared.requestCall(router: router, interceptor: AuthInterceptor())
+                
                 return self.authRepository.requestAuthAPI(of: RefreshTokenResponse.self, router: router)
             }
             .debug()
-//            .delay(.seconds(1), scheduler: MainScheduler.instance)
+            .delay(.seconds(1), scheduler: MainScheduler.instance)
             .bind(with: self) { owner, result in
                 print(result)
                 switch result {

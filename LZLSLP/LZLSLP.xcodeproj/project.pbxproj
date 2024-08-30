@@ -52,6 +52,7 @@
 		CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4A82C81C42A000656E0 /* LaunchViewModel.swift */; };
 		CE91E4AB2C81C4A5000656E0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */; };
 		CE91E4AD2C81D14C000656E0 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */; };
+		CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4AF2C820AA6000656E0 /* TabBarController.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -103,6 +104,7 @@
 		CE91E4A82C81C42A000656E0 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		CE91E4AA2C81C4A5000656E0 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		CE91E4AF2C820AA6000656E0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4AE2C820A9E000656E0 /* TabBar */,
 				CE91E4A52C81C40E000656E0 /* Launch */,
 				CE80D00A2C7CE32700A45249 /* DetailPost */,
 				CEE75B6B2C7B3EC200FC61E6 /* Community */,
@@ -345,6 +348,14 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		CE91E4AE2C820A9E000656E0 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4AF2C820AA6000656E0 /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +471,7 @@
 				CE5E649C2C6DF017009830AD /* RxViewModel.swift in Sources */,
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
+				CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */,
 				CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */,
 				CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */,
 				CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */,

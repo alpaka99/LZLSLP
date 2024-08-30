@@ -23,8 +23,8 @@ final class LaunchViewController: BaseViewController<LaunchView, LaunchViewModel
             .bind { owner, screenType in
                 switch screenType {
                 case .community:
-                    let communityViewController = CommunityViewController(baseView: CommunityView(), viewModel: CommunityViewModel())
-                    owner.setNewViewController(nextViewController: communityViewController, isNavigation: true)
+                    let tabbarController = TabBarController()
+                    owner.setNewViewController(nextViewController: tabbarController, isNavigation: false)
                 case .login:
                     let loginViewController = LoginViewController(baseView: LoginView(), viewModel: LoginViewModel())
                     owner.setNewViewController(nextViewController: loginViewController, isNavigation: true)

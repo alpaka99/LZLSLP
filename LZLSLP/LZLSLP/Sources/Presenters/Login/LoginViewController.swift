@@ -44,9 +44,9 @@ final class LoginViewController: BaseViewController<LoginView, LoginViewModel> {
             .debug("Login Completed")
             .asDriver(onErrorJustReturn: ())
             .drive(with: self) { owner, _ in
-                let trendingViewController = PostViewController(baseView: PostView(), viewModel: PostViewModel())
+                let tabBarController = TabBarController()
                 
-                owner.navigationController?.pushViewController(trendingViewController, animated: true)
+                owner.setNewViewController(nextViewController: tabBarController, isNavigation: false)
             }
             .disposed(by: disposeBag)
     }

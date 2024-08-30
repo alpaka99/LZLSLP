@@ -54,8 +54,11 @@ final class LoginViewModel: RxViewModel {
                 UserDefaults.standard.save(refreshToken)
                 UserDefaults.standard.save(userId)
                 
+                print(accessToken)
+                print(refreshToken)
+                
                 // 저장 제대로 됐는지 확인
-                if let accesToken = UserDefaults.standard.load(of: AccessToken.self), let refreshToken = UserDefaults.standard.load(of: RefreshToken.self) {
+                if let _ = UserDefaults.standard.load(of: AccessToken.self), let _ = UserDefaults.standard.load(of: RefreshToken.self) {
                     owner.store.loginCompleted.onNext(())
                 }
             }
