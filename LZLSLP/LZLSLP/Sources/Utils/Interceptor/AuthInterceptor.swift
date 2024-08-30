@@ -18,10 +18,6 @@ final class AuthInterceptor: RequestInterceptor {
             completion(.failure(InterceptorError.tokenURLBuildError))
             return
         }
-//        
-        
-//        let accessToken = UserDefaults.standard.load(of: AccessToken.self)?.token ?? ""
-//        let refreshToken = UserDefaults.standard.load(of: RefreshToken.self)?.token ?? ""
         
         print("\(String(describing: self)) loaded AccessToken")
         var urlRequest = urlRequest

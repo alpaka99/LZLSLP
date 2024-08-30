@@ -32,7 +32,7 @@ final class LaunchViewModel: RxViewModel {
             .flatMap {
                 let router = URLRouter.https(.lslp(.auth(.accessToken)))
                 
-                return self.authRepository.requestAuthAPI(of: RefreshTokenResponse.self, router: router)
+                return self.authRepository.requestAuthAPI(of: RefreshTokenResponse.self, router: router, interceptor: AuthInterceptor())
             }
             .debug()
             .delay(.seconds(1), scheduler: MainScheduler.instance)

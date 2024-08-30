@@ -7,15 +7,16 @@
 
 import Foundation
 
+import Alamofire
 import RxCocoa
 import RxSwift
 
 final class AuthRepository {
     let disposeBag = DisposeBag()
     
-    func requestAuthAPI<T: Decodable>(of type: T.Type, router: Router) -> Single<Result<T, Error>> {
+    func requestAuthAPI<T: Decodable>(of type: T.Type, router: Router, interceptor: RequestInterceptor? = nil) -> Single<Result<T, Error>> {
         Single.create { observer in
-            NetworkManager.shared.requestCall(router: router)
+            NetworkManager.shared.requestCall(router: router, interceptor: interceptor)
                 .subscribe(with: self) { owner, result in
                     switch result {
                     case .success(let data):
