@@ -31,10 +31,8 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
                 cell.content.text = item.cellData.content
                 cell.likeNumber.text = String(item.cellData.likes.count)
                 
-                if item.cellData.likes.count > 0 {
-                    cell.likeImage.tintColor = .systemRed
-                }
-//                
+                cell.setRedValue(likes: item.cellData.likes.count)
+//
                 cell.thumbnailImage.image = UIImage(data: item.cellImage ?? Data())
             }
             .disposed(by: disposeBag)
@@ -53,7 +51,6 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         
         baseView.tableView.rx.modelSelected(CombinedData.self)
             .bind(with: self) { owner, combinedData in
-                
                 let detailPostViewModel = DetailPostViewModel()
                 detailPostViewModel.store.postId.accept(combinedData.cellData.postId)
                 
@@ -63,6 +60,12 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
                 )
                 
                 owner.navigationController?.pushViewController(detailPostViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        baseView.tableView.rx.itemSelected
+            .bind(with: self) { owner, row in
+                owner.baseView.tableView.deselectRow(at: row, animated: true)
             }
             .disposed(by: disposeBag)
         

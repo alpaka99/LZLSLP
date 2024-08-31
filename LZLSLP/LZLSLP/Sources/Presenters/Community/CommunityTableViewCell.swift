@@ -12,6 +12,8 @@ import SnapKit
 final class CommunityTableViewCell: BaseTableViewCell {
     lazy var gradient = UIImage.gradientImage(bounds: self.bounds, colors: [.systemRed, .systemPurple, .systemOrange ,.systemPink])
     lazy var gradientColor = UIColor(patternImage: gradient)
+    private var redValue: CGFloat = 0.0
+    private let redStep: Int = 10
     
     let thumbnailImage = {
        let imageView = UIImageView()
@@ -105,6 +107,12 @@ final class CommunityTableViewCell: BaseTableViewCell {
         }
     }
     
+    func setRedValue(likes: Int) {
+        let redValue: CGFloat = (likes >= redStep) ? 1.0 : (CGFloat(likes) / CGFloat(redStep))
+        print(redValue)
+        self.redValue = redValue
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -116,8 +124,10 @@ final class CommunityTableViewCell: BaseTableViewCell {
         super.layoutSubviews()
         
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4))
-        contentView.layer.borderColor = gradientColor.cgColor
+//        contentView.layer.borderColor = gradientColor.cgColor
+        contentView.layer.borderColor = UIColor(red: self.redValue, green: 0.0, blue: 0.0, alpha: 1).cgColor
         contentView.layer.borderWidth = 2
+        likeImage.tintColor = UIColor(red: self.redValue, green: 0.0, blue: 0.0, alpha: 1)
         
     }
 
@@ -128,7 +138,6 @@ final class CommunityTableViewCell: BaseTableViewCell {
         thumbnailImage.layer.cornerRadius = 8
         contentView.layer.cornerRadius = 20
         contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
-        
         
     }
 }
