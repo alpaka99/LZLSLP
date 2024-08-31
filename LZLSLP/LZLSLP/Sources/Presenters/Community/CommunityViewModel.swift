@@ -72,8 +72,9 @@ final class CommunityViewModel: RxViewModel {
         store.refreshTriggered
             .bind(with: self) { owner, _ in
                 owner.store.reduce(owner.store.nextCursor, into: "")
-                owner.store.postResponses.onNext([])
-                owner.store.thumbnailImages.onNext([])
+//                owner.store.postResponses.onNext([])
+//                owner.store.thumbnailImages.onNext([])
+                owner.store.combinedData.accept([])
                 owner.store.prefetchTriggered.onNext(())
             }
             .disposed(by: disposeBag)

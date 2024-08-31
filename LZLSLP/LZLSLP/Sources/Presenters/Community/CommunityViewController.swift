@@ -51,11 +51,11 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
             .disposed(by: disposeBag)
             
         
-        baseView.tableView.rx.modelSelected(PostResponse.self)
-            .bind(with: self) { owner, postResponse in
+        baseView.tableView.rx.modelSelected(CombinedData.self)
+            .bind(with: self) { owner, combinedData in
                 
                 let detailPostViewModel = DetailPostViewModel()
-                detailPostViewModel.store.postId.accept(postResponse.postId)
+                detailPostViewModel.store.postId.accept(combinedData.cellData.postId)
                 
                 let detailPostViewController = DetailPostViewController(
                     baseView: DetailPostView(),
