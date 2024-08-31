@@ -10,11 +10,20 @@ import UIKit
 import SnapKit
 
 final class CommunityView: BaseView {
+    let titleLabel = {
+        let label = UILabel()
+        label.text = "최신글들을 확인해보세요"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.backgroundColor = .clear
+        return label
+    }()
+    
     lazy var tableView = {
         let tableView = UITableView()
         tableView.rowHeight = 80
         tableView.refreshControl = refreshControl
         tableView.separatorStyle = .none
+        tableView.tableHeaderView = titleLabel
         return tableView
     }()
     
@@ -38,6 +47,7 @@ final class CommunityView: BaseView {
     override func configureHierarchy() {
         super.configureHierarchy()
         
+        self.addSubview(titleLabel)
         self.addSubview(tableView)
         self.addSubview(floatingButton)
     }
@@ -45,8 +55,14 @@ final class CommunityView: BaseView {
     override func configureLayout() {
         super.configureLayout()
         
+        titleLabel.snp.makeConstraints { label in
+            label.height.equalTo(50)
+        }
+        
         tableView.snp.makeConstraints { tableView in
-            tableView.edges.equalTo(self.safeAreaLayoutGuide)
+            tableView.top.equalTo(self.safeAreaLayoutGuide)
+            tableView.horizontalEdges.bottom.equalTo(self.safeAreaLayoutGuide)
+                .inset(16)
         }
         
         floatingButton.snp.makeConstraints { btn in
