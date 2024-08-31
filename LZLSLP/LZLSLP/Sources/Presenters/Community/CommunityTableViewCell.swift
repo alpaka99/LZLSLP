@@ -36,18 +36,18 @@ final class CommunityTableViewCell: BaseTableViewCell {
     override func configureHierarchy() {
         super.configureHierarchy()
         
-        self.addSubview(image)
-        self.addSubview(title)
-        self.addSubview(content)
+        contentView.addSubview(image)
+        contentView.addSubview(title)
+        contentView.addSubview(content)
     }
     
     override func configureLayout() {
         super.configureLayout()
         
         image.snp.makeConstraints { img in
-            img.verticalEdges.equalTo(self)
+            img.verticalEdges.equalTo(contentView)
                 .inset(8)
-            img.leading.equalTo(self)
+            img.leading.equalTo(contentView)
                 .inset(8)
             img.width.equalTo(image.snp.height)
         }
@@ -55,18 +55,16 @@ final class CommunityTableViewCell: BaseTableViewCell {
         title.snp.makeConstraints { label in
             label.leading.equalTo(image.snp.trailing)
                 .offset(16)
-            label.top.equalTo(self)
-                .offset(16)
-            label.trailing.equalTo(self)
+            label.top.equalTo(image.snp.top)
+            label.trailing.equalTo(contentView)
                 .inset(8)
         }
         
         content.snp.makeConstraints { label in
             label.leading.equalTo(image.snp.trailing)
                 .offset(16)
-            label.bottom.equalTo(self)
-                .offset(-16)
-            label.trailing.equalTo(self)
+            label.bottom.equalTo(image.snp.bottom)
+            label.trailing.equalTo(contentView)
                 .inset(8)
         }
     }
@@ -77,9 +75,23 @@ final class CommunityTableViewCell: BaseTableViewCell {
         image.image = UIImage(systemName: "flame.fill")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4))
+        contentView.layer.borderColor = UIColor.systemOrange.cgColor
+        contentView.layer.borderWidth = 1
+    }
+
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        
         image.layer.cornerRadius = 8
+        
+//        contentView.frame = self.frame.inset(by: UIEdgeInsets(top: 102, left: 4, bottom: 2, right: 4))
+//        contentView.layer.borderColor = UIColor.systemOrange.cgColor
+//        contentView.layer.borderWidth = 1
     }
 }
 
