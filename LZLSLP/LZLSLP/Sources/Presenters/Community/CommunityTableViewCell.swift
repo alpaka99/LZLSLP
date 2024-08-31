@@ -109,7 +109,6 @@ final class CommunityTableViewCell: BaseTableViewCell {
     
     func setRedValue(likes: Int) {
         let redValue: CGFloat = (likes >= redStep) ? 1.0 : (CGFloat(likes) / CGFloat(redStep))
-        print(redValue)
         self.redValue = redValue
     }
     
@@ -118,6 +117,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
         
         thumbnailImage.image = UIImage(named: "danger")
         likeImage.tintColor = .gray
+        redValue = 0.0
     }
     
     override func layoutSubviews() {
