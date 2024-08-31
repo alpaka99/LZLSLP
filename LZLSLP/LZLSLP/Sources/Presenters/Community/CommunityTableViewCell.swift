@@ -13,7 +13,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
     lazy var gradient = UIImage.gradientImage(bounds: self.bounds, colors: [.systemRed, .systemPurple, .systemOrange ,.systemPink])
     lazy var gradientColor = UIColor(patternImage: gradient)
     
-    let image = {
+    let thumbnailImage = {
        let imageView = UIImageView()
         imageView.image = UIImage(named: "danger")
         imageView.contentMode = .scaleAspectFit
@@ -62,7 +62,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
     override func configureHierarchy() {
         super.configureHierarchy()
         
-        contentView.addSubview(image)
+        contentView.addSubview(thumbnailImage)
         contentView.addSubview(title)
         contentView.addSubview(content)
         contentView.addSubview(likeStack)
@@ -71,24 +71,24 @@ final class CommunityTableViewCell: BaseTableViewCell {
     override func configureLayout() {
         super.configureLayout()
         
-        image.snp.makeConstraints { img in
+        thumbnailImage.snp.makeConstraints { img in
             img.leading.verticalEdges.equalTo(contentView)
                 .inset(16)
-            img.width.equalTo(image.snp.height)
+            img.width.equalTo(thumbnailImage.snp.height)
         }
         
         title.snp.makeConstraints { label in
-            label.leading.equalTo(image.snp.trailing)
+            label.leading.equalTo(thumbnailImage.snp.trailing)
                 .offset(16)
-            label.top.equalTo(image.snp.top)
+            label.top.equalTo(thumbnailImage.snp.top)
             label.trailing.equalTo(likeImage)
                 .inset(8)
         }
         
         content.snp.makeConstraints { label in
-            label.leading.equalTo(image.snp.trailing)
+            label.leading.equalTo(thumbnailImage.snp.trailing)
                 .offset(16)
-            label.bottom.equalTo(image.snp.bottom)
+            label.bottom.equalTo(thumbnailImage.snp.bottom)
             label.trailing.equalTo(likeStack)
                 .inset(8)
         }
@@ -108,7 +108,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        image.image = UIImage(named: "danger")
+        thumbnailImage.image = UIImage(named: "danger")
         likeImage.tintColor = .gray
     }
     
@@ -125,7 +125,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        image.layer.cornerRadius = 8
+        thumbnailImage.layer.cornerRadius = 8
         contentView.layer.cornerRadius = 20
         contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
         

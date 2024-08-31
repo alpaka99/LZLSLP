@@ -12,7 +12,8 @@ import RxSwift
 
 final class CommunityViewModel: RxViewModel {
     struct Input: Inputable {
-        var postResponses = BehaviorRelay(value: [PostResponse]())
+        var postResponses = PublishSubject<[PostResponse]>()
+        var thumbnailImages = PublishSubject<[Data]>()
         var nextCursor: String = ""
         var prefetchTriggered = PublishSubject<Void>()
         var refreshTriggered = PublishSubject<Void>()
@@ -20,9 +21,11 @@ final class CommunityViewModel: RxViewModel {
     
     struct Output: Outputable {
         var isRefreshing = BehaviorSubject(value: false)
+        var combinedData = BehaviorRelay<[CombinedData]>(value: [])
     }
     
-    let repository = PostRepository()
+    let postRepository = PostRepository()
+    let imageRepository = ImageRepository()
     
     var store = ViewStore(input: Input(), output: Output())
     
@@ -39,14 +42,14 @@ final class CommunityViewModel: RxViewModel {
                 
                 let router = URLRouter.https(.lslp(.post(.getPosts(nextCursor: nextCursor, limit: 8, productId: "gasoline_post"))))
                 
-                return self.repository.requestPostAPI(of: GetPostResponse.self, router: router)
+                return self.postRepository.requestPostAPI(of: GetPostResponse.self, router: router)
             }            
             .bind(with: self) { owner, result in
                 switch result { // MARK: 만약 cursor의 마지막 데이터의 날짜가 오늘 날짜가 아니라면 nextCursor를 "0"으로 바꿈, REfresh시ㅣ cursor를 ""으로 바꿈
                 case .success(let response):
                     owner.store.reduce(owner.store.nextCursor, into: response.nextCursor)
-                    var data = owner.store.postResponses.value
-                    let newData = response.data.filter {
+                    
+                    let filteredData = response.data.filter {
                         let formatter = ConstDateFormatter.formatter
                         formatter.dateFormat = ConstDateFormatter.iso8601format
                         if let date = formatter.date(from: $0.createdAt) {
@@ -58,11 +61,10 @@ final class CommunityViewModel: RxViewModel {
                             return false
                         }
                     }
-                    data.append(contentsOf: newData)
-                    owner.store.postResponses.accept(data)
+                    owner.store.postResponses.onNext(filteredData)
                     owner.store.isRefreshing.onNext(false)
                 case .failure(let error):
-                    print(error)
+                    print("Load Post Response error: \(error)")
                 }
             }
             .disposed(by: disposeBag)
@@ -70,8 +72,57 @@ final class CommunityViewModel: RxViewModel {
         store.refreshTriggered
             .bind(with: self) { owner, _ in
                 owner.store.reduce(owner.store.nextCursor, into: "")
-                owner.store.postResponses.accept([])
+                owner.store.postResponses.onNext([])
+                owner.store.thumbnailImages.onNext([])
                 owner.store.prefetchTriggered.onNext(())
+            }
+            .disposed(by: disposeBag)
+        
+        store.postResponses
+            .flatMap {
+                let responseArray = $0
+                
+                var thumbnailArray = [String]()
+                for response in responseArray {
+                    if let thumbnailImage = response.files.first {
+                        thumbnailArray.append(thumbnailImage)
+                    } else {
+                        thumbnailArray.append("") // ImageRepository에서 에러가 발생해도 Data()를 반환해서 괜찮을듯?
+                    }
+                }
+                
+                return Observable.just(thumbnailArray)
+            }
+            .flatMap {
+                return self.imageRepository.loadImageData(fileURLS: $0)
+            }
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let dataArray):
+                    owner.store.thumbnailImages.onNext(dataArray)
+                case .failure(let error):
+                    print("ThumbnailImage Error: \(error)")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        Observable
+            .zip(store.postResponses, store.thumbnailImages)
+            .map { (postResponse, thumbnailImages) in
+               let zippedArray = zip(postResponse, thumbnailImages)
+                
+                var combinedDataArray = [CombinedData]()
+                for (postResponse, thumbnailImage) in zippedArray {
+                    let combinedData = CombinedData(cellImage: thumbnailImage, cellData: postResponse)
+                    combinedDataArray.append(combinedData)
+                }
+                
+                return combinedDataArray
+            }
+            .bind(with: self) { owner, value in
+                let cellData = owner.store.combinedData.value
+                let newData = cellData + value
+                owner.store.combinedData.accept(newData)
             }
             .disposed(by: disposeBag)
     }
@@ -85,4 +136,9 @@ struct GetPostResponse: Decodable {
         case data
         case nextCursor = "next_cursor"
     }
+}
+
+struct CombinedData {
+    let cellImage: Data?
+    let cellData: PostResponse
 }

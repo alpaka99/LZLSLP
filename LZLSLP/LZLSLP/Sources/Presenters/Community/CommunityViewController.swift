@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import RxCocoa
 import RxSwift
 
@@ -23,16 +24,18 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
     override func configureBind() {
         super.configureBind()
         
-        viewModel.store.postResponses
+        viewModel.store.combinedData
             .bind(to: baseView.tableView.rx.items(cellIdentifier: CommunityTableViewCell.identifier, cellType: CommunityTableViewCell.self)) { row, item, cell in
                 
-                cell.title.text = item.title
-                cell.content.text = item.content
-                cell.likeNumber.text = String(item.likes.count)
+                cell.title.text = item.cellData.title
+                cell.content.text = item.cellData.content
+                cell.likeNumber.text = String(item.cellData.likes.count)
                 
-                if item.likes.count > 0 {
+                if item.cellData.likes.count > 0 {
                     cell.likeImage.tintColor = .systemRed
                 }
+//                
+                cell.thumbnailImage.image = UIImage(data: item.cellImage ?? Data())
             }
             .disposed(by: disposeBag)
         

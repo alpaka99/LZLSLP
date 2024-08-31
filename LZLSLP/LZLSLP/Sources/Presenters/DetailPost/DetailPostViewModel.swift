@@ -117,7 +117,7 @@ final class DetailPostViewModel: RxViewModel {
         // image loading sequence
         store.detailPostData
             .flatMap {
-                self.imageRepository.loadImageData(fileURLS: $0.files)
+                return self.imageRepository.loadImageData(fileURLS: $0.files)
             }
             .bind(with: self, onNext: { owner, result in
                 switch result {
