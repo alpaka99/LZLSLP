@@ -23,10 +23,22 @@ final class CommunityView: BaseView {
         return control
     }()
     
+    let floatingButton = {
+        let button = UIButton.Configuration.plain()
+            .image(systemName: "plus")
+            .backgroundColor(.systemRed.withAlphaComponent(0.75))
+            .foregroundColor(.white)
+            .cornerStyle(.capsule)
+            .build()
+        
+        return button
+    }()
+    
     override func configureHierarchy() {
         super.configureHierarchy()
         
         self.addSubview(tableView)
+        self.addSubview(floatingButton)
     }
     
     override func configureLayout() {
@@ -34,6 +46,12 @@ final class CommunityView: BaseView {
         
         tableView.snp.makeConstraints { tableView in
             tableView.edges.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        floatingButton.snp.makeConstraints { btn in
+            btn.size.equalTo(50)
+            btn.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
+                .inset(20)
         }
     }
 }

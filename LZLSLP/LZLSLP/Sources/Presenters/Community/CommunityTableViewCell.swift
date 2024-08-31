@@ -81,6 +81,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4))
         contentView.layer.borderColor = UIColor.systemOrange.cgColor
         contentView.layer.borderWidth = 1
+        
     }
 
     
@@ -88,10 +89,6 @@ final class CommunityTableViewCell: BaseTableViewCell {
         super.draw(rect)
         
         image.layer.cornerRadius = 8
-        
-//        contentView.frame = self.frame.inset(by: UIEdgeInsets(top: 102, left: 4, bottom: 2, right: 4))
-//        contentView.layer.borderColor = UIColor.systemOrange.cgColor
-//        contentView.layer.borderWidth = 1
     }
 }
 
