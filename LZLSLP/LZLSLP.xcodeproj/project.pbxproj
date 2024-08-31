@@ -62,6 +62,7 @@
 		CE91E4C32C82673F000656E0 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C22C82673F000656E0 /* BaseTableViewCell.swift */; };
 		CE91E4C62C8269FD000656E0 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C52C8269FD000656E0 /* Reusable.swift */; };
 		CE91E4C82C826D85000656E0 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C72C826D85000656E0 /* UIColor+.swift */; };
+		CE91E4CA2C834947000656E0 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C92C834947000656E0 /* UIImage+.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -122,6 +123,7 @@
 		CE91E4C22C82673F000656E0 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		CE91E4C52C8269FD000656E0 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CE91E4C72C826D85000656E0 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		CE91E4C92C834947000656E0 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				CE5E64CE2C736A19009830AD /* Decodable+.swift */,
 				CE91E4AC2C81D14C000656E0 /* UIViewController+.swift */,
 				CE91E4C72C826D85000656E0 /* UIColor+.swift */,
+				CE91E4C92C834947000656E0 /* UIImage+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */,
 				CE91E4A72C81C415000656E0 /* LaunchView.swift in Sources */,
 				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
+				CE91E4CA2C834947000656E0 /* UIImage+.swift in Sources */,
 				CE91E4C12C82636D000656E0 /* CommunityTableViewCell.swift in Sources */,
 				CE5E64AE2C70C391009830AD /* SignupView.swift in Sources */,
 				CE80D00C2C7CE32C00A45249 /* DetailPostView.swift in Sources */,

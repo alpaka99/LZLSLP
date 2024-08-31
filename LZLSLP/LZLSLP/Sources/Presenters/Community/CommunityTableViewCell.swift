@@ -10,6 +10,9 @@ import UIKit
 import SnapKit
 
 final class CommunityTableViewCell: BaseTableViewCell {
+    lazy var gradient = UIImage.gradientImage(bounds: self.bounds, colors: [.systemPink, .systemRed, .systemOrange, .systemPurple ,.black])
+    lazy var gradientColor = UIColor(patternImage: gradient)
+    
     let image = {
        let imageView = UIImageView()
         imageView.image = UIImage(systemName: "flame.fill")
@@ -79,8 +82,8 @@ final class CommunityTableViewCell: BaseTableViewCell {
         super.layoutSubviews()
         
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4))
-        contentView.layer.borderColor = UIColor.systemOrange.cgColor
-        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = gradientColor.cgColor
+        contentView.layer.borderWidth = 2
         
     }
 
@@ -89,6 +92,10 @@ final class CommunityTableViewCell: BaseTableViewCell {
         super.draw(rect)
         
         image.layer.cornerRadius = 8
+        contentView.layer.cornerRadius = 20
+        contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner]
+        
+        
     }
 }
 

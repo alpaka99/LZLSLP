@@ -14,6 +14,7 @@ final class CommunityView: BaseView {
         let tableView = UITableView()
         tableView.rowHeight = 80
         tableView.refreshControl = refreshControl
+        tableView.separatorStyle = .none
         return tableView
     }()
     
