@@ -22,7 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            baseView: DonationView(),
 //            viewModel: DonationViewModel()
 //        )
-        let initialController = DonationViewController()
+        let initialController = PaymentViewController(
+            baseView: PaymentView(),
+            viewModel: PaymentViewModel()
+        )
         let rootViewController = UINavigationController(rootViewController: initialController)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()

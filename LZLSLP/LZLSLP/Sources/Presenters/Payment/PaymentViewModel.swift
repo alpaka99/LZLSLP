@@ -1,5 +1,5 @@
 //
-//  DonationViewModel.swift
+//  PaymentViewModel.swift
 //  LZLSLP
 //
 //  Created by user on 9/1/24.
@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class DonationViewModel: RxViewModel {
+final class PaymentViewModel: RxViewModel {
     struct Input: Inputable {
         
     }
