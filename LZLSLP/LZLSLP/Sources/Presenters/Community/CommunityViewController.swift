@@ -29,6 +29,10 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
                 cell.title.text = item.title
                 cell.content.text = item.content
                 cell.likeNumber.text = String(item.likes.count)
+                
+                if item.likes.count > 0 {
+                    cell.likeImage.tintColor = .systemRed
+                }
             }
             .disposed(by: disposeBag)
         

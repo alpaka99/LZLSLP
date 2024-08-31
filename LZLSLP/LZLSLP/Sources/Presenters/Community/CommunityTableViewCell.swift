@@ -108,7 +108,8 @@ final class CommunityTableViewCell: BaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        image.image = UIImage(systemName: "flame.fill")
+        image.image = UIImage(named: "danger")
+        likeImage.tintColor = .gray
     }
     
     override func layoutSubviews() {
