@@ -63,6 +63,9 @@
 		CE91E4C62C8269FD000656E0 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C52C8269FD000656E0 /* Reusable.swift */; };
 		CE91E4C82C826D85000656E0 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C72C826D85000656E0 /* UIColor+.swift */; };
 		CE91E4CA2C834947000656E0 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C92C834947000656E0 /* UIImage+.swift */; };
+		CE91E4D22C837E42000656E0 /* DonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4D12C837E42000656E0 /* DonationView.swift */; };
+		CE91E4D42C837E54000656E0 /* DonationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4D32C837E54000656E0 /* DonationViewModel.swift */; };
+		CE91E4D62C837E86000656E0 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4D52C837E86000656E0 /* DonationViewController.swift */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -124,6 +127,9 @@
 		CE91E4C52C8269FD000656E0 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CE91E4C72C826D85000656E0 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		CE91E4C92C834947000656E0 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		CE91E4D12C837E42000656E0 /* DonationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationView.swift; sourceTree = "<group>"; };
+		CE91E4D32C837E54000656E0 /* DonationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewModel.swift; sourceTree = "<group>"; };
+		CE91E4D52C837E86000656E0 /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -207,6 +213,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4D02C837E3D000656E0 /* Donation */,
 				CE91E4BD2C8240A3000656E0 /* Logo */,
 				CE91E4AE2C820A9E000656E0 /* TabBar */,
 				CE91E4A52C81C40E000656E0 /* Launch */,
@@ -408,6 +415,16 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		CE91E4D02C837E3D000656E0 /* Donation */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4D12C837E42000656E0 /* DonationView.swift */,
+				CE91E4D32C837E54000656E0 /* DonationViewModel.swift */,
+				CE91E4D52C837E86000656E0 /* DonationViewController.swift */,
+			);
+			path = Donation;
+			sourceTree = "<group>";
+		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE91E4D62C837E86000656E0 /* DonationViewController.swift in Sources */,
 				CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */,
 				CE91E4A72C81C415000656E0 /* LaunchView.swift in Sources */,
 				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
@@ -551,9 +569,11 @@
 				CEE75B712C7B3F8600FC61E6 /* CommunityViewController.swift in Sources */,
 				CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
+				CE91E4D22C837E42000656E0 /* DonationView.swift in Sources */,
 				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
 				CE80D0092C7C88D900A45249 /* DateFormatter.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
+				CE91E4D42C837E54000656E0 /* DonationViewModel.swift in Sources */,
 				CE91E4AD2C81D14C000656E0 /* UIViewController+.swift in Sources */,
 				CE91E4C82C826D85000656E0 /* UIColor+.swift in Sources */,
 				CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */,
