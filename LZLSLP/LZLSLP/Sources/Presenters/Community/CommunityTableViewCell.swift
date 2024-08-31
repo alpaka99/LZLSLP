@@ -15,7 +15,8 @@ final class CommunityTableViewCell: BaseTableViewCell {
     
     let image = {
        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "cylinder.fill")
+        imageView.image = UIImage(named: "danger")
+        imageView.contentMode = .scaleAspectFit
         imageView.tintColor = UIColor.randomColor()
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.clipsToBounds = true
