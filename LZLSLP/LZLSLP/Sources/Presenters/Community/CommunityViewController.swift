@@ -66,12 +66,22 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
         baseView.refreshControl.rx.controlEvent(.valueChanged)
             .bind(to: viewModel.store.refreshTriggered)
             .disposed(by: disposeBag)
+        
+        baseView.floatingButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let postViewController = PostViewController(
+                    baseView: PostView(),
+                    viewModel: PostViewModel()
+                )
+                
+                owner.navigationController?.pushViewController(postViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureDelegate() {
         super.configureDelegate()
         
-//        baseView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifier)
         baseView.tableView.register(CommunityTableViewCell.self, forCellReuseIdentifier: CommunityTableViewCell.identifier)
     }
     

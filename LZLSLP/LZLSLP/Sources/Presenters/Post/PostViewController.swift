@@ -47,6 +47,12 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
                 owner.present(imagePicker, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.store.postUploadedCompleted
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 

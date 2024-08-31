@@ -21,6 +21,7 @@ final class PostViewModel: RxViewModel {
     struct Output: Outputable {
         var imageArray = BehaviorRelay<[ImageForm]>(value: [])
         var uploadedImageArray = PublishRelay<[String]>()
+        var postUploadedCompleted = PublishSubject<Void>()
     }
     
     var store = ViewStore(input: Input(), output: Output())
@@ -40,7 +41,7 @@ final class PostViewModel: RxViewModel {
             }
             .flatMap { result in // 2. 성공했다면 post를 보냄
                 var postForm = self.store.postForm.value
-                
+                print("first result", result)
                 switch result {
                 case .success(let imageResponse):
                     postForm.files = imageResponse.files
@@ -52,9 +53,10 @@ final class PostViewModel: RxViewModel {
                 }
             }
             .bind(with: self) { owner, result in
+                print("second result", result)
                 switch result {
-                case .success(let response):
-                    print("Success Send Comment: \(response)")
+                case .success:
+                    owner.store.postUploadedCompleted.onNext(())
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
