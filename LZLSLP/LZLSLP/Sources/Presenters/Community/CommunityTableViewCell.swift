@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class CommunityTableViewCell: BaseTableViewCell {
-    lazy var gradient = UIImage.gradientImage(bounds: self.bounds, colors: [.systemPink, .systemRed, .systemOrange, .systemPurple ,.black])
+    lazy var gradient = UIImage.gradientImage(bounds: self.bounds, colors: [.systemRed, .systemPurple, .systemOrange ,.systemPink])
     lazy var gradientColor = UIColor(patternImage: gradient)
     
     let image = {
