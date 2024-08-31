@@ -28,7 +28,7 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
                 
                 cell.title.text = item.title
                 cell.content.text = item.content
-                
+                cell.likeNumber.text = String(item.likes.count)
             }
             .disposed(by: disposeBag)
         

@@ -15,7 +15,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
     
     let image = {
        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "flame.fill")
+        imageView.image = UIImage(systemName: "cylinder.fill")
         imageView.tintColor = UIColor.randomColor()
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.clipsToBounds = true
@@ -25,7 +25,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
     let title = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
         return label
     }()
     
@@ -36,22 +36,43 @@ final class CommunityTableViewCell: BaseTableViewCell {
         return label
     }()
     
+    let likeImage = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "flame")
+        imageView.tintColor = .darkGray
+        return imageView
+    }()
+    
+    let likeNumber = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textAlignment = .center
+        label.textColor = .gray
+        return label
+    }()
+    
+    lazy var likeStack = { [weak self] in
+        guard let cell = self else { return UIStackView() }
+        let stack = UIStackView(arrangedSubviews: [cell.likeImage, cell.likeNumber])
+        stack.axis = .vertical
+        return stack
+    }()
+    
     override func configureHierarchy() {
         super.configureHierarchy()
         
         contentView.addSubview(image)
         contentView.addSubview(title)
         contentView.addSubview(content)
+        contentView.addSubview(likeStack)
     }
     
     override func configureLayout() {
         super.configureLayout()
         
         image.snp.makeConstraints { img in
-            img.verticalEdges.equalTo(contentView)
-                .inset(8)
-            img.leading.equalTo(contentView)
-                .inset(8)
+            img.leading.verticalEdges.equalTo(contentView)
+                .inset(16)
             img.width.equalTo(image.snp.height)
         }
         
@@ -59,7 +80,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
             label.leading.equalTo(image.snp.trailing)
                 .offset(16)
             label.top.equalTo(image.snp.top)
-            label.trailing.equalTo(contentView)
+            label.trailing.equalTo(likeImage)
                 .inset(8)
         }
         
@@ -67,7 +88,18 @@ final class CommunityTableViewCell: BaseTableViewCell {
             label.leading.equalTo(image.snp.trailing)
                 .offset(16)
             label.bottom.equalTo(image.snp.bottom)
-            label.trailing.equalTo(contentView)
+            label.trailing.equalTo(likeStack)
+                .inset(8)
+        }
+        
+        likeImage.snp.makeConstraints { img in
+            img.size.equalTo(32)
+        }
+        
+        likeStack.snp.makeConstraints { stack in
+            stack.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
+                .inset(8)
+            stack.trailing.equalTo(contentView)
                 .inset(8)
         }
     }
