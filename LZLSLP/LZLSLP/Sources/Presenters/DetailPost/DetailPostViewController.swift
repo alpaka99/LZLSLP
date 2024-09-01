@@ -78,14 +78,7 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
             .disposed(by: disposeBag)
         
         
-        // image가 없다면 collectionView의 높이 줄여버리기
-        viewModel.store.loadedImages
-            .bind(with: self) { owner, value in
-                if value.isEmpty {
-                    
-                }
-            }
-            .disposed(by: disposeBag)
+        // MARK: image가 없다면 collectionView의 높이 줄여버리기
             
     }
 }

@@ -47,6 +47,7 @@ final class PostView: BaseView {
         let textView = UITextView()
         textView.backgroundColor = .lightGray.withAlphaComponent(0.5)
         textView.layer.cornerRadius = 8
+        textView.font = .systemFont(ofSize: 16)
         return textView
     }()
     

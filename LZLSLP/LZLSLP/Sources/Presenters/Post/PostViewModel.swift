@@ -15,6 +15,7 @@ final class PostViewModel: RxViewModel {
         var postForm = BehaviorRelay<PostForm>(value: PostForm(title: "", content: "", files: []))
         var selectedImageData = PublishRelay<ImageForm>()
         var submitButtonTapped = PublishSubject<Void>()
+        var deleteButtonTapped = PublishSubject<Int>()
         var toastMessage = PublishSubject<String>()
     }
     
@@ -22,6 +23,7 @@ final class PostViewModel: RxViewModel {
         var imageArray = BehaviorRelay<[ImageForm]>(value: [])
         var uploadedImageArray = PublishRelay<[String]>()
         var postUploadedCompleted = PublishSubject<Void>()
+        var reloadCollectionView = PublishSubject<Void>()
     }
     
     var store = ViewStore(input: Input(), output: Output())
@@ -80,6 +82,16 @@ final class PostViewModel: RxViewModel {
             }
             .disposed(by: disposeBag)
         
+        
+        // MARK: 선택한 이미지 지우는 작업
+//        store.deleteButtonTapped
+//            .bind(with: self) { owner, index in
+//                print("DELTE: \(index)")
+//                var newArray = owner.store.imageArray.value
+//                newArray.remove(at: index)
+//                owner.store.imageArray.accept(newArray)
+//            }
+//            .disposed(by: disposeBag)
     }
 }
 
