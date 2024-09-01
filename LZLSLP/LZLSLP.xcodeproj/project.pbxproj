@@ -67,6 +67,10 @@
 		CE91E4D42C837E54000656E0 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4D32C837E54000656E0 /* PaymentViewModel.swift */; };
 		CE91E4D62C837E86000656E0 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4D52C837E86000656E0 /* PaymentViewController.swift */; };
 		CE91E4D92C838233000656E0 /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = CE91E4D82C838233000656E0 /* iamport-ios */; };
+		CE91E4E22C84EDB7000656E0 /* DonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4E12C84EDB7000656E0 /* DonationView.swift */; };
+		CE91E4E42C84EDC8000656E0 /* DonationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4E32C84EDC8000656E0 /* DonationViewModel.swift */; };
+		CE91E4E62C84EDFF000656E0 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4E52C84EDFF000656E0 /* DonationViewController.swift */; };
+		CE91E4EA2C84F744000656E0 /* gasoline_coffee.json in Resources */ = {isa = PBXBuildFile; fileRef = CE91E4E92C84F744000656E0 /* gasoline_coffee.json */; };
 		CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */; };
 		CEE75B4B2C76C38200FC61E6 /* PostInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */; };
 		CEE75B6D2C7B3F4100FC61E6 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */; };
@@ -131,6 +135,10 @@
 		CE91E4D12C837E42000656E0 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		CE91E4D32C837E54000656E0 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		CE91E4D52C837E86000656E0 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		CE91E4E12C84EDB7000656E0 /* DonationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationView.swift; sourceTree = "<group>"; };
+		CE91E4E32C84EDC8000656E0 /* DonationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewModel.swift; sourceTree = "<group>"; };
+		CE91E4E52C84EDFF000656E0 /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
+		CE91E4E92C84F744000656E0 /* gasoline_coffee.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasoline_coffee.json; sourceTree = "<group>"; };
 		CEE75B482C76C34900FC61E6 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B4A2C76C38200FC61E6 /* PostInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInterceptor.swift; sourceTree = "<group>"; };
 		CEE75B6C2C7B3F4100FC61E6 /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
@@ -215,6 +223,7 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4E02C84EDAE000656E0 /* Donation */,
 				CE91E4D02C837E3D000656E0 /* Payment */,
 				CE91E4BD2C8240A3000656E0 /* Logo */,
 				CE91E4AE2C820A9E000656E0 /* TabBar */,
@@ -395,6 +404,7 @@
 		CE91E4B42C8226F4000656E0 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4E92C84F744000656E0 /* gasoline_coffee.json */,
 				CE91E4B92C822D32000656E0 /* gasoline_loading.json */,
 				CE91E4B52C822889000656E0 /* gasoline_launch.json */,
 			);
@@ -425,6 +435,16 @@
 				CE91E4D52C837E86000656E0 /* PaymentViewController.swift */,
 			);
 			path = Payment;
+			sourceTree = "<group>";
+		};
+		CE91E4E02C84EDAE000656E0 /* Donation */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4E12C84EDB7000656E0 /* DonationView.swift */,
+				CE91E4E32C84EDC8000656E0 /* DonationViewModel.swift */,
+				CE91E4E52C84EDFF000656E0 /* DonationViewController.swift */,
+			);
+			path = Donation;
 			sourceTree = "<group>";
 		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
@@ -524,6 +544,7 @@
 			files = (
 				CE91E4BA2C822D32000656E0 /* gasoline_loading.json in Resources */,
 				CE5E647F2C6DE215009830AD /* Assets.xcassets in Resources */,
+				CE91E4EA2C84F744000656E0 /* gasoline_coffee.json in Resources */,
 				CE5E64822C6DE215009830AD /* Base in Resources */,
 				CE91E4B62C822889000656E0 /* gasoline_launch.json in Resources */,
 			);
@@ -554,11 +575,13 @@
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
 				CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */,
+				CE91E4E42C84EDC8000656E0 /* DonationViewModel.swift in Sources */,
 				CE91E4C32C82673F000656E0 /* BaseTableViewCell.swift in Sources */,
 				CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */,
 				CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */,
 				CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */,
 				CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */,
+				CE91E4E62C84EDFF000656E0 /* DonationViewController.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
 				CE91E4AB2C81C4A5000656E0 /* LaunchViewController.swift in Sources */,
@@ -572,6 +595,7 @@
 				CE91E4BF2C8240AA000656E0 /* LogoView.swift in Sources */,
 				CEE75B712C7B3F8600FC61E6 /* CommunityViewController.swift in Sources */,
 				CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */,
+				CE91E4E22C84EDB7000656E0 /* DonationView.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
 				CE91E4D22C837E42000656E0 /* PaymentView.swift in Sources */,
 				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
