@@ -15,14 +15,15 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
     override func configureDelegate() {
         super.configureDelegate()
         
-        baseView.commentTableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-        baseView.imageCollectionView.register(TempImageCell.self, forCellWithReuseIdentifier: "TempImageCell")
+        baseView.commentTableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.identifier)
+        baseView.imageCollectionView.register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.identifier)
     }
     
     override func configureBind() {
         super.configureBind()
         
         viewModel.store.detailPostData
+            .share()
             .map {
                 $0.title
             }
@@ -35,7 +36,7 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
             }
             .asDriver(onErrorJustReturn: [CommentResponse]())
             .drive(baseView.commentTableView.rx.items) { tableView, row ,data in
-                let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: IndexPath(row: row, section: 0))
+                let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.identifier, for: IndexPath(row: row, section: 0))
                 cell.textLabel?.text = data.content
                 return cell
                 }
@@ -67,44 +68,17 @@ final class DetailPostViewController: BaseViewController<DetailPostView, DetailP
             .disposed(by: disposeBag)
         
         
+        // MARK: 만약 loadedImage 가 없으면 collectionView의 크기를 줄여버리기
         viewModel.store.loadedImages
-            .debug("DetailViewController")
-            .bind(to: baseView.imageCollectionView.rx.items(cellIdentifier: "TempImageCell", cellType: TempImageCell.self)) { row, data, cell in
-                
+            .bind(to: baseView.imageCollectionView.rx.items(cellIdentifier: DetailImageCell.identifier, cellType: DetailImageCell.self)) { row, data, cell in
                 let image = UIImage(data: data)
-                
-                
                 
                 cell.imageView.image = image
             }
             .disposed(by: disposeBag)
+        
+        
+        // MARK: image가 없다면 collectionView의 높이 줄여버리기
             
     }
-}
-
-final class TempImageCell: UICollectionViewCell {
-    let imageView = {
-        let view = UIImageView()
-        return view
-    }()
-    
-    override init(frame: CGRect) {
-           super.init(frame: frame)
-           setImageView()
-       }
-
-       required init?(coder aDecoder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-       }
-
-
-       func setImageView(){
-           backgroundColor = .systemGroupedBackground
-           
-           addSubview(imageView)
-           
-           imageView.snp.makeConstraints {
-               $0.edges.equalTo(self)
-           }
-       }
 }

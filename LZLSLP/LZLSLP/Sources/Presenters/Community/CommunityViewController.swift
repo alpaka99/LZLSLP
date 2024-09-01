@@ -34,8 +34,13 @@ final class CommunityViewController: BaseViewController<CommunityView, Community
                 if item.cellData.likes.count > 0 {
                     cell.likeImage.tintColor = .systemRed
                 }
-//                
-                cell.thumbnailImage.image = UIImage(data: item.cellImage ?? Data())
+                
+                guard let cellImage = item.cellImage else { return }
+                if cellImage.isEmpty {
+                    cell.thumbnailImage.image = UIImage(named: "thumbnail")
+                } else {
+                    cell.thumbnailImage.image = UIImage(data: item.cellImage ?? Data())
+                }
             }
             .disposed(by: disposeBag)
         
