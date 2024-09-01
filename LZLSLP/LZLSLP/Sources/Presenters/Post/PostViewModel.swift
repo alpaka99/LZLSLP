@@ -48,11 +48,12 @@ final class PostViewModel: RxViewModel {
             }
             .flatMap { result in // 2. 성공했다면 post를 보냄
                 var postForm = self.store.postForm.value
-                print("first result", result)
                 switch result {
                 case .success(let imageResponse):
-                    postForm.files = imageResponse.files
-                    print(postForm)
+                    if !imageResponse.files.isEmpty {
+                        postForm.files = imageResponse.files
+                    }
+                    
                     let router = URLRouter.https(.lslp(.post(.postPost(postForm: postForm))))
                     return self.postRepository.requestPostAPI(of: PostResponse.self, router: router)
                 case .failure(let error):
