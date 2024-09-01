@@ -48,9 +48,10 @@ final class NetworkManager {
         return Single.create { observer in
             if let urlRequest = router.build() {
                 // files라는 parameter 이름으로 이미지 파일들을 올려버림
+                
                 AF.upload(multipartFormData: { multipartFormData in
                     for data in dataArray {
-                        multipartFormData.append(data.data, withName: "files", fileName: data.dataName, mimeType: "image/png")
+                        multipartFormData.append(data.data, withName: "files", fileName: "test", mimeType: "image/jpeg")
                     }
                 }, with: urlRequest, interceptor: interceptor)
                 .validate(statusCode: 200..<300)
@@ -63,6 +64,7 @@ final class NetworkManager {
                         observer(.failure(error))
                     }
                 }
+
                 
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))

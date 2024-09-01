@@ -38,7 +38,17 @@ final class PostRepository {
     
     func requestPostDataAPI<T: Decodable>(of type: T.Type, router: URLRouter, imageArray: [Uploadable]) -> Single<Result<T, Error>> {
         Single.create { observer in
-            NetworkManager.shared.uploadDataCall(router: router, dataArray: imageArray, interceptor: PostInterceptor())
+            // imageArray가 비어있다면 여기서 미리 처리
+//            guard !imageArray.isEmpty else {
+//                observer(.success(.success()))
+//                return Disposables.create()
+//            }
+            
+            NetworkManager.shared.uploadDataCall(
+                router: router,
+                dataArray: imageArray,
+                interceptor: PostInterceptor()
+            )
                 .subscribe(with: self) { owner, result in
                     switch result {
                     case .success(let data):

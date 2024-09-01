@@ -68,11 +68,11 @@ extension PostViewController: PHPickerViewControllerDelegate {
                     print("Image 로딩 에러")
                     return
                 }
-                // image work
                 
+                // image work
                 guard let imageName = itemProvider.suggestedName, let image = image as? UIImage else { print("Error Converting")
                     return }
-                guard let imageData = image.pngData() else {
+                guard let imageData = image.jpegData(compressionQuality: 0.80) else {
                     print("To Data failed")
                     return }
                 
