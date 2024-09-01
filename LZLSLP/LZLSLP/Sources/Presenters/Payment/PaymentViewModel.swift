@@ -15,14 +15,15 @@ final class PaymentViewModel: RxViewModel {
         let sesacKey = Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
         let userCode = "imp57573124"
         
-        let paymentResponse = PublishSubject<PaymentResponse>()
-    }
-    
-    struct Output: Outputable {
         
     }
     
+    struct Output: Outputable {
+        let paymentResponse = PublishSubject<PaymentResponse>()
+    }
+    
     var store = ViewStore(input: Input(), output: Output())
+    
 }
 
 struct PaymentResponse {

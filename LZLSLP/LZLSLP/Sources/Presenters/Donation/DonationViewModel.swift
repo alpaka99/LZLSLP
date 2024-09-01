@@ -16,7 +16,7 @@ final class DonationViewModel: RxViewModel {
     }
     
     struct Output: Outputable {
-        
+        let paymentResponse = PublishSubject<PaymentResponse>()
     }
     
     var store = ViewStore(input: Input(), output: Output())

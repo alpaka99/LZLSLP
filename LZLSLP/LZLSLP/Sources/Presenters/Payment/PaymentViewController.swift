@@ -51,6 +51,13 @@ final class PaymentViewController: BaseViewController<PaymentView, PaymentViewMo
                 owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.store.paymentResponse
+            .share()
+            .bind(with: self) { owner, _ in
+                owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureNavigationItem() {
