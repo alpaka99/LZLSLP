@@ -32,12 +32,19 @@ final class PostViewModel: RxViewModel {
         super.configureBind()
         
         store.submitButtonTapped
-            .flatMap { _ in // MARK: 1. 우선은 이미지를 서버에 보냄 -> 이미지가 없는 경우는?
-                let imageArray = self.store.imageArray.value
+            .withLatestFrom(store.imageArray)
+            .flatMap { imageFormArray in // MARK: 1. 우선은 이미지를 서버에 보냄
+                
+                // MARK: 이미지가 없는 경우는? -> 없어도 stream이 진행되도록 처리해야함
+                guard !imageFormArray.isEmpty else {
+                    let returnValue: Single<Result<ImageUploadResponse, any Error>> = Single.just(.success(ImageUploadResponse(files: [])))
+                    return returnValue
+                }
                 
                 // send image array with MultiPartFormData
                 let router = URLRouter.https(.lslp(.post(.postFiles)))
-                return self.postRepository.requestPostDataAPI(of: ImageUploadResponse.self, router: router, imageArray: imageArray)
+                return self.postRepository.requestPostDataAPI(of: ImageUploadResponse.self, router: router, imageArray: imageFormArray)
+                
             }
             .flatMap { result in // 2. 성공했다면 post를 보냄
                 var postForm = self.store.postForm.value
@@ -80,11 +87,11 @@ struct PostResponse: Decodable {
     let productId: String?
     let title: String
     let content: String
-//    let content1: String
-//    let content2: String
-//    let content3: String
-//    let content4: String
-//    let content5: String
+    //    let content1: String
+    //    let content2: String
+    //    let content3: String
+    //    let content4: String
+    //    let content5: String
     let createdAt: String
     let creator: Creator
     let files: [String]
@@ -99,11 +106,11 @@ struct PostResponse: Decodable {
         case productId = "product_id"
         case title
         case content
-//        case content1
-//        case content2
-//        case content3
-//        case content4
-//        case content5
+        //        case content1
+        //        case content2
+        //        case content3
+        //        case content4
+        //        case content5
         case createdAt
         case creator
         case files

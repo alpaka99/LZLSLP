@@ -46,6 +46,11 @@ final class NetworkManager {
     
     func uploadDataCall(router: URLRouter, dataArray: [Uploadable], interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
         return Single.create { observer in
+            guard !dataArray.isEmpty else {
+                observer(.success(.success(Data())))
+                return Disposables.create()
+            }
+            
             if let urlRequest = router.build() {
                 // files라는 parameter 이름으로 이미지 파일들을 올려버림
                 
