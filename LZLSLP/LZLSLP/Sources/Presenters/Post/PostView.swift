@@ -10,17 +10,9 @@ import UIKit
 import SnapKit
 
 final class PostView: BaseView {
-    let titleTextField = {
-        let textField = UITextField()
-        textField.placeholder = "제목"
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.layer.borderWidth = 1
-        return textField
-    }()
-    
     let imagePickerButton = {
         let button = UIButton.Configuration.plain()
-            .title("이미지 추가")
+            .image(systemName: "photo.stack.fill")
             .foregroundColor(.white)
             .backgroundColor(.systemRed)
             .cornerStyle(.medium)
@@ -28,21 +20,44 @@ final class PostView: BaseView {
         return button
     }()
     
+    let imageCollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.createFlowLayout(
+            numberOfRowsInLine: 1,
+            spacing: 10,
+            width: 80,
+            heightMultiplier: 1)
+        )
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
+    
+    let titleTextField = {
+        let textField = UITextField()
+        textField.placeholder = "글 제목"
+        return textField
+    }()
+    
+    let divider = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
+    }()
+    
     let contentView = {
         let textView = UITextView()
-        textView.textContainer.maximumNumberOfLines = 10
-        textView.layer.borderColor = UIColor.black.cgColor
-        textView.layer.borderWidth = 1
+        textView.backgroundColor = .lightGray.withAlphaComponent(0.5)
+        textView.layer.cornerRadius = 8
         return textView
     }()
     
     
     let submitButton = {
         let button = UIButton.Configuration.plain()
-            .title("글쓰기")
-            .foregroundColor(.white)
-            .backgroundColor(.systemBlue)
-            .cornerStyle(.capsule)
+            .title("작성 완료")
+            .font(ofSize: 24, weight: .heavy)
+            .foregroundColor(.black)
+            .backgroundColor(.red)
+            .cornerStyle(.medium)
             .build()
         
         return button
@@ -52,8 +67,10 @@ final class PostView: BaseView {
     override func configureHierarchy() {
         super.configureHierarchy()
         
-        self.addSubview(titleTextField)
         self.addSubview(imagePickerButton)
+        self.addSubview(imageCollectionView)
+        self.addSubview(titleTextField)
+        self.addSubview(divider)
         self.addSubview(contentView)
         self.addSubview(submitButton)
     }
@@ -61,23 +78,41 @@ final class PostView: BaseView {
     override func configureLayout() {
         super.configureLayout()
         
-        titleTextField.snp.makeConstraints { textField in
-            textField.top.equalTo(self.safeAreaLayoutGuide)
-                .inset(16)
-            textField.leading.equalTo(self.safeAreaLayoutGuide)
+        imagePickerButton.snp.makeConstraints { btn in
+            btn.top.equalTo(self.safeAreaLayoutGuide)
+                .offset(20)
+            btn.leading.equalTo(self.safeAreaLayoutGuide)
                 .offset(16)
+            btn.size.equalTo(80)
         }
         
-        imagePickerButton.snp.makeConstraints { btn in
-            btn.top.equalTo(titleTextField.snp.top)
-            btn.leading.equalTo(titleTextField.snp.trailing)
-                .offset(16)
-            btn.trailing.equalTo(self.safeAreaLayoutGuide)
+        imageCollectionView.snp.makeConstraints { collectionView in
+            collectionView.top.equalTo(imagePickerButton)
+            collectionView.leading.equalTo(imagePickerButton.snp.trailing)
+                .offset(20)
+            collectionView.trailing.equalTo(self.safeAreaLayoutGuide)
                 .inset(16)
+            collectionView.height.equalTo(80)
         }
+        
+        titleTextField.snp.makeConstraints { textField in
+            textField.top.equalTo(imagePickerButton.snp.bottom)
+                .offset(16)
+            textField.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+                .inset(16)
+            textField.height.equalTo(50)
+        }
+        
+        divider.snp.makeConstraints { view in
+            view.top.equalTo(titleTextField.snp.bottom)
+                .offset(8)
+            view.horizontalEdges.equalTo(titleTextField)
+            view.height.equalTo(1)
+        }
+        
         
         contentView.snp.makeConstraints { textView in
-            textView.top.equalTo(titleTextField.snp.bottom)
+            textView.top.equalTo(divider.snp.bottom)
                 .offset(20)
             textView.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
                 .inset(16)
@@ -86,9 +121,12 @@ final class PostView: BaseView {
         submitButton.snp.makeConstraints { btn in
             btn.top.equalTo(contentView.snp.bottom)
                 .offset(16)
-            btn.centerX.equalTo(self.safeAreaLayoutGuide)
+            btn.horizontalEdges.equalTo(self.safeAreaLayoutGuide)
+                .inset(50)
             btn.bottom.equalTo(self.safeAreaLayoutGuide)
             btn.height.equalTo(44)
         }
     }
 }
+
+

@@ -53,6 +53,18 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
                 owner.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.store.imageArray
+            .bind(to: baseView.imageCollectionView.rx.items(cellIdentifier: PostImageCell.identifier, cellType: PostImageCell.self)) { row, imageForm, cell in
+                cell.imageView.image = UIImage(data: imageForm.data)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        baseView.imageCollectionView.register(PostImageCell.self, forCellWithReuseIdentifier: PostImageCell.identifier)
     }
 }
 
