@@ -67,14 +67,12 @@ enum URLRouter: Router {
                     return nil
                 }
                 
+                print("URLBuild sequence: \(request.parameters)")
+                
                 if !request.parameters.isEmpty { // MARK: 이 부분 수정 가능하지 않을까?
                     urlRequest.httpBody = requestBody
                 }
                 
-//                print("url", urlRequest.url?.absoluteString)
-//                print("Methods", urlRequest.httpMethod)
-//                print("Headers", urlRequest.allHTTPHeaderFields)
-//                print("Body", urlRequest.httpBody)
                 return urlRequest
             } else {
                 print("Cannot create urlRequest")
@@ -138,6 +136,7 @@ enum LSLPRequest: Pathable {
     case profile(ProfileType)
     case hashtag(HashtagType)
     case image(ImageType)
+    case payment(PaymentType)
     
     var baseURL: String {
         return "naver.com"
@@ -167,6 +166,8 @@ enum LSLPRequest: Pathable {
             return endpoint.endpoint
         case .image(let endpoint):
             return endpoint.endpoint
+        case .payment(let endpoint):
+            return endpoint.endpoint
         }
     }
     
@@ -189,6 +190,8 @@ enum LSLPRequest: Pathable {
         case .comment(let endpoint):
             return endpoint.httpMethod.rawValue
         case .image(let endpoint):
+            return endpoint.httpMethod.rawValue
+        case .payment(let endpoint):
             return endpoint.httpMethod.rawValue
         }
     }
@@ -213,6 +216,8 @@ enum LSLPRequest: Pathable {
             return endpoint.httpHeaders
         case .image(let endpoint):
             return endpoint.httpHeaders
+        case .payment(let endpoint):
+            return endpoint.httpHeaders
         }
     }
     
@@ -236,6 +241,8 @@ enum LSLPRequest: Pathable {
         case .comment(let endpoint):
             return endpoint.parameters
         case .image(let endpoint):
+            return endpoint.parameters
+        case .payment(let endpoint):
             return endpoint.parameters
         }
     }
@@ -638,6 +645,49 @@ enum LSLPRequest: Pathable {
         
         var parameters: [String : Any] {
             return [:]
+        }
+    }
+    
+    enum PaymentType: Endpoitable {
+        case validation(String)
+        case me
+        
+        var endpoint: String {
+            switch self {
+            case .validation:
+                return "/payments/validation"
+            case .me:
+                return "/payments/me"
+            }
+        }
+        
+        var httpMethod: HTTPMethod {
+            switch self {
+            case .validation:
+                return .post
+            case .me:
+                return .get
+            }
+        }
+
+        var httpHeaders: [String : String] {
+            var headerPayload: [String : String] = [:]
+            headerPayload[HTTPHeaderKey.applicationJson.key] = HTTPHeaderKey.applicationJson.value
+            headerPayload[HTTPHeaderKey.sesacKey.key] = HTTPHeaderKey.sesacKey.value
+
+            return headerPayload
+        }
+
+        var parameters: [String : Any] {
+            switch self {
+            case .validation(let impUID):
+                return [
+                    "imp_uid" : impUID,
+                    "post_id" : "66d4e45e5a9c85013f8f0314"
+                ]
+            default:
+                return [:]
+            }
         }
     }
 }

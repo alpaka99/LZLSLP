@@ -14,8 +14,6 @@ final class PaymentViewModel: RxViewModel {
     struct Input: Inputable {
         let sesacKey = Bundle.main.object(forInfoDictionaryKey: "SeSAC_Key") as? String ?? ""
         let userCode = "imp57573124"
-        
-        
     }
     
     struct Output: Outputable {

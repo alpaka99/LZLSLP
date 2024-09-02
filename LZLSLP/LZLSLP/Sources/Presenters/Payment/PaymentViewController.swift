@@ -48,13 +48,13 @@ final class PaymentViewController: BaseViewController<PaymentView, PaymentViewMo
         
         leftBarButtonItem.rx.tap
             .bind(with: self) { owner, _ in
+                owner.viewModel.store.paymentResponse.onNext(PaymentResponse(merchantUID: "temp", success: true, impUID: "imp_892335070167"))
                 owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
         
         viewModel.store.paymentResponse
-            .share()
-            .bind(with: self) { owner, _ in
+            .bind(with: self) { owner, value in
                 owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
