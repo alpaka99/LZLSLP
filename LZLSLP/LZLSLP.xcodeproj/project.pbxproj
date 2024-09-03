@@ -63,6 +63,15 @@
 		CE91E4C62C8269FD000656E0 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C52C8269FD000656E0 /* Reusable.swift */; };
 		CE91E4C82C826D85000656E0 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C72C826D85000656E0 /* UIColor+.swift */; };
 		CE91E4CA2C834947000656E0 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4C92C834947000656E0 /* UIImage+.swift */; };
+		CE91E4D22C837E42000656E0 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4D12C837E42000656E0 /* PaymentView.swift */; };
+		CE91E4D42C837E54000656E0 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4D32C837E54000656E0 /* PaymentViewModel.swift */; };
+		CE91E4D62C837E86000656E0 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4D52C837E86000656E0 /* PaymentViewController.swift */; };
+		CE91E4D92C838233000656E0 /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = CE91E4D82C838233000656E0 /* iamport-ios */; };
+		CE91E4E22C84EDB7000656E0 /* DonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4E12C84EDB7000656E0 /* DonationView.swift */; };
+		CE91E4E42C84EDC8000656E0 /* DonationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4E32C84EDC8000656E0 /* DonationViewModel.swift */; };
+		CE91E4E62C84EDFF000656E0 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4E52C84EDFF000656E0 /* DonationViewController.swift */; };
+		CE91E4EA2C84F744000656E0 /* gasoline_coffee.json in Resources */ = {isa = PBXBuildFile; fileRef = CE91E4E92C84F744000656E0 /* gasoline_coffee.json */; };
+		CE91E4EC2C851102000656E0 /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4EB2C851102000656E0 /* PaymentRepository.swift */; };
 		CE91E4DB2C8471C6000656E0 /* DetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4DA2C8471C6000656E0 /* DetailImageCell.swift */; };
 		CE91E4DD2C8477E3000656E0 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4DC2C8477E3000656E0 /* BaseCollectionViewCell.swift */; };
 		CE91E4DF2C84792E000656E0 /* PostImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE91E4DE2C84792E000656E0 /* PostImageCell.swift */; };
@@ -127,6 +136,14 @@
 		CE91E4C52C8269FD000656E0 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		CE91E4C72C826D85000656E0 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		CE91E4C92C834947000656E0 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		CE91E4D12C837E42000656E0 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		CE91E4D32C837E54000656E0 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
+		CE91E4D52C837E86000656E0 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		CE91E4E12C84EDB7000656E0 /* DonationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationView.swift; sourceTree = "<group>"; };
+		CE91E4E32C84EDC8000656E0 /* DonationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewModel.swift; sourceTree = "<group>"; };
+		CE91E4E52C84EDFF000656E0 /* DonationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
+		CE91E4E92C84F744000656E0 /* gasoline_coffee.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gasoline_coffee.json; sourceTree = "<group>"; };
+		CE91E4EB2C851102000656E0 /* PaymentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
 		CE91E4DA2C8471C6000656E0 /* DetailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCell.swift; sourceTree = "<group>"; };
 		CE91E4DC2C8477E3000656E0 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE91E4DE2C84792E000656E0 /* PostImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageCell.swift; sourceTree = "<group>"; };
@@ -147,6 +164,7 @@
 				CE5E649A2C6DEFFC009830AD /* RxSwift in Frameworks */,
 				CE5E64982C6DEFFC009830AD /* RxCocoa in Frameworks */,
 				CE80D02B2C7F321000A45249 /* Kingfisher in Frameworks */,
+				CE91E4D92C838233000656E0 /* iamport-ios in Frameworks */,
 				CE91E4B32C8226E3000656E0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +231,8 @@
 		CE5E648C2C6DE4E4009830AD /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4E02C84EDAE000656E0 /* Donation */,
+				CE91E4D02C837E3D000656E0 /* Payment */,
 				CE91E4BD2C8240A3000656E0 /* Logo */,
 				CE91E4AE2C820A9E000656E0 /* TabBar */,
 				CE91E4A52C81C40E000656E0 /* Launch */,
@@ -248,6 +268,7 @@
 				CE5E64AA2C70C2FD009830AD /* AuthRepository.swift */,
 				CE5E64E22C74FDAA009830AD /* PostRepository.swift */,
 				CE80D0372C805CDD00A45249 /* ImageRepository.swift */,
+				CE91E4EB2C851102000656E0 /* PaymentRepository.swift */,
 			);
 			path = Domains;
 			sourceTree = "<group>";
@@ -395,6 +416,7 @@
 		CE91E4B42C8226F4000656E0 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				CE91E4E92C84F744000656E0 /* gasoline_coffee.json */,
 				CE91E4B92C822D32000656E0 /* gasoline_loading.json */,
 				CE91E4B52C822889000656E0 /* gasoline_launch.json */,
 			);
@@ -415,6 +437,26 @@
 				CE91E4C52C8269FD000656E0 /* Reusable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CE91E4D02C837E3D000656E0 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4D12C837E42000656E0 /* PaymentView.swift */,
+				CE91E4D32C837E54000656E0 /* PaymentViewModel.swift */,
+				CE91E4D52C837E86000656E0 /* PaymentViewController.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		CE91E4E02C84EDAE000656E0 /* Donation */ = {
+			isa = PBXGroup;
+			children = (
+				CE91E4E12C84EDB7000656E0 /* DonationView.swift */,
+				CE91E4E32C84EDC8000656E0 /* DonationViewModel.swift */,
+				CE91E4E52C84EDFF000656E0 /* DonationViewController.swift */,
+			);
+			path = Donation;
 			sourceTree = "<group>";
 		};
 		CEE75B472C76C30900FC61E6 /* Interceptor */ = {
@@ -460,6 +502,7 @@
 				CE5E64D92C73B3D0009830AD /* Alamofire */,
 				CE80D02A2C7F321000A45249 /* Kingfisher */,
 				CE91E4B22C8226E3000656E0 /* Lottie */,
+				CE91E4D82C838233000656E0 /* iamport-ios */,
 			);
 			productName = LZLSLP;
 			productReference = CE5E64722C6DE213009830AD /* LZLSLP.app */;
@@ -495,6 +538,7 @@
 				CE5E64D82C73B3D0009830AD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE80D0292C7F321000A45249 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CE91E4B12C8226E3000656E0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				CE91E4D72C838233000656E0 /* XCRemoteSwiftPackageReference "iamport-ios" */,
 			);
 			productRefGroup = CE5E64732C6DE213009830AD /* Products */;
 			projectDirPath = "";
@@ -512,6 +556,7 @@
 			files = (
 				CE91E4BA2C822D32000656E0 /* gasoline_loading.json in Resources */,
 				CE5E647F2C6DE215009830AD /* Assets.xcassets in Resources */,
+				CE91E4EA2C84F744000656E0 /* gasoline_coffee.json in Resources */,
 				CE5E64822C6DE215009830AD /* Base in Resources */,
 				CE91E4B62C822889000656E0 /* gasoline_launch.json in Resources */,
 			);
@@ -524,6 +569,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE91E4D62C837E86000656E0 /* PaymentViewController.swift in Sources */,
 				CE5E64DF2C74EDE8009830AD /* PostViewModel.swift in Sources */,
 				CE91E4A72C81C415000656E0 /* LaunchView.swift in Sources */,
 				CE5E64C12C71FCCE009830AD /* LoginViewController.swift in Sources */,
@@ -541,11 +587,13 @@
 				CE5E64A32C6DF1DD009830AD /* UIButton.Configuration+.swift in Sources */,
 				CE5E64D52C7387E8009830AD /* TrendingViewModel.swift in Sources */,
 				CE91E4B02C820AA6000656E0 /* TabBarController.swift in Sources */,
+				CE91E4E42C84EDC8000656E0 /* DonationViewModel.swift in Sources */,
 				CE91E4C32C82673F000656E0 /* BaseTableViewCell.swift in Sources */,
 				CEE75B492C76C34900FC61E6 /* AuthInterceptor.swift in Sources */,
 				CE5E64DD2C74EDD7009830AD /* PostView.swift in Sources */,
 				CE91E4A92C81C42A000656E0 /* LaunchViewModel.swift in Sources */,
 				CE5E64CD2C736A11009830AD /* Encodable+.swift in Sources */,
+				CE91E4E62C84EDFF000656E0 /* DonationViewController.swift in Sources */,
 				CE5E64B02C70C3A4009830AD /* SignupViewModel.swift in Sources */,
 				CE5E64B72C70CD81009830AD /* UIStackView+.swift in Sources */,
 				CE91E4AB2C81C4A5000656E0 /* LaunchViewController.swift in Sources */,
@@ -561,10 +609,13 @@
 				CE91E4BF2C8240AA000656E0 /* LogoView.swift in Sources */,
 				CEE75B712C7B3F8600FC61E6 /* CommunityViewController.swift in Sources */,
 				CE5E64E32C74FDAA009830AD /* PostRepository.swift in Sources */,
+				CE91E4E22C84EDB7000656E0 /* DonationView.swift in Sources */,
 				CE5E64CB2C736796009830AD /* UserDefaults+.swift in Sources */,
+				CE91E4D22C837E42000656E0 /* PaymentView.swift in Sources */,
 				CE5E64E12C74EE17009830AD /* PostViewController.swift in Sources */,
 				CE80D0092C7C88D900A45249 /* DateFormatter.swift in Sources */,
 				CE5E64762C6DE213009830AD /* AppDelegate.swift in Sources */,
+				CE91E4D42C837E54000656E0 /* PaymentViewModel.swift in Sources */,
 				CE91E4AD2C81D14C000656E0 /* UIViewController+.swift in Sources */,
 				CE91E4C82C826D85000656E0 /* UIColor+.swift in Sources */,
 				CE5E64D72C73881F009830AD /* TrendingViewController.swift in Sources */,
@@ -575,6 +626,7 @@
 				CE5E64952C6DEF54009830AD /* BaseView.swift in Sources */,
 				CE91E4DD2C8477E3000656E0 /* BaseCollectionViewCell.swift in Sources */,
 				CE5E64BD2C71FB96009830AD /* LoginView.swift in Sources */,
+				CE91E4EC2C851102000656E0 /* PaymentRepository.swift in Sources */,
 				CE5E649E2C6DF131009830AD /* BaseViewController.swift in Sources */,
 				CE5E64CF2C736A19009830AD /* Decodable+.swift in Sources */,
 				CE91E4C62C8269FD000656E0 /* Reusable.swift in Sources */,
@@ -843,6 +895,14 @@
 				minimumVersion = 4.5.0;
 			};
 		};
+		CE91E4D72C838233000656E0 /* XCRemoteSwiftPackageReference "iamport-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iamport/iamport-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -875,6 +935,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE91E4B12C8226E3000656E0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		CE91E4D82C838233000656E0 /* iamport-ios */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE91E4D72C838233000656E0 /* XCRemoteSwiftPackageReference "iamport-ios" */;
+			productName = "iamport-ios";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

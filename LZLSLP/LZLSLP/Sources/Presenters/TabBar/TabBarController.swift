@@ -19,15 +19,28 @@ final class TabBarController: UITabBarController {
 enum TabType: CaseIterable {
     case community
     case trending
+    case donation
     
     
     func viewController() -> UIViewController {
         switch self {
         case .community:
-            let viewController = CommunityViewController(baseView: CommunityView(), viewModel: CommunityViewModel())
+            let viewController = CommunityViewController(
+                baseView: CommunityView(),
+                viewModel: CommunityViewModel()
+            )
             return viewController
         case .trending:
-            let viewController = TrendingViewController(baseView: TrendingView(), viewModel: TrendingViewModel())
+            let viewController = TrendingViewController(
+                baseView: TrendingView(),
+                viewModel: TrendingViewModel()
+            )
+            return viewController
+        case .donation:
+            let viewController = DonationViewController(
+                baseView: DonationView(),
+                viewModel: DonationViewModel()
+            )
             return viewController
         }
     }
@@ -38,6 +51,8 @@ enum TabType: CaseIterable {
             UIImage(systemName: "chart.bar.doc.horizontal.fill")!
         case .trending:
             UIImage(systemName: "flame.circle.fill")!
+        case .donation:
+            UIImage(systemName: "cup.and.saucer.fill")!
         }
     }
     

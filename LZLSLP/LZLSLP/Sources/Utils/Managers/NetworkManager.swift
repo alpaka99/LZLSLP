@@ -17,6 +17,11 @@ final class NetworkManager {
     func requestCall(router: Router, interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
         Single.create { observer in
             if let urlRequest = router.build() {
+                
+                print("NetworkManager url: \(urlRequest.url?.absoluteString)")
+                print("NetworkManager header: \(urlRequest.headers)")
+                print("NetworkManager parameters: \(urlRequest.httpBody)")
+                
                 AF.request(urlRequest, interceptor: interceptor)
                     .validate(statusCode: 200..<300)
                     .responseData { result in
@@ -83,7 +88,7 @@ final class NetworkManager {
         Single.create { observer in
             if let urlRequest = router.build() {
                 AF.request(urlRequest, interceptor: interceptor)
-                    .validate(statusCode: 200..<300)
+//                    .validate(statusCode: 200..<300)
                     .responseString { result in
                         switch result.result {
                         case .success(let str):
