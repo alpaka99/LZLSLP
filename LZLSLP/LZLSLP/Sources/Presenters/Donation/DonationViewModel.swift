@@ -13,6 +13,7 @@ import RxSwift
 final class DonationViewModel: RxViewModel {
     struct Input: Inputable {
         let donationButtonTapped = PublishSubject<Void>()
+        let paymentValidationResponse = PublishSubject<PaymentValidationResponse>()
     }
     
     struct Output: Outputable {
@@ -34,7 +35,7 @@ final class DonationViewModel: RxViewModel {
             .bind(with: self) { owner, response in
                 switch response {
                 case .success(let paymentValidationResponse):
-                    print("DonationViewModel response :\(paymentValidationResponse)")
+                    owner.store.paymentValidationResponse.onNext(paymentValidationResponse)
                 case .failure(let error):
                     print("DonationViewModel error: \(error)")
                 }
