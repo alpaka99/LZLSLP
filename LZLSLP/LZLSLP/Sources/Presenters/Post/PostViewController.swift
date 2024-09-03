@@ -8,6 +8,7 @@
 import UIKit
 import PhotosUI
 
+import RxCocoa
 import RxSwift
 
 final class PostViewController: BaseViewController<PostView, PostViewModel> {
@@ -53,6 +54,38 @@ final class PostViewController: BaseViewController<PostView, PostViewModel> {
                 owner.navigationController?.popViewController(animated: true)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.store.imageArray
+            .share()
+            .bind(to: baseView.imageCollectionView.rx.items(cellIdentifier: PostImageCell.identifier, cellType: PostImageCell.self)) {[weak self] row, imageForm, cell in
+                
+                guard let vc = self else { return }
+                
+                cell.imageView.image = UIImage(data: imageForm.data)
+                
+                cell.deleteButton.rx.tap
+                    .share()
+                    .bind(with: vc) { owner, _ in
+                        print("\(row) 버튼 눌림")
+                        owner.viewModel.store.deleteButtonTapped.onNext(row)
+                    }
+                    .disposed(by: vc.disposeBag)
+                
+            }
+            .disposed(by: disposeBag)
+        
+        
+        viewModel.store.reloadCollectionView
+            .bind(with: self) { owner, _ in
+                owner.baseView.imageCollectionView.reloadData()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    override func configureDelegate() {
+        super.configureDelegate()
+        
+        baseView.imageCollectionView.register(PostImageCell.self, forCellWithReuseIdentifier: PostImageCell.identifier)
     }
 }
 
@@ -68,11 +101,11 @@ extension PostViewController: PHPickerViewControllerDelegate {
                     print("Image 로딩 에러")
                     return
                 }
-                // image work
                 
+                // image work
                 guard let imageName = itemProvider.suggestedName, let image = image as? UIImage else { print("Error Converting")
                     return }
-                guard let imageData = image.pngData() else {
+                guard let imageData = image.jpegData(compressionQuality: 0.80) else {
                     print("To Data failed")
                     return }
                 

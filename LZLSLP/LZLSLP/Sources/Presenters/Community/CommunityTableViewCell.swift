@@ -108,7 +108,7 @@ final class CommunityTableViewCell: BaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        thumbnailImage.image = UIImage(named: "danger")
+        thumbnailImage.image = UIImage(named: "thumbnail")
         likeImage.tintColor = .gray
     }
     
