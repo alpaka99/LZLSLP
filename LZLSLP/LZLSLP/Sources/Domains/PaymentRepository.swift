@@ -1,22 +1,20 @@
 //
-//  AuthRepository.swift
+//  PaymentRepository.swift
 //  LZLSLP
 //
-//  Created by user on 8/17/24.
+//  Created by user on 9/2/24.
 //
 
 import Foundation
 
-import Alamofire
-import RxCocoa
 import RxSwift
 
-final class AuthRepository {
+final class PaymentRepository {
     let disposeBag = DisposeBag()
     
-    func requestAuthAPI<T: Decodable>(of type: T.Type, router: Router, interceptor: RequestInterceptor? = nil) -> Single<Result<T, Error>> {
+    func requestPaymentValidation<T: Decodable>(of type: T.Type, router: Router) -> Single<Result<T, Error>> {
         Single.create { observer in
-            NetworkManager.shared.requestCall(router: router, interceptor: interceptor)
+            NetworkManager.shared.requestCall(router: router, interceptor: PostInterceptor())
                 .subscribe(with: self) { owner, result in
                     switch result {
                     case .success(let data):
@@ -24,9 +22,11 @@ final class AuthRepository {
                             let decodedData = try JSONDecoder().decode(T.self, from: data)
                             observer(.success(.success(decodedData)))
                         } catch {
+                            print("Catched: \(error)")
                             observer(.success(.failure(error)))
                         }
                     case.failure(let error):
+                        print("Error \(error)")
                         observer(.success(.failure(error)))
                     }
                 }
@@ -34,17 +34,5 @@ final class AuthRepository {
             
             return Disposables.create()
         }
-    }
-}
-
-struct SignUpResponse: Decodable {
-    let userId: String
-    let email: String
-    let nick: String
-    
-    enum CodingKeys: String, CodingKey {
-        case userId = "user_id"
-        case email
-        case nick
     }
 }

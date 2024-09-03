@@ -17,6 +17,11 @@ final class NetworkManager {
     func requestCall(router: Router, interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
         Single.create { observer in
             if let urlRequest = router.build() {
+                
+                print("NetworkManager url: \(urlRequest.url?.absoluteString)")
+                print("NetworkManager header: \(urlRequest.headers)")
+                print("NetworkManager parameters: \(urlRequest.httpBody)")
+                
                 AF.request(urlRequest, interceptor: interceptor)
                     .validate(statusCode: 200..<300)
                     .responseData { result in
@@ -28,37 +33,35 @@ final class NetworkManager {
                             print("NetworkManager error: \(error)")
                             switch error {
                             case .createURLRequestFailed:
-                                observer(.failure(NetworkError.urlRequestCreateError))
+                                observer(.success(.failure(NetworkError.urlRequestCreateError)))
                             case .responseValidationFailed:
-                                observer(.failure(NetworkError.responseStatusCodeError))
+                                observer(.success(.failure(NetworkError.responseStatusCodeError)))
                             default:
-                                observer(.failure(NetworkError.networkError))
+                                observer(.success(.failure(NetworkError.networkError)))
                             }
                         }
                     }
-//                    .responseString { result in
-//                        switch result.result {
-//                        case .success(let str):
-//                            dump(str)
-//                        case .failure(let error):
-//                            print(error)
-//                        }
-//                    }
             } else {
-                observer(.failure(NetworkError.urlRequestCreateError))
+                observer(.success(.failure(NetworkError.urlRequestCreateError)))
             }
             
             return Disposables.create()
         }
     }
     
-    func requestDataCall(router: URLRouter, dataArray: [Uploadable], interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
+    func uploadDataCall(router: URLRouter, dataArray: [Uploadable], interceptor: RequestInterceptor? = nil) -> Single<Result<Data, Error>> {
         return Single.create { observer in
+            guard !dataArray.isEmpty else {
+                observer(.success(.success(Data())))
+                return Disposables.create()
+            }
+            
             if let urlRequest = router.build() {
                 // files라는 parameter 이름으로 이미지 파일들을 올려버림
+                
                 AF.upload(multipartFormData: { multipartFormData in
-                    dataArray.forEach { data in
-                        multipartFormData.append(data.data, withName: "files", fileName: data.dataName, mimeType: "image/png")
+                    for data in dataArray {
+                        multipartFormData.append(data.data, withName: "files", fileName: "test", mimeType: "image/jpeg")
                     }
                 }, with: urlRequest, interceptor: interceptor)
                 .validate(statusCode: 200..<300)
@@ -71,6 +74,7 @@ final class NetworkManager {
                         observer(.failure(error))
                     }
                 }
+
                 
             } else {
                 observer(.failure(NetworkError.urlRequestCreateError))
@@ -84,12 +88,14 @@ final class NetworkManager {
         Single.create { observer in
             if let urlRequest = router.build() {
                 AF.request(urlRequest, interceptor: interceptor)
-                    .validate(statusCode: 200..<300)
+//                    .validate(statusCode: 200..<300)
                     .responseString { result in
                         switch result.result {
                         case .success(let str):
+                            print("String Result")
                             dump(str)
                         case .failure(let error):
+                            print("String Error Result")
                             print(error)
                         }
                     }

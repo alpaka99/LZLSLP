@@ -20,13 +20,13 @@ final class PostInterceptor: RequestInterceptor {
         print("\(String(describing: self)) loaded AccessToken")
         var urlRequest = urlRequest
         urlRequest.addValue(accessToken, forHTTPHeaderField: "Authorization")
+        
         completion(.success(urlRequest))
     }
     
     
     // 만약 access token 문제라면 retry
     func retry(_ request: Request, for session: Session, dueTo error: any Error, completion: @escaping (RetryResult) -> Void) {
-        print(#function, String(describing: self))
         // invalidAccessToken 에러가 아니라면 retry하지 않고 통과시킴
         print(String(describing: self), request.response?.statusCode)
         guard let response = request.response, response.statusCode == 419 else {

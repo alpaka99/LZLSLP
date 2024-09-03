@@ -23,7 +23,14 @@ final class DetailPostView: BaseView {
     }()
     
     let imageCollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.createFlowLayout(numberOfRowsInLine: 1, spacing: 10, heightMultiplier: 1))
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.createFlowLayout(
+            numberOfRowsInLine: 1,
+            spacing: 10,
+            width: ScreenSize.width,
+            heightMultiplier: 1
+        ))
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -89,7 +96,9 @@ final class DetailPostView: BaseView {
         imageCollectionView.snp.makeConstraints { collectionView in
             collectionView.top.equalTo(contentView)
                 .offset(16)
-            collectionView.centerX.equalTo(contentView)
+
+            collectionView.horizontalEdges.equalTo(contentView)
+            collectionView.height.equalTo(self.safeAreaLayoutGuide.snp.width)
         }
         
         contentLabel.snp.makeConstraints { label in
@@ -135,7 +144,7 @@ final class DetailPostView: BaseView {
 }
 
 extension UICollectionViewLayout {
-    static func createFlowLayout(numberOfRowsInLine: CGFloat, spacing: CGFloat, heightMultiplier: CGFloat) -> UICollectionViewFlowLayout {
+    static func createFlowLayout(numberOfRowsInLine: CGFloat, spacing: CGFloat, width: CGFloat ,heightMultiplier: CGFloat) -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         
         flowLayout.scrollDirection = .horizontal
@@ -148,13 +157,15 @@ extension UICollectionViewLayout {
             right: spacing
         )
         
-        let lengthOfALine = ScreenSize.width - (spacing * CGFloat(2 + numberOfRowsInLine - 1))
+        let lengthOfALine = width - (spacing * CGFloat(2 + numberOfRowsInLine - 1))
         let length = lengthOfALine / numberOfRowsInLine
         
         flowLayout.itemSize = CGSize(
             width: length,
             height: length * heightMultiplier
         )
+        
+        print("itemSize", flowLayout.itemSize)
         
         return flowLayout
     }

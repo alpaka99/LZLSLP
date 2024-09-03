@@ -15,7 +15,8 @@ final class SignupViewController: BaseViewController<SignupView, SignupViewModel
     override func configureNavigationItem() {
         super.configureNavigationItem()
         
-        navigationItem.title = "Signup ViewController"
+        navigationItem.titleView = LogoView(fontSize: 20, weight: .semibold, logoColor: .black)
+        
     }
     
     override func configureBind() {
@@ -34,8 +35,6 @@ final class SignupViewController: BaseViewController<SignupView, SignupViewModel
                 let password = value.1
                 let nick = value.2
                 
-                print("This >>>", email, password, nick)
-                
                 let signUpForm = SignUpForm(
                     email: email,
                     password: password,
@@ -48,11 +47,13 @@ final class SignupViewController: BaseViewController<SignupView, SignupViewModel
                     .onNext(signUpForm)
             }
             .disposed(by: disposeBag)
-        
-        
-        viewModel.store.singUpResponse
-            .bind(with: self) { owner, response in
-                dump(response)
+     
+        viewModel.store.alertMessage
+            .bind(with: self) { owner, value in
+                owner.showAlert(title: "알림", message: "회원 가입 완료!") {
+                    let loginViewController = LoginViewController(baseView: LoginView(), viewModel: LoginViewModel())
+                    owner.setNewViewController(nextViewController: loginViewController, isNavigation: true)
+                }
             }
             .disposed(by: disposeBag)
     }
